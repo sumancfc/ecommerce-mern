@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-mern",
+  "version": "1.0.0",
+  "description": "Ecommerce website using Mongodb, Express, React, Redux, Node and firebase for authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mern",
+    "mongoDB",
+    "Express",
+    "React",
+    "Node",
+    "Firebase",
+    "Redux",
+    "Ecommerce"
+  ],
+  "author": "Suman Shrestha",
+  "license": "ISC"
+}
