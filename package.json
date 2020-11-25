@@ -17,5 +17,6 @@
     "Ecommerce"
   ],
   "author": "Suman Shrestha",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
