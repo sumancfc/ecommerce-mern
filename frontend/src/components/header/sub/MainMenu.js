@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MainMenu = ({ className }) => {
+const MainMenu = ({ className = "" }) => {
   return (
     <div className={`d-flex ${className}`}>
       <div className='header__main-menu'>

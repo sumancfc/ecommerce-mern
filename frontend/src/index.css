@@ -33,7 +33,7 @@ h4,
 h5,
 h6 {
   color: #373737;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   margin-top: 0;
 }
@@ -82,6 +82,7 @@ button {
   text-decoration: none;
   cursor: pointer;
   color: #373737;
+  font-family: "Poppins", sans-serif;
 }
 
 a,
@@ -587,18 +588,28 @@ textarea {
 }
 
 .header__main-menu nav ul li a {
-  font-size: 18px;
+  font-size: 16px;
   display: inline-block;
   letter-spacing: 0.2px;
-  line-height: 55px;
+  line-height: 60px;
   color: #fff;
 }
 
 .header__main-menu nav ul li:hover a {
-  color: #ff5151;
+  color: #fff;
 }
 
-.stick .header__main-menu > nav > ul > li > a {
+.offcanvas__wrapper .header__main-menu {
+  width: 100%;
+}
+
+.offcanvas__wrapper .header__main-menu nav ul li {
+  display: block;
+  margin-right: 0;
+}
+
+.stick .header__main-menu > nav > ul > li > a,
+.offcanvas__wrapper .header__main-menu nav ul li a {
   color: #010211;
 }
 
@@ -922,7 +933,7 @@ textarea {
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100%;
-  padding: 90px 35px 0;
+  padding: 20px 35px 0;
 }
 
 .mobile__header .mobile__header-right {
@@ -1068,9 +1079,10 @@ textarea {
   height: 50px;
   font-weight: 400;
   color: #030512;
-  font-size: 16px;
+  font-size: 14px;
   padding: 2px 60px 2px 29px;
   border-radius: 4px;
+  letter-spacing: 0.5px;
 }
 
 .header__search-wrap .header__search .header__search-form button {
@@ -1149,8 +1161,8 @@ textarea {
 }
 
 .header__cart.header__cart-white button span.cart__items-count {
-  color: #030512;
-  border: 1px solid #030512;
+  color: #fff;
+  background: #ff5151;
 }
 
 .mobile__search {
