@@ -38,10 +38,6 @@ const Register = () => {
           <div className='row'>
             <div className='col-lg-7 col-md-12 ml-auto mr-auto'>
               <div className='login__register-wrapper'>
-                <div className='login__register-tab-list nav'>
-                  <h4> Register </h4>
-                </div>
-
                 <div className='login__form-wrapper'>
                   <div className='login__register-form'>
                     <form onSubmit={handleForm}>

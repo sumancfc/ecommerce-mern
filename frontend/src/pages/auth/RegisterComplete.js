@@ -47,7 +47,7 @@ const RegisterComplete = ({ history }) => {
         let user = auth.currentUser;
         await user.updatePassword(password);
 
-        const userTokenId = await user.getIdTokenResult();
+        const userIdToken = await user.getIdTokenResult();
 
         //  console.log("user", user, "Token Id", userTokenId);
 
