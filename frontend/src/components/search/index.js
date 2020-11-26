@@ -7,7 +7,6 @@ const Search = ({ className = "" }) => {
         <form>
           <div className='header__search-form'>
             <input
-              id='searchForm'
               className='input-text'
               value=''
               placeholder='Search products...'
