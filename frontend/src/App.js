@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login";
 import Shop from "./pages/Shop";
 import { auth } from "./firebase";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const App = () => {
           <Route path='/login' exact component={Login} />
           <Route path='/shop' exact component={Shop} />
           <Route path='/' exact component={Home} />
+          <Route exact component={PageNotFound} />
         </Switch>
       </Router>
     </ToastProvider>

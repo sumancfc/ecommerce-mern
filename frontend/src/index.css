@@ -1367,6 +1367,88 @@ textarea {
   color: #000000;
 }
 
+/* 404 page */
+.error h1 {
+  font-size: 17rem;
+  font-weight: bold;
+  letter-spacing: 1rem;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  color: #010225;
+}
+
+.error h2 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.error__btn {
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: #fff;
+  font-size: 16px;
+  min-width: 184px;
+  min-height: 55px;
+  line-height: 55px;
+  margin-bottom: 6px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 0;
+  background-color: #010225;
+  display: inline-block;
+}
+
+.error__btn:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 100%;
+  background-color: #010225;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.error__btn:hover {
+  background-color: #111111;
+  color: #fff;
+}
+
+.error__btn:hover:after {
+  background-color: #111111;
+}
+
+.searchform {
+  position: relative;
+}
+
+.searchform input {
+  border: 1px solid #eeeeee;
+  height: 45px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 80px;
+  background-color: transparent;
+}
+
+.searchform button {
+  border: none;
+  background-color: #010225;
+  width: 70px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.searchform button:hover {
+  background-color: #000;
+}
+
 /* Footer Starts */
 .footer__area-widget .footer__area-social {
   margin-top: 21px;
@@ -1559,6 +1641,11 @@ textarea {
   .header__search-wrap {
     margin: 0;
   }
+
+  .error h1 {
+    font-size: 15rem;
+    margin-bottom: 4px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -1598,6 +1685,10 @@ textarea {
     .footer__area-form
     input {
     padding: 2px 40px 2px 0;
+  }
+
+  .error h1 {
+    font-size: 12rem;
   }
 }
 
@@ -1694,7 +1785,20 @@ textarea {
   .footer__area-top.pb-85 {
     padding-bottom: 20px;
   }
+
+  .error h1 {
+    font-size: 7rem;
+    line-height: 88px;
+  }
+
+  .searchform.mb-50 {
+    margin-bottom: 20px;
+  }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+  .error h1 {
+    font-size: 9rem;
+    line-height: 100px;
+  }
 }
