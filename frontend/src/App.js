@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Shop from "./pages/Shop";
 import { auth } from "./firebase";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const App = () => {
           payload: { email: user.email, token: userIdToken.token },
         });
       }
-      console.log(user);
+      // console.log(user);
     });
 
     return () => unsubscribe();
@@ -34,6 +35,7 @@ const App = () => {
         <Switch>
           <Route path='/register' exact component={Register} />
           <Route path='/register/complete' exact component={RegisterComplete} />
+          <Route path='/forgot/password' exact component={ForgotPassword} />
           <Route path='/login' exact component={Login} />
           <Route path='/shop' exact component={Shop} />
           <Route path='/' exact component={Home} />

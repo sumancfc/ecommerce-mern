@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import Layout from "../../Layout";
 import Breadcrumb from "../../components/breadcrumb";
+import { userRegisterComplete } from "../../store/actions/userAction";
 
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { addToast } = useToasts();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegister"));
@@ -33,34 +35,7 @@ const RegisterComplete = ({ history }) => {
       return;
     }
 
-    try {
-      const result = await auth.signInWithEmailLink(
-        email,
-        window.location.href
-      );
-      //       console.log(result);
-      if (result.user.emailVerified) {
-        //remove email from local storage
-        window.localStorage.removeItem("emailForRegister", email);
-
-        //get user id token
-        let user = auth.currentUser;
-        await user.updatePassword(password);
-
-        const userIdToken = await user.getIdTokenResult();
-
-        //  console.log("user", user, "Token Id", userTokenId);
-
-        //redirect user
-        history.push("/");
-      }
-    } catch (error) {
-      console.log(error);
-      addToast(error.message, {
-        autoDismiss: true,
-        appearance: "error",
-      });
-    }
+    dispatch(userRegisterComplete(email, password, history, addToast));
   };
   return (
     <Layout>

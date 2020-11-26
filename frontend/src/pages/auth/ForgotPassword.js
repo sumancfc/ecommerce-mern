@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
-import { connect, useDispatch } from "react-redux";
 import Layout from "../../Layout";
 import Breadcrumb from "../../components/breadcrumb";
-import { userRegister } from "../../store/actions/userAction";
+import { passportReset } from "../../store/actions/userAction";
 
-const Register = ({ user, history }) => {
+const ForgotPassword = ({ history, user }) => {
   const [email, setEmail] = useState("");
   const { addToast } = useToasts();
   const dispatch = useDispatch();
@@ -14,14 +14,16 @@ const Register = ({ user, history }) => {
     if (user && user.token) history.push("/");
   }, [user, history]);
 
+  //handle password reset form
   const handleForm = (e) => {
     e.preventDefault();
 
-    dispatch(userRegister(email, setEmail, addToast));
+    dispatch(passportReset(email, setEmail, addToast));
   };
+
   return (
     <Layout>
-      <Breadcrumb pageTitle='Register' />
+      <Breadcrumb pageTitle='Forgot Password' />
 
       <div className='login__register-area pt-85 pb-90'>
         <div className='container'>
@@ -33,15 +35,14 @@ const Register = ({ user, history }) => {
                     <form onSubmit={handleForm}>
                       <input
                         name='email'
-                        placeholder='Email'
+                        placeholder='Email your email'
                         type='email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        autoFocus
                       />
                       <div className='button__box'>
-                        <button type='submit'>Register</button>
+                        <button type='submit'>Forgot Password</button>
                       </div>
                     </form>
                   </div>
@@ -61,4 +62,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(ForgotPassword);

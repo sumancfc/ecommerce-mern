@@ -43,10 +43,8 @@ const Topbar = ({ clsName, user, logout }) => {
               <div className='top__content-right'>
                 <Link to='/compare'>Compare</Link>
                 <Link to='/wishlist'>Wishlist</Link>
-
-                {!user ? (
-                  <Link to='/login'>Login</Link>
-                ) : (
+                {!user && <Link to='/login'>Login</Link>}
+                {user && (
                   <Link to='#' onClick={() => logout(addToast, history)}>
                     Logout
                   </Link>

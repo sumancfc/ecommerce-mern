@@ -1310,27 +1310,6 @@ textarea {
   .login__form-wrapper
   .login__register-form
   form
-  .button__box
-  .login__toggle-btn {
-  padding: 10px 0 19px;
-}
-
-.login__register-wrapper
-  .login__form-wrapper
-  .login__register-form
-  form
-  .button__box
-  .login__toggle-btn
-  label {
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.login__register-wrapper
-  .login__form-wrapper
-  .login__register-form
-  form
-  .button__box
   .login__toggle-btn
   a {
   float: right;
@@ -1344,7 +1323,6 @@ textarea {
   .login__form-wrapper
   .login__register-form
   form
-  .button__box
   .login__toggle-btn
   a:hover {
   color: #ff5151;
@@ -1356,6 +1334,7 @@ textarea {
   form
   .button__box
   button {
+  margin-top: 20px;
   background-color: #ff5151;
   color: #fff;
   border: medium none;

@@ -1,65 +1,31 @@
-import React, { useState } from "react";
-import { auth, googleAuthProvider } from "../../firebase";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import Layout from "../../Layout";
 import Breadcrumb from "../../components/breadcrumb";
+import { loginUser, loginUsingGoogle } from "../../store/actions/userAction";
 
-const Login = ({ history }) => {
+const Login = ({ history, user }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { addToast } = useToasts();
   const dispatch = useDispatch();
 
-  // handle submit for login submit
-  const handleForm = async (e) => {
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user, history]);
+
+  // handle submit for login
+  const handleForm = (e) => {
     e.preventDefault();
 
-    try {
-      const result = await auth.signInWithEmailAndPassword(email, password);
-
-      const { user } = result;
-
-      const userIdToken = await user.getIdTokenResult();
-
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload: { email: user.email, token: userIdToken.token },
-      });
-      history.push("/");
-    } catch (error) {
-      console.log(error);
-      addToast(error.message, {
-        appearance: "error",
-        autoDismiss: true,
-      });
-    }
+    dispatch(loginUser(email, password, history, addToast));
   };
 
-  //handle submit for google submit
-  const handleGoogleSubmit = async () => {
-    auth
-      .signInWithPopup(googleAuthProvider)
-      .then(async (result) => {
-        const { user } = result;
-
-        //  console.log(user);
-
-        const userIdToken = await user.getIdTokenResult();
-
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: { email: user.email, token: userIdToken.token },
-        });
-        history.push("/");
-      })
-      .catch((err) => {
-        console.error(err);
-        addToast(err.message, {
-          appearance: "error",
-          autoDismiss: true,
-        });
-      });
+  //handle submit for google
+  const handleGoogleSubmit = () => {
+    dispatch(loginUsingGoogle(history, addToast));
   };
 
   return (
@@ -91,6 +57,9 @@ const Login = ({ history }) => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                       />
+                      <div className='login__toggle-btn clearfix'>
+                        <Link to='/forgot/password'>Forgot Password?</Link>
+                      </div>
                       <div className='button__box'>
                         {/* Login btn */}
                         <button
@@ -120,4 +89,10 @@ const Login = ({ history }) => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userList,
+  };
+};
+
+export default connect(mapStateToProps)(Login);
