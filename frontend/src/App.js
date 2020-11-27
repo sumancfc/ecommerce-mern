@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Shop from "./pages/Shop";
 import { auth } from "./firebase";
+import { currentUser } from "./store/actions/userAction";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import PageNotFound from "./pages/PageNotFound";
 
@@ -19,10 +20,20 @@ const App = () => {
       if (user) {
         const userIdToken = await user.getIdTokenResult();
 
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: { email: user.email, token: userIdToken.token },
-        });
+        currentUser(userIdToken.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                email: res.data.email,
+                name: res.data.name,
+                role: res.data.role,
+                id: res.data._id,
+                token: userIdToken.token,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
       }
       // console.log(user);
     });

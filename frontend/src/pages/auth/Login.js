@@ -7,8 +7,8 @@ import Breadcrumb from "../../components/breadcrumb";
 import { loginUser, loginUsingGoogle } from "../../store/actions/userAction";
 
 const Login = ({ history, user }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("sumanstha999@gmail.com");
+  const [password, setPassword] = useState("sumancfc");
   const { addToast } = useToasts();
   const dispatch = useDispatch();
 

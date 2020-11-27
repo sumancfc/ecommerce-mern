@@ -1,6 +1,33 @@
 import firebase from "firebase";
+import axios from "axios";
 import { auth, googleAuthProvider } from "../../firebase";
 import { LOGGED_IN_USER, LOGOUT } from "../constants";
+
+//create update user from backend
+export const userCreateUpdate = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/create-update-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
+
+//create update user from backend
+export const currentUser = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/current-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
 
 //user register
 export const userRegister = (email, setEmail, addToast) => async () => {
@@ -29,7 +56,7 @@ export const userRegisterComplete = (
   password,
   history,
   addToast
-) => async () => {
+) => async (dispatch) => {
   try {
     const result = await auth.signInWithEmailLink(email, window.location.href);
     //       console.log(result);
@@ -43,7 +70,25 @@ export const userRegisterComplete = (
 
       const userIdToken = await user.getIdTokenResult();
 
-      //  console.log("user", user, "Token Id", userTokenId);
+      userCreateUpdate(userIdToken.token)
+        .then((res) => {
+          console.log("clg", res);
+          dispatch({
+            type: LOGGED_IN_USER,
+            payload: {
+              email: res.data.email,
+              name: res.data.name,
+              role: res.data.role,
+              id: res.data._id,
+              token: userIdToken.token,
+            },
+          });
+          addToast("User Created", {
+            appearance: "success",
+            autoDismiss: true,
+          });
+        })
+        .catch((err) => console.log(err));
 
       //redirect user
       history.push("/");
@@ -68,14 +113,25 @@ export const loginUser = (email, password, history, addToast) => async (
 
     const userIdToken = await user.getIdTokenResult();
 
-    dispatch({
-      type: LOGGED_IN_USER,
-      payload: { email: user.email, token: userIdToken.token },
-    });
-    addToast("Login Success", {
-      appearance: "success",
-      autoDismiss: true,
-    });
+    userCreateUpdate(userIdToken.token)
+      .then((res) => {
+        console.log("clg", res);
+        dispatch({
+          type: LOGGED_IN_USER,
+          payload: {
+            email: res.data.email,
+            name: res.data.name,
+            role: res.data.role,
+            id: res.data._id,
+            token: userIdToken.token,
+          },
+        });
+        addToast("Login Success", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => console.log(err));
     history.push("/");
   } catch (error) {
     console.log(error);
@@ -97,11 +153,26 @@ export const loginUsingGoogle = (history, addToast) => async (dispatch) => {
 
       const userIdToken = await user.getIdTokenResult();
 
-      dispatch({
-        type: LOGGED_IN_USER,
-        payload: { email: user.email, token: userIdToken.token },
-      });
-      history.push("/");
+      userCreateUpdate(userIdToken.token)
+        .then((res) => {
+          console.log("clg", res);
+          dispatch({
+            type: LOGGED_IN_USER,
+            payload: {
+              email: res.data.email,
+              name: res.data.name,
+              role: res.data.role,
+              id: res.data._id,
+              token: userIdToken.token,
+            },
+          });
+          addToast("Login Success", {
+            appearance: "success",
+            autoDismiss: true,
+          });
+          history.push("/");
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       console.error(err);
