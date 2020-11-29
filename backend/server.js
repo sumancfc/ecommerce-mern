@@ -9,6 +9,8 @@ const app = express();
 
 const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/category");
+const subCategoryRoutes = require("./routes/subcategory");
+
 const { errorNotFound, errorHandler } = require("./middlewares/errorHandler");
 
 //database connection
@@ -34,6 +36,7 @@ app.use(cors());
 //routes middleware
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", subCategoryRoutes);
 
 //error middleware
 app.use(errorNotFound);
