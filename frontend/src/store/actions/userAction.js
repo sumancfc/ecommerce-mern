@@ -16,10 +16,23 @@ export const userCreateUpdate = async (authtoken) => {
   );
 };
 
-//create update user from backend
-export const currentUser = async (authtoken) => {
+//get current user
+export const getCurrentUser = async (authtoken) => {
   return await axios.post(
     `${process.env.REACT_APP_API}/current-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
+
+//get admin from user
+export const getCurrentAdmin = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/current-admin`,
     {},
     {
       headers: {
@@ -48,6 +61,16 @@ export const userRegister = (email, setEmail, addToast) => async () => {
 
   //clear email
   setEmail("");
+};
+
+//redirect user per role
+const userRoleRedirect = (res, history) => {
+  // console.log(res);
+  if (res.data.role === "admin") {
+    history.push("/admin/profile");
+  } else {
+    history.push("/user/profile");
+  }
 };
 
 //user register complete
@@ -130,9 +153,9 @@ export const loginUser = (email, password, history, addToast) => async (
           appearance: "success",
           autoDismiss: true,
         });
+        userRoleRedirect(res, history);
       })
       .catch((err) => console.log(err));
-    history.push("/");
   } catch (error) {
     console.log(error);
     addToast(error.message, {
@@ -170,7 +193,7 @@ export const loginUsingGoogle = (history, addToast) => async (dispatch) => {
             appearance: "success",
             autoDismiss: true,
           });
-          history.push("/");
+          userRoleRedirect(res, history);
         })
         .catch((err) => console.log(err));
     })

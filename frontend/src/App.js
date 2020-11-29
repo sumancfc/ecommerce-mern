@@ -8,9 +8,12 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Shop from "./pages/Shop";
 import { auth } from "./firebase";
-import { currentUser } from "./store/actions/userAction";
+import { getCurrentUser } from "./store/actions/userAction";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import PageNotFound from "./pages/PageNotFound";
+import AdminProfile from "./pages/admin";
+// import PrivateRoute from "./components/routes/PrivateRoute";
+import AdminRoute from "./components/routes/AdminRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ const App = () => {
       if (user) {
         const userIdToken = await user.getIdTokenResult();
 
-        currentUser(userIdToken.token)
+        getCurrentUser(userIdToken.token)
           .then((res) => {
             dispatch({
               type: "LOGGED_IN_USER",
@@ -45,12 +48,13 @@ const App = () => {
     <ToastProvider placement='top-center'>
       <Router>
         <Switch>
-          <Route path='/register' exact component={Register} />
-          <Route path='/register/complete' exact component={RegisterComplete} />
-          <Route path='/forgot/password' exact component={ForgotPassword} />
-          <Route path='/login' exact component={Login} />
-          <Route path='/shop' exact component={Shop} />
-          <Route path='/' exact component={Home} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/register/complete' component={RegisterComplete} />
+          <Route exact path='/forgot/password' component={ForgotPassword} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/shop' component={Shop} />
+          <Route exact path='/' component={Home} />
+          <AdminRoute exact path='/admin/profile' component={AdminProfile} />
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>

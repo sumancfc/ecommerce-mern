@@ -1595,6 +1595,157 @@ textarea {
   color: #ff5151;
 }
 
+/* Profile page */
+
+.account__tab-menu {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.account__tab-menu a {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 13px;
+  display: block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  -ms-border-radius: 0 !important;
+  -o-border-radius: 0 !important;
+}
+
+.account__tab-menu a:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.account__tab-menu a:hover,
+.account__tab-menu a.active {
+  background-color: #ff5151 !important;
+  border-color: #ff5151 !important;
+  color: #ffffff !important;
+}
+
+.account__tab-menu a i.fa {
+  font-size: 14px;
+  text-align: center;
+  width: 25px;
+}
+
+.account__content {
+  border: 1px solid #eeeeee;
+  padding: 30px;
+}
+
+.account__content form {
+  margin-top: -20px;
+}
+
+.account__content h3 {
+  font-size: 20px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.account__content .welcome a:hover {
+  color: #ff5151;
+}
+
+.account__content .welcome strong {
+  font-weight: 600;
+  color: #ff5151;
+}
+
+.account__content fieldset {
+  margin-top: 20px;
+}
+
+.account__content fieldset legend {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.account__content .account__form {
+  margin-top: 50px;
+}
+
+.account__content .account__form .input__item {
+  margin-bottom: 20px;
+}
+
+.account__content .account__form .input__item label {
+  font-size: 14px;
+  text-transform: capitalize;
+  display: block;
+  margin: 0 0 5px;
+}
+
+.account__content .account__form .input__item input {
+  border: 1px solid #e8e8e8;
+  height: 50px;
+  background-color: transparent;
+  padding: 2px 20px;
+  color: #1f2226;
+  font-size: 13px;
+}
+
+.account__content .account__form .input__item input:focus {
+  border: 1px solid #343538;
+}
+
+.account__content .account__form .input__item button {
+  border: none;
+  background-color: #ff5151;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 9px 25px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.account__content .account__form .input__item button:hover {
+  background-color: #1f2226;
+}
+
+.account__table {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.account__table table th,
+.account__table .table th {
+  padding: 10px;
+  font-weight: 600;
+  background-color: #f8f8f8;
+  border-color: #ccc;
+  border-bottom: 0;
+  color: #1f2226;
+}
+
+.account__table table td,
+.account__table .table td {
+  padding: 10px;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+.message__saved {
+  background-color: #fff;
+  border-top: 3px solid #ff5151;
+  font-size: 14px;
+  padding: 20px 0;
+  color: #333;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {
