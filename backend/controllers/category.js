@@ -1,6 +1,6 @@
 const Category = require("../models/category");
 const slugify = require("slugify");
-const { findOneAndDelete } = require("../models/category");
+// const asyncHandler = require('express-async-handler')
 
 //create category
 exports.createCategory = async (req, res) => {
@@ -12,7 +12,7 @@ exports.createCategory = async (req, res) => {
     res.json(category);
   } catch (err) {
     console.log(err);
-    res.status(400).send("Failed to create category!");
+    res.status(400).json({ message: "Failed to create category!" });
   }
 };
 
@@ -32,7 +32,7 @@ exports.getSingleCategory = async (req, res) => {
   const category = await Category.findOne({ slug }).exec();
 
   if (!category) {
-    res.status(400).json({ msg: "Category not found!" });
+    res.status(400).json({ message: "Category not found!" });
   }
 
   res.json(category);
@@ -54,7 +54,7 @@ exports.updateCategory = async (req, res) => {
     res.json(category);
   } catch (err) {
     console.log(err);
-    res.status(400).json({ msg: "Category failed to update." });
+    res.status(400).json({ message: "Category failed to update." });
   }
 };
 
@@ -66,12 +66,12 @@ exports.deleteCategory = async (req, res) => {
     const category = await Category.findOneAndDelete({ slug });
 
     if (!category) {
-      res.json({ msg: "Category not found or already have been deleted!" });
+      res.json({ message: "Category not found or already have been deleted!" });
     }
 
     res.json(category);
   } catch (err) {
     console.log(err);
-    res.status(400).json({ msg: "Category failed to delete." });
+    res.status(400).json({ message: "Category failed to delete." });
   }
 };
