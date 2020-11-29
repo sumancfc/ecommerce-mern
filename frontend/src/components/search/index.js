@@ -1,24 +1,26 @@
 import React from "react";
 
-const Search = ({ className = "" }) => {
+const Search = ({ className = "", setKeyword, keyword }) => {
+  const handleSearch = (e) => {
+    setKeyword(e.target.value.toLowerCase());
+  };
   return (
     <div className={`${className}`}>
       <div className='header__search'>
-        <form>
+        <>
           <div className='header__search-form'>
             <input
               className='input-text'
-              value=''
-              placeholder='Search products...'
+              value={keyword}
+              placeholder='Search'
               type='search'
-              onChange={(e) => e.target.value}
-              required
+              onChange={handleSearch}
             />
-            <button>
+            {/* <button>
               <i className='fa fa-search'></i>
-            </button>
+            </button> */}
           </div>
-        </form>
+        </>
       </div>
     </div>
   );

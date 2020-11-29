@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
+import Search from "../../../components/search";
 import {
   createCategory,
   deleteCategory,
@@ -21,6 +22,7 @@ const Category = ({
   categoryDelete,
 }) => {
   const [name, setName] = useState("");
+  const [keyword, setKeyword] = useState("");
   const authtoken = user.token;
   const { success } = categoryCreate;
   const { success: deleteSuccess } = categoryDelete;
@@ -50,6 +52,8 @@ const Category = ({
     deleteCategory(slug, authtoken, addToast);
   };
 
+  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
   return (
     <>
       <div className='account__form'>
@@ -72,8 +76,10 @@ const Category = ({
             <button className='btn-check'>Create Category</button>
           </div>
         </form>
-        <div className='row mt-50'>
-          {category.categories.map((c) => (
+        <hr />
+        <Search keyword={keyword} setKeyword={setKeyword} />
+        <div className='row mt-25'>
+          {category.categories.filter(searched(keyword)).map((c) => (
             <div
               key={c._id}
               className='d-flex justify-content-between align-items-center category__box bg-gray'
