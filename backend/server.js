@@ -8,6 +8,7 @@ require("dotenv").config();
 const app = express();
 
 const authRoutes = require("./routes/auth");
+const categoryRoutes = require("./routes/category");
 
 //database connection
 mongoose
@@ -31,6 +32,7 @@ app.use(cors());
 
 //routes middleware
 app.use("/api", authRoutes);
+app.use("/api", categoryRoutes);
 
 const port = process.env.PORT || 8000;
 
