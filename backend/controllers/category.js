@@ -1,15 +1,21 @@
 const Category = require("../models/category");
 const slugify = require("slugify");
-// const asyncHandler = require('express-async-handler')
 
 //create category
 exports.createCategory = async (req, res) => {
   try {
     const { name } = req.body;
 
-    const category = await new Category({ name, slug: slugify(name) }).save();
+    const categoryExits = await Category.findOne({ name });
 
-    res.json(category);
+    if (categoryExits) {
+      res.status(409).json({ message: "Category already present" });
+      return;
+    } else {
+      const category = await new Category({ name, slug: slugify(name) }).save();
+
+      res.json(category);
+    }
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Failed to create category!" });
@@ -66,10 +72,12 @@ exports.deleteCategory = async (req, res) => {
     const category = await Category.findOneAndDelete({ slug });
 
     if (!category) {
-      res.json({ message: "Category not found or already have been deleted!" });
+      res
+        .status(400)
+        .json({ message: "Category not found or already have been deleted!" });
     }
 
-    res.json(category);
+    res.json({ message: "Category Deleted" });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Category failed to delete." });

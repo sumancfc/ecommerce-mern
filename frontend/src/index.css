@@ -1746,6 +1746,20 @@ textarea {
   color: #333;
 }
 
+.category__box {
+  width: 45%;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.category__box .category__icon span {
+  margin: 0 10px;
+}
+
+.category__box .category__icon span i {
+  cursor: pointer;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {

@@ -54,7 +54,7 @@ const App = () => {
           <Route exact path='/login' component={Login} />
           <Route exact path='/shop' component={Shop} />
           <Route exact path='/' component={Home} />
-          <AdminRoute exact path='/admin/profile' component={AdminProfile} />
+          <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>

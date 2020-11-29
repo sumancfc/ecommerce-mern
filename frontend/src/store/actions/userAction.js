@@ -67,7 +67,7 @@ export const userRegister = (email, setEmail, addToast) => async () => {
 const userRoleRedirect = (res, history) => {
   // console.log(res);
   if (res.data.role === "admin") {
-    history.push("/admin/profile");
+    history.push("/admin/dashboard");
   } else {
     history.push("/user/profile");
   }

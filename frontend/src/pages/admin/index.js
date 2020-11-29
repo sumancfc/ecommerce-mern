@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import Layout from "../../Layout";
-import Breadcrumb from "../../components/breadcrumb";
+// import Breadcrumb from "../../components/breadcrumb";
+import Category from "./pages/Category";
 
 const AdminProfile = () => {
   return (
     <Layout>
-      <Breadcrumb pageTitle='Admin Profile' />
+      {/* <Breadcrumb pageTitle='Admin Profile' /> */}
       <div className='account__area pt-100 pb-100'>
         <div className='container'>
           <div className='row'>
@@ -18,7 +19,7 @@ const AdminProfile = () => {
                   <div className='row'>
                     <div className='col-lg-3 col-md-4'>
                       <Nav
-                        variant='pills'
+                        variant='tabs'
                         className='account__tab-menu nav bg-gray'
                       >
                         <Nav.Item>
@@ -28,9 +29,7 @@ const AdminProfile = () => {
                         </Nav.Item>
 
                         <Nav.Item>
-                          <Nav.Link eventKey='orders'>
-                            <i className='fa fa-cart-arrow-down'></i> Orders
-                          </Nav.Link>
+                          <Nav.Link eventKey='category'>Category</Nav.Link>
                         </Nav.Item>
 
                         <Nav.Item>
@@ -73,57 +72,10 @@ const AdminProfile = () => {
                           </div>
                         </Tab.Pane>
 
-                        <Tab.Pane eventKey='orders'>
+                        <Tab.Pane eventKey='category'>
                           <div className='account__content'>
-                            <h3>Orders</h3>
-                            <div className='account__table table-responsive text-center'>
-                              <table className='table table-bordered'>
-                                <thead className='thead-light'>
-                                  <tr>
-                                    <th>Order</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>1</td>
-                                    <td>Aug 22, 2018</td>
-                                    <td>Pending</td>
-                                    <td>$3000</td>
-                                    <td>
-                                      <Link to='/cart' className='btn-check'>
-                                        View
-                                      </Link>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>2</td>
-                                    <td>July 22, 2018</td>
-                                    <td>Approved</td>
-                                    <td>$200</td>
-                                    <td>
-                                      <Link to='/cart' className='btn-check'>
-                                        View
-                                      </Link>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>3</td>
-                                    <td>June 12, 2017</td>
-                                    <td>On Hold</td>
-                                    <td>$990</td>
-                                    <td>
-                                      <Link to='/cart' className='btn-check'>
-                                        View
-                                      </Link>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
+                            <h3>Category</h3>
+                            <Category />
                           </div>
                         </Tab.Pane>
 
