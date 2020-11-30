@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 //pages
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 
 //auth
@@ -65,6 +66,7 @@ const App = () => {
           <Route exact path='/forgot/password' component={ForgotPassword} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/shop' component={Shop} />
+          <Route exact path='/contact-us' component={Contact} />
           <Route exact path='/' component={Home} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />

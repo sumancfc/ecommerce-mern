@@ -1762,6 +1762,109 @@ textarea {
   background-color: #1f2226;
 }
 
+/* Contact Page */
+
+.info__wrap h3 {
+  text-transform: capitalize;
+  font-size: 25px;
+  font-weight: 600;
+  margin: 0 0 30px;
+}
+
+.contact__info {
+  background-color: #f7f7f7;
+  padding: 48px 10px 49px;
+}
+
+.contact__info > i {
+  font-size: 36px;
+  color: #ff5151;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  display: block;
+}
+
+.contact__info h4 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: capitalize;
+  margin: 19px 0 10px;
+}
+
+.contact__info p {
+  letter-spacing: 0.4px;
+  font-size: 15px;
+  color: #333;
+}
+
+.contact__info ul li {
+  border-bottom: 2px solid #fff;
+  letter-spacing: 0.4px;
+  margin-bottom: 30px;
+  padding-bottom: 33px;
+  font-size: 15px;
+}
+
+.contact__info ul li:last-child {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  border-bottom: none;
+}
+
+.contact__info ul li i {
+  font-size: 18px;
+  margin-right: 7px;
+  color: #ff5151;
+  top: 3px;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  display: inline-block;
+}
+
+.contact__info ul li:hover i {
+  -webkit-animation: 500ms ease-in-out 0s normal none 1 running tada;
+  animation: 500ms ease-in-out 0s normal none 1 running tada;
+}
+
+.contact__info:hover > i {
+  -webkit-animation: 500ms ease-in-out 0s normal none 1 running tada;
+  animation: 500ms ease-in-out 0s normal none 1 running tada;
+}
+
+.form__wrap input,
+.form__wrap textarea {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: none;
+  color: #000;
+  height: 60px;
+  padding: 2px 20px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.form__wrap textarea {
+  height: 200px;
+  padding: 20px 20px;
+}
+
+.form__wrap button {
+  border: none;
+  background-color: transparent;
+  text-transform: capitalize;
+  background-color: #ff5151;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+.form__wrap button:hover {
+  background-color: #000;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {
