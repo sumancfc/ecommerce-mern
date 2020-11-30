@@ -10,7 +10,7 @@ import {
   CATEGORY_UPDATE_RESET,
 } from "../../../store/constants/category";
 import AdminProfile from "../AdminDashboard";
-import CategoryForm from "./CategoryForm";
+import CategoryForm from "../common/CategoryForm";
 
 const UpdateCategory = ({
   user,

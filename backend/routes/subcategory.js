@@ -15,7 +15,7 @@ const {
 router.post("/subcategory", authCheck, adminCheck, createSubcategory);
 router.get("/subcategories", getAllSubcategory);
 router.get("/subcategory/:slug", getSingleSubcategory);
-router.put("/subcategory:slug", authCheck, adminCheck, updateSubcategory);
-router.delete("/subcategory:slug", authCheck, adminCheck, deleteSubcategory);
+router.put("/subcategory/:slug", authCheck, adminCheck, updateSubcategory);
+router.delete("/subcategory/:slug", authCheck, adminCheck, deleteSubcategory);
 
 module.exports = router;

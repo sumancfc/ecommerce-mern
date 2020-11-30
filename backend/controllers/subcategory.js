@@ -1,10 +1,15 @@
 const Subcategory = require("../models/subCategory");
+const Product = require("../models/category");
 const slugify = require("slugify");
 
 //create sub category
 exports.createSubcategory = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, parent } = req.body;
+
+    if (!parent) {
+      res.status(400).json({ message: "Parent Category not selected" });
+    }
 
     const subCategoryExits = await Subcategory.findOne({ name });
 
@@ -13,6 +18,7 @@ exports.createSubcategory = async (req, res) => {
     } else {
       const subCategory = await new Subcategory({
         name,
+        parent,
         slug: slugify(name),
       }).save();
       res.json(subCategory);
@@ -38,25 +44,24 @@ exports.getSingleSubcategory = async (req, res) => {
 
   const subCategory = await Subcategory.findOne({ slug }).exec();
 
-  if (!subCategory) {
-    res.status(400).json({
-      message: "Sub Category not found!",
-    });
-  }
+  // const products = await Product.find({ subs: slug })
+  //   .populate("category")
+  //   .exec();
 
   res.json(subCategory);
+  // res.json({ subCategory, products });
 };
 
 // update sub category
 exports.updateSubcategory = async (req, res) => {
-  const { name } = req.body;
+  const { name, parent } = req.body;
 
   try {
     const slug = req.params.slug;
 
     const subCategory = await Subcategory.findOneAndUpdate(
       { slug },
-      { name, slug: slugify(name) },
+      { name, slug: slugify(name), parent },
       { new: true }
     );
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ListTable = ({ c, removeCategory }) => {
+const ListTable = ({ c, removeCategory, link }) => {
   return (
     <>
       <div className='d-flex justify-content-between align-items-center category__box bg-gray-1'>
@@ -11,7 +11,7 @@ const ListTable = ({ c, removeCategory }) => {
             <i className='fa fa-trash' />
           </span>
           <span>
-            <Link to={`/admin/category/${c.slug}`}>
+            <Link to={`/admin/${link}/${c.slug}`}>
               <i className='fa fa-edit' />
             </Link>
           </span>

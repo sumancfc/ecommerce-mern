@@ -21,6 +21,9 @@ import Login from "./pages/auth/Login";
 //admin
 import CreateCategory from "./pages/admin/category/CreateCategory";
 import UpdateCategory from "./pages/admin/category/UpdateCategory";
+import CreateSubCategory from "./pages/admin/subcategory/CreateSub";
+import UpdateSubCategory from "./pages/admin/subcategory/UpdateSub";
+
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminProfile from "./pages/admin/AdminDashboard";
 
@@ -70,6 +73,17 @@ const App = () => {
             path='/admin/category/:slug'
             component={UpdateCategory}
           />
+          <AdminRoute
+            exact
+            path='/admin/subcategory'
+            component={CreateSubCategory}
+          />
+          <AdminRoute
+            exact
+            path='/admin/subcategory/:slug'
+            component={UpdateSubCategory}
+          />
+
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>

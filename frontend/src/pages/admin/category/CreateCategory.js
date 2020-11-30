@@ -13,8 +13,8 @@ import {
   CATEGORY_UPDATE_RESET,
 } from "../../../store/constants/category";
 import AdminProfile from "../AdminDashboard";
-import CategoryForm from "./CategoryForm";
-import ListTable from "./ListTable";
+import CategoryForm from "../common/CategoryForm";
+import ListTable from "../common/ListTable";
 
 const CreateCategory = ({
   user,
@@ -83,6 +83,7 @@ const CreateCategory = ({
               key={category._id}
               c={category}
               removeCategory={removeCategory}
+              link='category'
             />
           ))}
         </div>
