@@ -1678,18 +1678,18 @@ textarea {
   margin-top: 50px;
 }
 
-.account__content .account__form .input__item {
+.input__item {
   margin-bottom: 20px;
 }
 
-.account__content .account__form .input__item label {
+.input__item label {
   font-size: 14px;
   text-transform: capitalize;
   display: block;
   margin: 0 0 5px;
 }
 
-.account__content .account__form .input__item input {
+.input__item input {
   border: 1px solid #e8e8e8;
   height: 50px;
   background-color: transparent;
@@ -1698,22 +1698,8 @@ textarea {
   font-size: 13px;
 }
 
-.account__content .account__form .input__item input:focus {
+.input__item input:focus {
   border: 1px solid #343538;
-}
-
-.account__content .account__form .input__item button {
-  border: none;
-  background-color: #ff5151;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 9px 25px;
-  color: #fff;
-  font-size: 13px;
-}
-
-.account__content .account__form .input__item button:hover {
-  background-color: #1f2226;
 }
 
 .account__table {
@@ -1758,6 +1744,22 @@ textarea {
 
 .category__box .category__icon span i {
   cursor: pointer;
+}
+
+/* button */
+.button__wrap button {
+  border: none;
+  background-color: #ff5151;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 9px 25px;
+  color: #fff;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+}
+
+.button__wrap button:hover {
+  background-color: #1f2226;
 }
 
 /* Media Query */
@@ -1958,6 +1960,9 @@ textarea {
 
   .searchform.mb-50 {
     margin-bottom: 20px;
+  }
+  .category__box {
+    width: 100%;
   }
 }
 

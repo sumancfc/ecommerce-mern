@@ -10,22 +10,28 @@ import {
 import {
   CATEGORY_CREATE_RESET,
   CATEGORY_DELETE_RESET,
+  CATEGORY_UPDATE_RESET,
 } from "../../../store/constants/category";
+import AdminProfile from "../AdminDashboard";
+import CategoryForm from "./CategoryForm";
+import ListTable from "./ListTable";
 
-const Category = ({
+const CreateCategory = ({
   user,
-  category,
+  categories,
   getAllCategories,
   createCategory,
   categoryCreate,
   deleteCategory,
   categoryDelete,
+  categoryUpdate,
 }) => {
   const [name, setName] = useState("");
   const [keyword, setKeyword] = useState("");
   const authtoken = user.token;
   const { success } = categoryCreate;
   const { success: deleteSuccess } = categoryDelete;
+  const { success: updateSuccess } = categoryUpdate;
 
   const { addToast } = useToasts();
   const dispatch = useDispatch();
@@ -37,12 +43,16 @@ const Category = ({
     if (deleteSuccess) {
       dispatch({ type: CATEGORY_DELETE_RESET });
     }
+
+    if (updateSuccess) {
+      dispatch({ type: CATEGORY_UPDATE_RESET });
+    }
     getAllCategories();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [success, deleteSuccess]);
+  }, [success, deleteSuccess, updateSuccess]);
 
-  const handleCategory = (e) => {
+  const handleCreateCategory = (e) => {
     e.preventDefault();
 
     createCategory(name, authtoken, addToast, setName);
@@ -55,58 +65,39 @@ const Category = ({
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
-    <>
+    <AdminProfile title='Category'>
       <div className='account__form'>
-        <form onSubmit={handleCategory}>
-          <div className='row'>
-            <div className='col-lg-12'>
-              <div className='input__item'>
-                <input
-                  type='text'
-                  name='category'
-                  placeholder='Enter category name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div className='input__item'>
-            <button className='btn-check'>Create Category</button>
-          </div>
-        </form>
+        <CategoryForm
+          handleCategory={handleCreateCategory}
+          value={name}
+          setName={setName}
+          title='Create Category'
+          placeholder='Enter Category'
+        />
+
         <hr />
         <Search keyword={keyword} setKeyword={setKeyword} />
         <div className='row mt-25'>
-          {category.categories.filter(searched(keyword)).map((c) => (
-            <div
-              key={c._id}
-              className='d-flex justify-content-between align-items-center category__box bg-gray'
-            >
-              {c.name}
-              <div className='category__icon'>
-                <span className='' onClick={() => removeCategory(c.slug)}>
-                  <i className='fa fa-close' />
-                </span>
-                <span>
-                  <i className='fa fa-edit' />
-                </span>
-              </div>
-            </div>
+          {categories.filter(searched(keyword)).map((category) => (
+            <ListTable
+              key={category._id}
+              c={category}
+              removeCategory={removeCategory}
+            />
           ))}
         </div>
       </div>
-    </>
+    </AdminProfile>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     user: state.userList,
-    category: state.categoryList,
+    categories: state.categoryList.categories,
     categoryCreate: state.categoryCreate,
     categoryDelete: state.categoryDelete,
+    categoryUpdate: state.categoryUpdate,
   };
 };
 
@@ -124,4 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCategory);

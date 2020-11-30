@@ -10,6 +10,14 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
+  CATEGORY_SINGLE_FAIL,
+  CATEGORY_SINGLE_REQUEST,
+  CATEGORY_SINGLE_SUCCESS,
+  CATEGORY_UPDATE_FAIL,
+  CATEGORY_UPDATE_REQUEST,
+  CATEGORY_UPDATE_RESET,
+  CATEGORY_UPDATE_SUCCESS,
+  CATEGORY_SINGLE_RESET,
 } from "../constants/category";
 
 //get all categories
@@ -24,7 +32,7 @@ export const categoryListReducer = (state = { categories: [] }, action) => {
     case CATEGORY_LIST_SUCCESS:
       return {
         loading: false,
-        categories: action.payload.categories,
+        categories: action.payload,
       };
 
     case CATEGORY_LIST_FAIL:
@@ -32,6 +40,34 @@ export const categoryListReducer = (state = { categories: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+
+    default:
+      return state;
+  }
+};
+
+//get all categories
+export const categorySingleReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CATEGORY_SINGLE_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case CATEGORY_SINGLE_SUCCESS:
+      return {
+        loading: false,
+        category: action.payload,
+      };
+
+    case CATEGORY_SINGLE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CATEGORY_SINGLE_RESET:
+      return {};
 
     default:
       return state;
@@ -51,6 +87,26 @@ export const categoryCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
 
     case CATEGORY_CREATE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+//update category
+export const categoryUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CATEGORY_UPDATE_REQUEST:
+      return { loading: true };
+
+    case CATEGORY_UPDATE_SUCCESS:
+      return { loading: false, success: true, category: action.payload };
+
+    case CATEGORY_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case CATEGORY_UPDATE_RESET:
       return {};
 
     default:

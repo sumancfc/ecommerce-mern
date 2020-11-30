@@ -25,10 +25,7 @@ exports.createCategory = async (req, res) => {
 //get all categories
 exports.getAllCategory = async (req, res) => {
   const categories = await Category.find({}).sort({ createdAt: -1 }).exec();
-  res.json({
-    count: categories.length,
-    categories,
-  });
+  res.json(categories);
 };
 
 //get single category
@@ -37,18 +34,13 @@ exports.getSingleCategory = async (req, res) => {
 
   const category = await Category.findOne({ slug }).exec();
 
-  if (!category) {
-    res.status(400).json({ message: "Category not found!" });
-  }
-
   res.json(category);
 };
 
 //update category
 exports.updateCategory = async (req, res) => {
-  const { name } = req.body;
-
   try {
+    const { name } = req.body;
     const slug = req.params.slug;
 
     const category = await Category.findOneAndUpdate(

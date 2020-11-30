@@ -2,18 +2,27 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 import { useDispatch } from "react-redux";
+
+//pages
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import PageNotFound from "./pages/PageNotFound";
+
+//auth
 import Register from "./pages/auth/Register";
 import RegisterComplete from "./pages/auth/RegisterComplete";
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Shop from "./pages/Shop";
 import { auth } from "./firebase";
 import { getCurrentUser } from "./store/actions/userAction";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import PageNotFound from "./pages/PageNotFound";
-import AdminProfile from "./pages/admin";
-// import PrivateRoute from "./components/routes/PrivateRoute";
+import Login from "./pages/auth/Login";
+
+//users
+
+//admin
+import CreateCategory from "./pages/admin/category/CreateCategory";
+import UpdateCategory from "./pages/admin/category/UpdateCategory";
 import AdminRoute from "./components/routes/AdminRoute";
+import AdminProfile from "./pages/admin/AdminDashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,6 +64,12 @@ const App = () => {
           <Route exact path='/shop' component={Shop} />
           <Route exact path='/' component={Home} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
+          <AdminRoute exact path='/admin/category' component={CreateCategory} />
+          <AdminRoute
+            exact
+            path='/admin/category/:slug'
+            component={UpdateCategory}
+          />
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>
