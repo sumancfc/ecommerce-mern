@@ -11,6 +11,7 @@ const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/category");
 const subCategoryRoutes = require("./routes/subcategory");
 const productRoutes = require("./routes/product");
+const cloudinaryRoutes = require("./routes/cloudinary");
 
 const { errorNotFound, errorHandler } = require("./middlewares/errorHandler");
 
@@ -39,6 +40,7 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", subCategoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", cloudinaryRoutes);
 
 //error middleware
 app.use(errorNotFound);
