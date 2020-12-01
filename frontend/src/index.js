@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import "animate.css/animate.min.css";
 import "fontawesome-4.7/css/font-awesome.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "antd/dist/antd.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

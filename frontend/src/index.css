@@ -1682,14 +1682,8 @@ textarea {
   margin-bottom: 20px;
 }
 
-.input__item label {
-  font-size: 14px;
-  text-transform: capitalize;
-  display: block;
-  margin: 0 0 5px;
-}
-
-.input__item input {
+.input__item input,
+.input__item select {
   border: 1px solid #e8e8e8;
   height: 50px;
   background-color: transparent;
@@ -1698,7 +1692,8 @@ textarea {
   font-size: 13px;
 }
 
-.input__item input:focus {
+.input__item input:focus,
+.input__item select:focus {
   border: 1px solid #343538;
 }
 

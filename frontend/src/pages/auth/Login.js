@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import Layout from "../../Layout";
 import Breadcrumb from "../../components/breadcrumb";
 import { loginUser, loginUsingGoogle } from "../../store/actions/userAction";
 
-const Login = ({ history, user }) => {
+const Login = ({ history }) => {
   const [email, setEmail] = useState("sumanstha999@gmail.com");
   const [password, setPassword] = useState("sumancfc");
   const { addToast } = useToasts();
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.userList);
+  // console.log(user);
+
   useEffect(() => {
-    if (user && user.token) history.push("/");
+    if (user && user.token) {
+      history.push("/admin/dashboard");
+    }
   }, [user, history]);
 
   // handle submit for login
@@ -89,10 +94,4 @@ const Login = ({ history, user }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userList,
-  };
-};
-
-export default connect(mapStateToProps)(Login);
+export default Login;

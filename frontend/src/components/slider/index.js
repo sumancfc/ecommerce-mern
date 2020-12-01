@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LinkButton from "../button/LinkButton";
 
 const HeroSlider = () => {
   const settings = {
@@ -53,14 +53,11 @@ const HeroSlider = () => {
                         <div>
                           <h4>{value.sliderTitle}</h4>
                           <h1>{value.brand}</h1>
-                          <div className=' default-btn btn-hover mt-20'>
-                            <Link
-                              to={value.btnLink}
-                              className='btn-size-md btn-style-outline'
-                            >
-                              shop now
-                            </Link>
-                          </div>
+                          <LinkButton
+                            title='Shop Now'
+                            link='/shop'
+                            className='mt-20'
+                          />
                         </div>
                       </div>
                     </div>

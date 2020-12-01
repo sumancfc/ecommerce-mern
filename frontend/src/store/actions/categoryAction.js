@@ -173,3 +173,8 @@ export const deleteCategory = (slug, authtoken, addToast) => async (
     });
   }
 };
+
+//get sub category of categories
+export const gCategorySubs = async (_id) => {
+  return await axios.get(`${process.env.REACT_APP_API}/category/subs/${_id}`);
+};
