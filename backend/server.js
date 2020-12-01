@@ -10,6 +10,7 @@ const app = express();
 const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/category");
 const subCategoryRoutes = require("./routes/subcategory");
+const productRoutes = require("./routes/product");
 
 const { errorNotFound, errorHandler } = require("./middlewares/errorHandler");
 
@@ -37,6 +38,7 @@ app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", subCategoryRoutes);
+app.use("/api", productRoutes);
 
 //error middleware
 app.use(errorNotFound);
