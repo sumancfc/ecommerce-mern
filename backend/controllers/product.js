@@ -71,3 +71,24 @@ exports.deleteProduct = async (req, res) => {
     res.status(400).json({ message: "Failed to delete product" });
   }
 };
+
+//get products by arrival and sold
+exports.productBySelect = async (req, res) => {
+  try {
+    const { sort, order, limit } = req.body;
+
+    const products = await Product.find({})
+      .populate("category")
+      .populate("subs")
+      .sort([[sort, order]])
+      .limit(limit)
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      message: "Failed to get products",
+    });
+  }
+};

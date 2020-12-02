@@ -6,6 +6,7 @@ import {
   categoryUpdateReducer,
   categorySingleReducer,
 } from "./categoryReducer";
+import productReducer from "./productReducer";
 import { userReducer } from "./userReducer";
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   categorySingle: categorySingleReducer,
   categoryUpdate: categoryUpdateReducer,
   categoryDelete: categoryDeleteReducer,
+  productList: productReducer,
 });
 
 export default rootReducer;

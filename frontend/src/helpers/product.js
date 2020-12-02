@@ -35,3 +35,34 @@ export const deleteProduct = async (slug, authtoken) => {
     },
   });
 };
+
+// get All products
+export const getAllProducts = (products, limit, type) => {
+  const finalProducts = products;
+
+  //product by arrival
+  if (type && type === "new") {
+    const newProducts = finalProducts.filter((single) => single.createdAt);
+    return newProducts.slice(0, limit ? limit : newProducts.length);
+  }
+
+  //product by best sells
+  if (type && type === "bestSeller") {
+    return finalProducts
+      .sort((a, b) => {
+        return b.quantity - a.quantity;
+      })
+      .slice(0, limit ? limit : finalProducts.length);
+  }
+
+  return finalProducts.slice(0, limit ? limit : finalProducts.length);
+};
+
+// get product by sort
+export const getSortedProducts = async (sort, order, page) => {
+  return await axios.post(`${process.env.REACT_APP_API}/products`, {
+    sort,
+    order,
+    page,
+  });
+};
