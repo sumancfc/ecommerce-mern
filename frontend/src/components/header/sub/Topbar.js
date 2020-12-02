@@ -14,7 +14,9 @@ const Topbar = ({ clsName, user, logout }) => {
         <div className='row'>
           <div className='col-lg-4'>
             <div className='header__top-left'>
-              <p>Welcome to our shop</p>
+              <Link to='/admin/dashboard' style={{ color: "#fff" }}>
+                Admin
+              </Link>
             </div>
           </div>
           <div className='col-lg-8'>

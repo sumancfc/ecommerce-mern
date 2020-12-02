@@ -7,17 +7,18 @@ import {
   gCategorySubs,
 } from "../../../store/actions/categoryAction";
 import AdminProfile from "../AdminDashboard";
+import ImageUpload from "../common/ImageUpload";
 import ProductForm from "../common/ProductForm";
 
 const initialState = {
   title: "Macbook Pro",
   description: "This is the best Apple product",
   price: "45000",
-  //   categories: [],
   subs: [],
   category: "",
   shipping: "Yes",
   quantity: "50",
+  images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
   brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
   color: "White",
@@ -28,6 +29,7 @@ const CreateProduct = () => {
   const [values, setValues] = useState(initialState);
   const [subOptions, setSubOptions] = useState("");
   const [showSub, setShowSub] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { addToast } = useToasts();
 
@@ -72,7 +74,7 @@ const CreateProduct = () => {
   const handleCatagoryChange = (e) => {
     e.preventDefault();
     console.log("CLICKED CATEGORY", e.target.value);
-    setValues({ ...values, category: e.target.value });
+    setValues({ ...values, subs: [], category: e.target.value });
 
     gCategorySubs(e.target.value)
       .then((res) => {
@@ -85,6 +87,14 @@ const CreateProduct = () => {
 
   return (
     <AdminProfile title='Create Products'>
+      {/* Image Upload Btn */}
+      <ImageUpload
+        setLoading={setLoading}
+        values={values}
+        setValues={setValues}
+      />
+
+      {/* Product Create Form */}
       <ProductForm
         categories={categories}
         handleChange={handleChange}

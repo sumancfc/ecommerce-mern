@@ -29,8 +29,6 @@ const ProductForm = ({
     brand,
   } = values;
 
-  console.log(subOptions);
-
   return (
     <div className='mt-45'>
       <form onSubmit={handleSubmit}>
