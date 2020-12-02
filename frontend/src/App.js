@@ -27,6 +27,7 @@ import CreateSubCategory from "./pages/admin/subcategory/CreateSub";
 import UpdateSubCategory from "./pages/admin/subcategory/UpdateSub";
 import CreateProduct from "./pages/admin/products/CreateProduct";
 import AllProducts from "./pages/admin/products/AllProducts";
+import UpdateProduct from "./pages/admin/products/UpdateProduct";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminProfile from "./pages/admin/AdminDashboard";
@@ -90,6 +91,11 @@ const App = () => {
             component={UpdateSubCategory}
           />
           <AdminRoute exact path='/admin/product' component={CreateProduct} />
+          <AdminRoute
+            exact
+            path='/admin/product/:slug'
+            component={UpdateProduct}
+          />
           <AdminRoute exact path='/admin/products' component={AllProducts} />
 
           <Route exact component={PageNotFound} />

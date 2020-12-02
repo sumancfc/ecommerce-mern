@@ -2073,6 +2073,90 @@ textarea {
   transform: scale(1.8);
 }
 
+/* Product table */
+.table__content table {
+  border: 1px solid #ebebeb;
+}
+
+.table__content table thead > tr {
+  background-color: #f9f9f9;
+  border: 1px solid #ebebeb;
+}
+
+.table__content table thead > tr th {
+  border-top: medium none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 21px 45px 22px;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table__content table tbody > tr {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.table__content table tbody > tr td.product__thumbnail {
+  width: 150px;
+}
+
+.table__content table tbody > tr td.product__name {
+  width: 435px;
+}
+
+.table__content table tbody > tr td.product__name a {
+  font-size: 15px;
+}
+
+.table__content table tbody > tr td.product__name a:hover {
+  color: #ff5151;
+}
+
+.table__content table tbody > tr td.product__price-cart {
+  width: 435px;
+}
+
+.table__content table tbody > tr td.product__price-cart span.amount {
+  color: #333;
+  font-weight: 500;
+}
+
+.table__content table tbody > tr td.product__price-cart span.old {
+  margin-right: 10px;
+  text-decoration: line-through;
+  color: #8e8e8e;
+}
+
+.table__content table tbody > tr td.product__remove {
+  width: 100px;
+}
+
+.table__content table tbody > tr td.product__remove a {
+  font-size: 17px;
+  margin: 0 6px;
+}
+
+.table__content table tbody > tr td.product__remove button {
+  font-size: 17px;
+  margin: 0 6px;
+  border: none;
+  background: none;
+}
+
+.table__content table tbody > tr td.product__remove a:hover,
+.table__content table tbody > tr td.product__remove button:hover {
+  color: #ff5151;
+}
+
+.table__content table tbody > tr td {
+  font-size: 15px;
+  padding: 5px 0;
+  text-align: center;
+  font-weight: 500;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {
@@ -2149,6 +2233,18 @@ textarea {
 
   .hero__slider .slider__container h1 {
     font-size: 50px;
+  }
+
+  .table__content table thead > tr th {
+    padding: 21px 35px 22px;
+  }
+
+  .table__content table thead > tr th {
+    padding: 21px 20px 22px;
+  }
+
+  .table__content table tbody > tr td {
+    padding: 30px 0 30px 10px;
   }
 }
 
