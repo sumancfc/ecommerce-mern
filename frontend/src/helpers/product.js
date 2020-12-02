@@ -37,21 +37,24 @@ export const deleteProduct = async (slug, authtoken) => {
 };
 
 // get All products
-export const getAllProducts = (products, limit, type) => {
+export const getAllProducts = (products, type, limit) => {
   const finalProducts = products;
 
-  //product by arrival
-  if (type && type === "new") {
-    const newProducts = finalProducts.filter((single) => single.createdAt);
-    return newProducts.slice(0, limit ? limit : newProducts.length);
-  }
+  // console.log(finalProducts);
 
-  //product by best sells
   if (type && type === "bestSeller") {
     return finalProducts
       .sort((a, b) => {
-        return b.quantity - a.quantity;
+        return b.sold - a.sold;
       })
+      .slice(0, limit ? limit : finalProducts.length);
+  }
+
+  //product by arrival
+  if (type && type === "bestPrice") {
+    return finalProducts
+      .slice()
+      .sort((a, b) => b.price - a.price)
       .slice(0, limit ? limit : finalProducts.length);
   }
 

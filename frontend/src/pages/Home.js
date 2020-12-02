@@ -8,7 +8,7 @@ import { getAllProductsFrom } from "../store/actions/productAction";
 const Home = () => {
   const products = useSelector((state) => state.productList.products);
 
-  // console.log(products);
+  console.log(products);
 
   const dispatch = useDispatch();
 
@@ -18,19 +18,19 @@ const Home = () => {
 
   return (
     <Layout>
+      {/* Best Seller  */}
+      <ProductGrid
+        type='bestSeller'
+        limit={4}
+        title='Best Products'
+        desc='lorem ipsum lorem ipsum lorem ipsumv lorem ipsum'
+      />
       <HeroSlider />
       {/* New Arrival */}
       <ProductGrid
+        type='bestPrice'
         limit={4}
-        type='bestSeller'
-        title='New Products'
-        desc='lorem ipsum lorem ipsum lorem ipsumv lorem ipsum'
-      />
-      {/* Best Seller */}
-      <ProductGrid
-        limit={6}
-        type='new'
-        title='Best Products'
+        title='Best Price'
         desc='lorem ipsum lorem ipsum lorem ipsumv lorem ipsum'
       />
     </Layout>

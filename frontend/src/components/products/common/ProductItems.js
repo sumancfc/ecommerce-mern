@@ -18,8 +18,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     products: getAllProducts(
       state.productList.products,
-      ownProps.limit,
-      ownProps.type
+      ownProps.type,
+      ownProps.limit
     ),
   };
 };
