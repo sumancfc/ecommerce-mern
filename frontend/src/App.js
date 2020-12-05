@@ -41,6 +41,7 @@ const App = () => {
       if (user) {
         const userIdToken = await user.getIdTokenResult();
 
+        // console.log(userIdToken.token);
         getCurrentUser(userIdToken.token)
           .then((res) => {
             dispatch({
@@ -56,7 +57,7 @@ const App = () => {
           })
           .catch((err) => console.log(err));
       }
-      // console.log(user);
+      // console.log(token);
     });
 
     return () => unsubscribe();

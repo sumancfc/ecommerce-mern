@@ -6,7 +6,11 @@ import {
   categoryUpdateReducer,
   categorySingleReducer,
 } from "./categoryReducer";
-import productReducer from "./productReducer";
+import {
+  productDetailReducer,
+  productReducer,
+  productReviewReducer,
+} from "./productReducer";
 import { userReducer } from "./userReducer";
 
 const rootReducer = combineReducers({
@@ -17,6 +21,8 @@ const rootReducer = combineReducers({
   categoryUpdate: categoryUpdateReducer,
   categoryDelete: categoryDeleteReducer,
   productList: productReducer,
+  productDetail: productDetailReducer,
+  productReview: productReviewReducer,
 });
 
 export default rootReducer;

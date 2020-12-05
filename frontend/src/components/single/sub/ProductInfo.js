@@ -1,25 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { showAverage } from "../../../helpers/averageRating";
 
 const ProductInfo = ({ product }) => {
-  const { title, price, quantity, category, subs, color } = product;
+  const { title, price, quantity, category, subs, reviews } = product;
 
   return (
     <div className='col-lg-6 col-md-6'>
       <div className='product__details-content product__details-content-modify'>
         <h2>{title}</h2>
-        <div className='product__rating-review'>
-          <div className='product__rating'>
-            <i className='fa fa-star'></i>
-            <i className='fa fa-star'></i>
-            <i className='fa fa-star'></i>
-            <i className='fa fa-star'></i>
-            <i className='fa fa-star-half-o'></i>
-          </div>
-          <div className='product__rating'>
-            <span>40+ Reviews</span>
-          </div>
-        </div>
+
+        {reviews && reviews.length > 0 ? (
+          showAverage(product)
+        ) : (
+          <h2>No review Yet</h2>
+        )}
 
         <div className='pro__details-price-wrap mt-40'>
           <div className='product__price'>

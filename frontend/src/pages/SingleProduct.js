@@ -31,7 +31,7 @@ const SingleProduct = ({ match }) => {
 
       <SingleProductTop product={product} />
 
-      <SingleProductDesc />
+      <SingleProductDesc slug={slug} />
     </Layout>
   );
 };

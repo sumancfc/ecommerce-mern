@@ -1,6 +1,20 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
+const reviewSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, default: 0 },
+    comment: { type: String, required: true },
+    user: {
+      type: ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
 const productSchema = new mongoose.Schema(
   {
     title: {
@@ -57,6 +71,12 @@ const productSchema = new mongoose.Schema(
     brand: {
       type: String,
       enum: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
+    },
+    reviews: { type: [reviewSchema] },
+    reviewsNumber: {
+      type: Number,
+      required: true,
+      default: 0,
     },
   },
   { timestamps: true }

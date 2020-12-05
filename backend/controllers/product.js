@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 const slugify = require("slugify");
 
 //create products
@@ -90,5 +91,47 @@ exports.productBySelect = async (req, res) => {
     res.status(400).json({
       message: "Failed to get products",
     });
+  }
+};
+
+//add  product review
+exports.reviewProduct = async (req, res) => {
+  const product = await Product.findById(req.params.id).exec();
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  const { rating, comment } = req.body;
+
+  //check if reviews exist
+  let reviewExist = product.reviews.find(
+    (rev) => rev.user.toString() === user._id.toString()
+  );
+
+  // if review not exist then add review
+  if (reviewExist === undefined) {
+    const review = {
+      name: user.name,
+      rating: Number(rating),
+      comment,
+      user: user._id,
+    };
+
+    product.reviews.push(review);
+
+    product.reviewsNumber = product.reviews.length;
+
+    const reviewSaved = await product.save();
+
+    res.json(reviewSaved);
+  } else {
+    // if review already exist then update review
+    const updateReview = await Product.updateOne(
+      {
+        reviews: { $elemMatch: reviewExist },
+      },
+      { $set: { "reviews.$.rating": rating, "reviews.$.comment": comment } },
+      { new: true }
+    ).exec();
+
+    res.json(updateReview);
   }
 };
