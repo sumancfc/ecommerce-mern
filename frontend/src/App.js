@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import SingleProduct from "./pages/SingleProduct";
 import PageNotFound from "./pages/PageNotFound";
 
 //auth
@@ -98,6 +99,7 @@ const App = () => {
           />
           <AdminRoute exact path='/admin/products' component={AllProducts} />
 
+          <Route exact path='/product/:slug' component={SingleProduct} />
           <Route exact component={PageNotFound} />
         </Switch>
       </Router>

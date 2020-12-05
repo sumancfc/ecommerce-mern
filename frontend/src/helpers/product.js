@@ -36,7 +36,7 @@ export const deleteProduct = async (slug, authtoken) => {
   });
 };
 
-// get All products
+// get All products based on sort
 export const getAllProducts = (products, type, limit) => {
   const finalProducts = products;
 
