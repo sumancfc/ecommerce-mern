@@ -135,3 +135,21 @@ exports.reviewProduct = async (req, res) => {
     res.json(updateReview);
   }
 };
+
+//related products
+exports.relatedProduct = async (req, res) => {
+  const id = req.params.id;
+  const product = await Product.findById(id).exec();
+
+  const relatedProduct = await Product.find({
+    _id: { $ne: product._id },
+    category: product.category,
+  })
+    .limit(3)
+    .populate("category")
+    .populate("subs")
+    .populate("user")
+    .exec();
+
+  res.json(relatedProduct);
+};

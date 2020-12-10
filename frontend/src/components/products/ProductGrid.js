@@ -1,7 +1,6 @@
 import React from "react";
 import Title from "../Title";
 import ProductItems from "./common/ProductItems";
-import "./Product.css";
 
 const ProductGrid = ({ type, limit, title, desc }) => {
   console.log(type);

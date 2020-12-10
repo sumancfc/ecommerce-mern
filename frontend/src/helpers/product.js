@@ -69,3 +69,8 @@ export const getSortedProducts = async (sort, order, page) => {
     page,
   });
 };
+
+//get related product
+export const getRelatedProduct = async (productId) => {
+  return axios.get(`${process.env.REACT_APP_API}/product/${productId}/related`);
+};

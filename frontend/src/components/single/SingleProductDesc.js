@@ -50,7 +50,7 @@ const SingleProductDesc = ({ slug, user }) => {
   };
 
   return (
-    <div className='description__wrapper pb-90'>
+    <div className='description__wrapper '>
       <div className='container'>
         <div className='row'>
           <div className='ml-auto mr-auto col-lg-10'>
