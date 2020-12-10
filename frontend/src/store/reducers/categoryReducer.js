@@ -57,7 +57,8 @@ export const categorySingleReducer = (state = {}, action) => {
     case CATEGORY_SINGLE_SUCCESS:
       return {
         loading: false,
-        category: action.payload,
+        category: action.payload.category,
+        products: action.payload.products,
       };
 
     case CATEGORY_SINGLE_FAIL:
@@ -66,8 +67,8 @@ export const categorySingleReducer = (state = {}, action) => {
         error: action.payload,
       };
 
-    case CATEGORY_SINGLE_RESET:
-      return {};
+    // case CATEGORY_SINGLE_RESET:
+    //   return {};
 
     default:
       return state;

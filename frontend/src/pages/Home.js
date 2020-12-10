@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import CategoryList from "../components/category";
 import ProductGrid from "../components/products/ProductGrid";
 import HeroSlider from "../components/slider";
 import Layout from "../Layout";
 import { getAllProductsFrom } from "../store/actions/productAction";
 
 const Home = () => {
-  const products = useSelector((state) => state.productList.products);
-
-  console.log(products);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,6 +28,11 @@ const Home = () => {
         type='bestPrice'
         limit={4}
         title='Best Price'
+        desc='lorem ipsum lorem ipsum lorem ipsumv lorem ipsum'
+      />
+
+      <CategoryList
+        title='Top Categories'
         desc='lorem ipsum lorem ipsum lorem ipsumv lorem ipsum'
       />
     </Layout>

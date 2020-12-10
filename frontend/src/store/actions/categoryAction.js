@@ -47,7 +47,19 @@ export const getSingleCategory = (slug, setCategory) => async (dispatch) => {
     );
 
     dispatch({ type: CATEGORY_SINGLE_SUCCESS, payload: data });
-    setCategory(data.name);
+    setCategory(data.category);
+  } catch (error) {}
+};
+
+export const getSingleCat = (slug) => async (dispatch) => {
+  try {
+    dispatch({ type: CATEGORY_SINGLE_REQUEST });
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/category/${slug}`
+    );
+
+    dispatch({ type: CATEGORY_SINGLE_SUCCESS, payload: data });
   } catch (error) {}
 };
 

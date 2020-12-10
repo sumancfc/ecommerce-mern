@@ -3,7 +3,7 @@ import Title from "../Title";
 import ProductItems from "./common/ProductItems";
 
 const ProductGrid = ({ type, limit, title, desc }) => {
-  console.log(type);
+  // console.log(type);
   return (
     <div className='product__area pt-80 pb-100'>
       <div className='container'>
