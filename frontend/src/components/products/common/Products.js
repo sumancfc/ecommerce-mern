@@ -34,7 +34,7 @@ const Product = ({ product }) => {
           <div className='product__content'>
             <span>{category.name}</span>
             <h4>
-              <Link to='/product'>{title}</Link>
+              <Link to={`/product/${slug}`}>{title}</Link>
             </h4>
             <div className='price__add-to-cart'>
               <div className='product__price'>

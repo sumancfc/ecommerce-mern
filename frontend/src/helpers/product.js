@@ -93,3 +93,31 @@ export const setActiveLayout = (e) => {
   });
   e.currentTarget.classList.add("active");
 };
+
+//product sort
+export const productSort = (products, sortType, sortValue) => {
+  if (products && sortType && sortValue) {
+    //sort by price high --> low to low --> high
+    if (sortType === "filterSort") {
+      let sortedProduct = [...products];
+
+      if (sortValue === "default") {
+        return sortedProduct;
+      }
+
+      if (sortValue === "priceHighToLow") {
+        return sortedProduct.sort((a, b) => {
+          return b.price - a.price;
+        });
+      }
+
+      if (sortValue === "priceLowToHigh") {
+        return sortedProduct.sort((a, b) => {
+          return a.price - b.price;
+        });
+      }
+    }
+  }
+
+  return products;
+};
