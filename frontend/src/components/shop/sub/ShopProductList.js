@@ -5,7 +5,7 @@ const ShopProductList = ({ products }) => {
   return (
     <>
       {products.map((product) => {
-        return <ShopProductItem key={product.id} product={product} />;
+        return <ShopProductItem key={product._id} product={product} />;
       })}
     </>
   );

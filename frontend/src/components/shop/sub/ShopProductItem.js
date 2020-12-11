@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useToasts } from "react-toast-notifications";
-import laptop from "../../assets/images/product-8.jpg";
+
+import laptop from "../../../assets/images/product-8.jpg";
 
 const ShopProductItem = ({ product }) => {
-  const { addToast } = useToasts();
-
   const { title, slug, images, price, category, description } = product;
 
   return (

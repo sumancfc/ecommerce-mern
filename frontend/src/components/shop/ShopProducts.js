@@ -1,5 +1,5 @@
 import React from "react";
-import ShopProductList from "./ShopProductList";
+import ShopProductList from "./sub/ShopProductList";
 
 const ShopProducts = ({ products, layout }) => {
   return (

@@ -182,11 +182,130 @@ const handleQuery = async (req, res, query) => {
   }
 };
 
-//search products
+//handle price
+const handlePriceQuery = async (req, res, price) => {
+  try {
+    const products = await Product.find({
+      price: {
+        $gte: price[0],
+        $lte: price[1],
+      },
+    })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//handle category
+const handleCategoryQuery = async (req, res, category) => {
+  try {
+    const products = await Product.find({ category })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//handle sub category
+const handleSubQuery = async (req, res, sub) => {
+  try {
+    const products = await Product.find({ subs: sub })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//handle product brand
+const handleBrandQuery = async (req, res, brand) => {
+  try {
+    const products = await Product.find({ brand })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//handle product shipping
+const handleShippingQuery = async (req, res, shipping) => {
+  try {
+    const products = await Product.find({ shipping })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//handle product brand
+const handleColorQuery = async (req, res, color) => {
+  try {
+    const products = await Product.find({ color })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//search products by query,price
 exports.searchProducts = async (req, res) => {
-  const { query } = req.body;
+  const { query, price, category, sub, shipping, color, brand } = req.body;
 
   if (query) {
     await handleQuery(req, res, query);
+  }
+
+  if (price !== undefined) {
+    await handlePriceQuery(req, res, price);
+  }
+
+  if (category) {
+    await handleCategoryQuery(req, res, category);
+  }
+
+  if (sub) {
+    await handleSubQuery(req, res, sub);
+  }
+
+  if (brand) {
+    await handleBrandQuery(req, res, brand);
+  }
+
+  if (shipping) {
+    await handleShippingQuery(req, res, shipping);
+  }
+
+  if (color) {
+    await handleColorQuery(req, res, color);
   }
 };

@@ -6,9 +6,9 @@ const SearchCategory = ({ className = "", setKeyword, keyword }) => {
   };
   return (
     <div className={`${className}`}>
-      <div className='header__search'>
+      <div className='search__wrap'>
         <>
-          <div className='header__search-form'>
+          <div className='search__form'>
             <input
               className='input-text'
               value={keyword}
