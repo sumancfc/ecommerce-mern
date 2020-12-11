@@ -39,6 +39,19 @@ exports.getSingleProduct = async (req, res) => {
   res.json(product);
 };
 
+//get products by count
+exports.getProductsByCount = async (req, res) => {
+  const count = req.params.count;
+  let products = await Product.find({})
+    .limit(parseInt(count))
+    .populate("category")
+    .populate("subs")
+    .sort([["createdAt", "desc"]])
+    .exec();
+
+  res.json(products);
+};
+
 //update product
 exports.updateProduct = async (req, res) => {
   try {
@@ -152,4 +165,28 @@ exports.relatedProduct = async (req, res) => {
     .exec();
 
   res.json(relatedProduct);
+};
+
+//handle Query
+const handleQuery = async (req, res, query) => {
+  try {
+    const products = await Product.find({ $text: { $search: query } })
+      .populate("category", "_id name")
+      .populate("subs", "_id name")
+      .populate("user", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//search products
+exports.searchProducts = async (req, res) => {
+  const { query } = req.body;
+
+  if (query) {
+    await handleQuery(req, res, query);
+  }
 };

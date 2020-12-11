@@ -1,7 +1,7 @@
 import React from "react";
 import MenuCart from "../../cart";
 import Logo from "../../logo";
-import Search from "../../search";
+import Search from "../../search/Search";
 
 const MiddleHeader = () => {
   return (

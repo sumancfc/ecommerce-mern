@@ -19,6 +19,11 @@ export const getProduct = async (slug) => {
   return await axios.get(`${process.env.REACT_APP_API}/product/${slug}`);
 };
 
+//get products by count
+export const getProductsByCount = async (count) => {
+  return await axios.get(`${process.env.REACT_APP_API}/products/${count}`);
+};
+
 //update product
 export const updateProduct = async (slug, product, authtoken) =>
   await axios.put(`${process.env.REACT_APP_API}/product/${slug}`, product, {
@@ -73,4 +78,18 @@ export const getSortedProducts = async (sort, order, page) => {
 //get related product
 export const getRelatedProduct = async (productId) => {
   return axios.get(`${process.env.REACT_APP_API}/product/${productId}/related`);
+};
+
+//get related product
+export const getProductBySearch = async (args) => {
+  return axios.post(`${process.env.REACT_APP_API}/search/filters`, args);
+};
+
+//Change the layout as grid / list
+export const setActiveLayout = (e) => {
+  const switchBtn = document.querySelectorAll(".view__mode a");
+  switchBtn.forEach((item) => {
+    item.classList.remove("active");
+  });
+  e.currentTarget.classList.add("active");
 };

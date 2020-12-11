@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
-import Search from "../../../components/search";
+import SearchCategory from "../../../components/search/SearchCategory";
 import {
   createCategory,
   deleteCategory,
@@ -76,7 +76,7 @@ const CreateCategory = ({
         />
 
         <hr />
-        <Search keyword={keyword} setKeyword={setKeyword} />
+        <SearchCategory keyword={keyword} setKeyword={setKeyword} />
         <div className='row mt-25'>
           {categories.filter(searched(keyword)).map((category) => (
             <ListTable

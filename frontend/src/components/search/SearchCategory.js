@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = ({ className = "", setKeyword, keyword }) => {
+const SearchCategory = ({ className = "", setKeyword, keyword }) => {
   const handleSearch = (e) => {
     setKeyword(e.target.value.toLowerCase());
   };
@@ -16,9 +16,6 @@ const Search = ({ className = "", setKeyword, keyword }) => {
               type='search'
               onChange={handleSearch}
             />
-            {/* <button>
-              <i className='fa fa-search'></i>
-            </button> */}
           </div>
         </>
       </div>
@@ -26,4 +23,4 @@ const Search = ({ className = "", setKeyword, keyword }) => {
   );
 };
 
-export default Search;
+export default SearchCategory;

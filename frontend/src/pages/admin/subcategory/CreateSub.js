@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
-import Search from "../../../components/search";
+import SearchCategory from "../../../components/search/SearchCategory";
 import { getAllCategories } from "../../../store/actions/categoryAction";
 import {
   createSubCategory,
@@ -102,7 +102,7 @@ const CreateSubCategory = ({ user, categories, getAllCategories }) => {
         />
 
         <hr />
-        <Search keyword={keyword} setKeyword={setKeyword} />
+        <SearchCategory keyword={keyword} setKeyword={setKeyword} />
         <div className='row mt-25'>
           {subs.filter(searched(keyword)).map((subc) => (
             <ListTable

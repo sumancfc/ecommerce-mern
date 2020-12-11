@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Search from "../search";
+import Search from "../search/Search";
 import Topbar from "./sub/Topbar";
 import MainMenu from "./sub/MainMenu";
 import MiddleHeader from "./sub/MiddleHeader";
