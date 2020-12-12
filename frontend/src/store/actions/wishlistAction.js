@@ -34,3 +34,13 @@ export const getAllWishlist = async (authtoken) => {
     headers: { authtoken },
   });
 };
+
+export const deleteFromWishlist = async (productId, authtoken) => {
+  return axios.put(
+    `${process.env.REACT_APP_API}/user/wishlist/${productId}`,
+    {},
+    {
+      headers: { authtoken },
+    }
+  );
+};

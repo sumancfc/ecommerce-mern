@@ -20,6 +20,7 @@ exports.getWishlist = async (req, res) => {
   const wishlistItems = await User.findOne({ email })
     .select("wishlist")
     .populate("wishlist")
+    .populate("product")
     .exec();
 
   res.json(wishlistItems);

@@ -35,6 +35,7 @@ import CategoryGrid from "./pages/CategoryGrid";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminProfile from "./pages/admin/AdminDashboard";
+import Wishlist from "./pages/user/Wishlist";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ const App = () => {
             path='/user/dashboard'
             component={UserDashboard}
           />
+          <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />
           <AdminRoute
