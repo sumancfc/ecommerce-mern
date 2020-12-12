@@ -18,3 +18,9 @@ export const PRODUCT_REVIEW_RESET = "PRODUCT_REVIEW_RESET";
 
 //search
 export const SEARCH_QUERY = "SEARCH_QUERY";
+
+//Cart
+export const ADD_TO_CART = "ADD_TO_CART";
+export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+export const DELETE_FROM_CART = "DELETE_FROM_CART";
+export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";

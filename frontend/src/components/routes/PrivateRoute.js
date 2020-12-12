@@ -1,17 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import LoadingToRedirect from "./LoadingToRedirect";
 
-const PrivateRoute = ({ user, ...rest }) => {
-  // const { user } = this.props;
+const PrivateRoute = ({ ...rest }) => {
+  const user = useSelector((state) => state.userList);
+
+  // console.log(user);
+
   return user && user.token ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userList,
-  };
-};
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

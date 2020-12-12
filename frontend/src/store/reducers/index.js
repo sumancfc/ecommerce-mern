@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { cartReducer } from "./cartReducer";
 import {
   categoryCreateReducer,
   categoryListReducer,
@@ -13,6 +14,7 @@ import {
 } from "./productReducer";
 import { searchReducer } from "./searchReducer";
 import { userReducer } from "./userReducer";
+import { addWishlistReducer } from "./wishlistReducer";
 
 const rootReducer = combineReducers({
   userList: userReducer,
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   productDetail: productDetailReducer,
   productReview: productReviewReducer,
   search: searchReducer,
+  cartData: cartReducer,
+  addWishlist: addWishlistReducer,
 });
 
 export default rootReducer;

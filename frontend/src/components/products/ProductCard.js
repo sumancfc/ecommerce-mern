@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
-import laptop from "../../../assets/images/product-8.jpg";
+import laptop from "../../assets/images/product-8.jpg";
 
-const Product = ({ user, product }) => {
+const ProductCard = ({ user, product, addToWishlist, wishlistItem }) => {
   const { title, slug, images, price, category, quantity } = product;
 
   const { addToast } = useToasts();
@@ -26,7 +26,16 @@ const Product = ({ user, product }) => {
               <button title='Quick View'>
                 <i className='fa fa-plus'></i>
               </button>
-              <button>
+              <button
+                className={wishlistItem !== undefined ? "active" : ""}
+                disabled={wishlistItem !== undefined}
+                title={
+                  wishlistItem !== undefined
+                    ? "Added to wishlist"
+                    : "Add to wishlist"
+                }
+                onClick={() => addToWishlist(product._id, addToast, user.token)}
+              >
                 <i className='fa fa-heart-o'></i>
               </button>
               <button title='Add To Compare'>
@@ -46,11 +55,11 @@ const Product = ({ user, product }) => {
               <div className='product-add-to-cart'>
                 {quantity && quantity > 0 ? (
                   <button>
-                    <i className='la la-shopping-cart'></i>
+                    <i className='fa fa-shopping-cart'></i>
                   </button>
                 ) : (
                   <button disabled className='active' title='Out of stock'>
-                    <i className='la la-shopping-cart'></i>
+                    <i className='fa fa-shopping-cart'></i>
                   </button>
                 )}
               </div>
@@ -62,4 +71,4 @@ const Product = ({ user, product }) => {
   );
 };
 
-export default Product;
+export default ProductCard;

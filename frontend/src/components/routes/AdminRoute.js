@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import LoadingToRedirect from "./LoadingToRedirect";
 import { getCurrentAdmin } from "../../store/actions/userAction";
 
-const AdminRoute = ({ user, ...rest }) => {
-  // const { user } = this.props;
+const AdminRoute = ({ ...rest }) => {
   const [admin, setAdmin] = useState(false);
+
+  const user = useSelector((state) => state.userList);
 
   useEffect(() => {
     if (user && user.token) {
@@ -24,10 +25,4 @@ const AdminRoute = ({ user, ...rest }) => {
   return admin ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userList,
-  };
-};
-
-export default connect(mapStateToProps)(AdminRoute);
+export default AdminRoute;

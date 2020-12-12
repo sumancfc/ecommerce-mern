@@ -41,6 +41,15 @@ export const deleteProduct = async (slug, authtoken) => {
   });
 };
 
+//get products by best sell,new arrivals
+export const getProductAB = async (sort, order, limit) => {
+  return axios.post(`${process.env.REACT_APP_API}/products`, {
+    sort,
+    order,
+    limit,
+  });
+};
+
 // get All products based on sort
 export const getAllProducts = (products, type, limit) => {
   const finalProducts = products;

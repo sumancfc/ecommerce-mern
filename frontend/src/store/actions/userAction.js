@@ -69,7 +69,7 @@ const userRoleRedirect = (res, history) => {
   if (res.data.role === "admin") {
     history.push("/admin/dashboard");
   } else {
-    history.push("/user/profile");
+    history.push("/user/dashboard");
   }
 };
 

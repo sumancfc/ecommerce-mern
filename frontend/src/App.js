@@ -20,6 +20,8 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
 
 //users
+import PrivateRoute from "./components/routes/PrivateRoute";
+import UserDashboard from "./pages/user/UserDashboard";
 
 //admin
 import CreateCategory from "./pages/admin/category/CreateCategory";
@@ -76,6 +78,11 @@ const App = () => {
           <Route exact path='/about-us' component={About} />
           <Route exact path='/contact-us' component={Contact} />
           <Route exact path='/' component={Home} />
+          <PrivateRoute
+            exact
+            path='/user/dashboard'
+            component={UserDashboard}
+          />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />
           <AdminRoute
