@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { showAverage } from "../../../helpers/averageRating";
+import { getProductCartQuantity } from "../../../helpers/product";
 
-const ProductInfo = ({ user, product, addToWishlist, wishlistItem }) => {
+const ProductInfo = ({
+  user,
+  product,
+  addToCart,
+  addToWishlist,
+  cartItems,
+  wishlistItem,
+}) => {
   const { title, price, quantity, category, subs, reviews } = product;
   const { addToast } = useToasts();
+
+  const [productStock, setProductStock] = useState(
+    product.variation ? product.variation[0].size[0].stock : product.stock
+  );
+
+  const [quantityCount, setQuantityCount] = useState(1);
+
+  // console.log(cartItems);
+
+  const productCartQuantity = getProductCartQuantity(cartItems, product);
 
   return (
     <div className='col-lg-6 col-md-6'>
@@ -43,12 +61,45 @@ const ProductInfo = ({ user, product, addToWishlist, wishlistItem }) => {
             </button>
           </div>
         </div>
+
+        <div className='pro__details-quality'>
+          <div className='cart__plus-minus'>
+            <button
+              onClick={() =>
+                setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)
+              }
+              className='dec qtybutton'
+            >
+              -
+            </button>
+            <input
+              className='cart__plus-minus-box'
+              type='text'
+              value={quantityCount}
+              readOnly
+            />
+            <button
+              onClick={() =>
+                setQuantityCount(
+                  quantityCount < quantity - productCartQuantity
+                    ? quantityCount + 1
+                    : quantityCount
+                )
+              }
+              className='inc qtybutton'
+            >
+              +
+            </button>
+          </div>
+        </div>
+
         <div className='pro__details-buy-now btn-hover'>
-          {quantity && quantity > 0 ? (
-            <button title='Add To Cart'>Add To Cart</button>
-          ) : (
-            <button disabled>Out of Stock</button>
-          )}
+          <button
+            onClick={() => addToCart(product, addToast, quantityCount)}
+            disabled={productCartQuantity >= quantity}
+          >
+            Add To Cart
+          </button>
         </div>
 
         {category && (

@@ -2,7 +2,14 @@ import React from "react";
 import ProductImageSlider from "./sub/ProductImageSlider";
 import ProductInfo from "./sub/ProductInfo";
 
-const SingleProductTop = ({ product, user, addToWishlist, wishlistItem }) => {
+const SingleProductTop = ({
+  product,
+  user,
+  addToCart,
+  addToWishlist,
+  cartItems,
+  wishlistItem,
+}) => {
   return (
     <div className='product__details-area pt-90 pb-90'>
       <div className='container'>
@@ -12,7 +19,9 @@ const SingleProductTop = ({ product, user, addToWishlist, wishlistItem }) => {
           <ProductInfo
             product={product}
             user={user}
+            addToCart={addToCart}
             addToWishlist={addToWishlist}
+            cartItems={cartItems}
             wishlistItem={wishlistItem}
           />
         </div>

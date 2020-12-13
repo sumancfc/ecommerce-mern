@@ -4,10 +4,19 @@ import { useToasts } from "react-toast-notifications";
 
 import laptop from "../../assets/images/product-8.jpg";
 
-const ProductCard = ({ user, product, addToWishlist, wishlistItem }) => {
+const ProductCard = ({
+  user,
+  product,
+  addToCart,
+  addToWishlist,
+  cartItem,
+  wishlistItem,
+}) => {
   const { title, slug, images, price, category, quantity } = product;
 
   const { addToast } = useToasts();
+
+  // console.log(product);
 
   return (
     <Fragment>
@@ -54,7 +63,18 @@ const ProductCard = ({ user, product, addToWishlist, wishlistItem }) => {
               </div>
               <div className='product-add-to-cart'>
                 {quantity && quantity > 0 ? (
-                  <button>
+                  <button
+                    onClick={() => addToCart(product, addToast)}
+                    className={
+                      cartItem !== undefined && cartItem.quantity > 0
+                        ? "active"
+                        : ""
+                    }
+                    disabled={cartItem !== undefined && cartItem.quantity > 0}
+                    title={
+                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                    }
+                  >
                     <i className='fa fa-shopping-cart'></i>
                   </button>
                 ) : (

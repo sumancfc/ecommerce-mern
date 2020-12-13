@@ -130,3 +130,15 @@ export const productSort = (products, sortType, sortValue) => {
 
   return products;
 };
+
+// get product cart quantity
+export const getProductCartQuantity = (cartItems, product) => {
+  let productInCart = cartItems.filter(
+    (single) => single._id === product._id
+  )[0];
+  if (cartItems.length >= 1 && productInCart) {
+    return cartItems.filter((single) => product._id === single._id)[0].quantity;
+  } else {
+    return 0;
+  }
+};

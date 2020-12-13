@@ -2,7 +2,14 @@ import React from "react";
 import Title from "../Title";
 import ProductCard from "./ProductCard";
 
-const RelatedProduct = ({ related, user, addToWishlist, wishlistItem }) => {
+const RelatedProduct = ({
+  related,
+  user,
+  addToCart,
+  addToWishlist,
+  cartItem,
+  wishlistItem,
+}) => {
   console.log(related);
   return (
     <div className='product__area pt-80 pb-100'>
@@ -20,7 +27,9 @@ const RelatedProduct = ({ related, user, addToWishlist, wishlistItem }) => {
                   key={product._id}
                   product={product}
                   user={user}
+                  addToCart={addToCart}
                   addToWishlist={addToWishlist}
+                  cartItem={cartItem}
                   wishlistItem={wishlistItem}
                 />
               );

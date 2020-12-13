@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { getProductAB } from "../../helpers/product";
+import { addToCart } from "../../store/actions/cartAction";
+
 import {
   addToWishlist,
   getAllWishlist,
@@ -8,11 +10,12 @@ import {
 import ProductCard from "../products/ProductCard";
 import Title from "../Title";
 
-const NewArrivals = ({ title, desc, addToWishlist }) => {
+const NewArrivals = ({ title, desc, addToCart, addToWishlist }) => {
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
 
   const user = useSelector((state) => state.userList);
+  const cartItems = useSelector((state) => state.cartData);
 
   useEffect(() => {
     getProductAB("createdAt", "desc", 8).then((res) => setProducts(res.data));
@@ -33,7 +36,13 @@ const NewArrivals = ({ title, desc, addToWishlist }) => {
                   key={product._id}
                   product={product}
                   user={user}
+                  addToCart={addToCart}
                   addToWishlist={addToWishlist}
+                  cartItem={
+                    cartItems.filter(
+                      (cartItem) => cartItem._id === product._id
+                    )[0]
+                  }
                   wishlistItem={
                     wishlistItems.filter((item) => item._id === product._id)[0]
                   }
@@ -49,6 +58,9 @@ const NewArrivals = ({ title, desc, addToWishlist }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addToCart: (item, addToast, quantityCount) => {
+      dispatch(addToCart(item, addToast, quantityCount));
+    },
     addToWishlist: (item, addToast, authtoken) => {
       dispatch(addToWishlist(item, addToast, authtoken));
     },

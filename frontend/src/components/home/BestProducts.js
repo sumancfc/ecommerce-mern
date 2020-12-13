@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, connect } from "react-redux";
 import { getProductAB } from "../../helpers/product";
+import { addToCart } from "../../store/actions/cartAction";
 import {
   addToWishlist,
   getAllWishlist,
@@ -8,11 +9,14 @@ import {
 import ProductCard from "../products/ProductCard";
 import Title from "../Title";
 
-const BestProducts = ({ title, desc, addToWishlist }) => {
+const BestProducts = ({ title, desc, addToCart, addToWishlist }) => {
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
 
   const user = useSelector((state) => state.userList);
+  const cartItems = useSelector((state) => state.cartData);
+
+  console.log(cartItems);
 
   // console.log(wishlistItems);
 
@@ -35,7 +39,13 @@ const BestProducts = ({ title, desc, addToWishlist }) => {
                   key={product._id}
                   product={product}
                   user={user}
+                  addToCart={addToCart}
                   addToWishlist={addToWishlist}
+                  cartItem={
+                    cartItems.filter(
+                      (cartItem) => cartItem._id === product._id
+                    )[0]
+                  }
                   wishlistItem={
                     wishlistItems.filter((item) => item._id === product._id)[0]
                   }
@@ -51,6 +61,9 @@ const BestProducts = ({ title, desc, addToWishlist }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addToCart: (item, addToast, quantityCount) => {
+      dispatch(addToCart(item, addToast, quantityCount));
+    },
     addToWishlist: (item, addToast, authtoken) => {
       dispatch(addToWishlist(item, addToast, authtoken));
     },

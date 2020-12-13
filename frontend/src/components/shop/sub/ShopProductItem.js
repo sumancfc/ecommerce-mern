@@ -4,7 +4,14 @@ import { useToasts } from "react-toast-notifications";
 
 import laptop from "../../../assets/images/product-8.jpg";
 
-const ShopProductItem = ({ product, user, addToWishlist, wishlistItem }) => {
+const ShopProductItem = ({
+  product,
+  user,
+  addToCart,
+  addToWishlist,
+  cartItem,
+  wishlistItem,
+}) => {
   const { title, slug, images, price, category, description } = product;
   const { addToast } = useToasts();
 
@@ -52,7 +59,18 @@ const ShopProductItem = ({ product, user, addToWishlist, wishlistItem }) => {
                 <span>${price} </span>
               </div>
               <div className='product-add-to-cart'>
-                <button title='Add To Cart'>
+                <button
+                  onClick={() => addToCart(product, addToast)}
+                  className={
+                    cartItem !== undefined && cartItem.quantity > 0
+                      ? "active"
+                      : ""
+                  }
+                  disabled={cartItem !== undefined && cartItem.quantity > 0}
+                  title={
+                    cartItem !== undefined ? "Added to cart" : "Add to cart"
+                  }
+                >
                   <i className='fa fa-shopping-cart'></i>
                 </button>
               </div>
@@ -107,7 +125,18 @@ const ShopProductItem = ({ product, user, addToWishlist, wishlistItem }) => {
                   <button title='Add To Compare'>
                     <i className='fa fa-retweet'></i>
                   </button>
-                  <button title='Add To Cart'>
+                  <button
+                    onClick={() => addToCart(product, addToast)}
+                    className={
+                      cartItem !== undefined && cartItem.quantity > 0
+                        ? "active"
+                        : ""
+                    }
+                    disabled={cartItem !== undefined && cartItem.quantity > 0}
+                    title={
+                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                    }
+                  >
                     <i className='fa fa-shopping-cart'></i>
                   </button>
                 </div>
