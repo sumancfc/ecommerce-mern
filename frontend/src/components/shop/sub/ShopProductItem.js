@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 import laptop from "../../../assets/images/product-8.jpg";
 
-const ShopProductItem = ({ product }) => {
+const ShopProductItem = ({ product, user, addToWishlist, wishlistItem }) => {
   const { title, slug, images, price, category, description } = product;
+  const { addToast } = useToasts();
 
   return (
     <>
@@ -23,7 +25,16 @@ const ShopProductItem = ({ product }) => {
               <button title='Quick View'>
                 <i className='fa fa-plus'></i>
               </button>
-              <button title='Add To Wishlist'>
+              <button
+                className={wishlistItem !== undefined ? "active" : ""}
+                disabled={wishlistItem !== undefined}
+                title={
+                  wishlistItem !== undefined
+                    ? "Added to wishlist"
+                    : "Add to wishlist"
+                }
+                onClick={() => addToWishlist(product._id, addToast, user.token)}
+              >
                 <i className='fa fa-heart-o'></i>
               </button>
               <button title='Add To Compare'>
@@ -79,7 +90,18 @@ const ShopProductItem = ({ product }) => {
                 </div>
                 <p>{description}</p>
                 <div className='product__list-action'>
-                  <button title='Add To Wishlist'>
+                  <button
+                    className={wishlistItem !== undefined ? "active" : ""}
+                    disabled={wishlistItem !== undefined}
+                    title={
+                      wishlistItem !== undefined
+                        ? "Added to wishlist"
+                        : "Add to wishlist"
+                    }
+                    onClick={() =>
+                      addToWishlist(product._id, addToast, user.token)
+                    }
+                  >
                     <i className='fa fa-heart-o'></i>
                   </button>
                   <button title='Add To Compare'>

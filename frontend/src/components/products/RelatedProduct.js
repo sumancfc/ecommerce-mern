@@ -1,8 +1,8 @@
 import React from "react";
 import Title from "../Title";
-import Products from "./common/Products";
+import ProductCard from "./ProductCard";
 
-const RelatedProduct = ({ related }) => {
+const RelatedProduct = ({ related, user, addToWishlist, wishlistItem }) => {
   console.log(related);
   return (
     <div className='product__area pt-80 pb-100'>
@@ -15,7 +15,15 @@ const RelatedProduct = ({ related }) => {
 
           {related &&
             related.map((product) => {
-              return <Products key={product._id} product={product} />;
+              return (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  user={user}
+                  addToWishlist={addToWishlist}
+                  wishlistItem={wishlistItem}
+                />
+              );
             })}
         </div>
       </div>

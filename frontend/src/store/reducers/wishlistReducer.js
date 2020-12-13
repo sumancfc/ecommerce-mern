@@ -1,9 +1,4 @@
-import {
-  ADD_TO_WISHLIST,
-  FETCH_WISHLIST_SUCCESS,
-  DELETE_ALL_FROM_WISHLIST,
-  DELETE_FROM_WISHLIST,
-} from "../constants/wishlist";
+import { ADD_TO_WISHLIST } from "../constants/wishlist";
 
 const initialState = [];
 

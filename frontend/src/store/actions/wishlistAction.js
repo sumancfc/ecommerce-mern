@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-  ADD_TO_WISHLIST,
-  DELETE_ALL_FROM_WISHLIST,
-  DELETE_FROM_WISHLIST,
-  FETCH_WISHLIST_SUCCESS,
-} from "../constants/wishlist";
+import { ADD_TO_WISHLIST } from "../constants/wishlist";
 
 export const addToWishlist = (productId, addToast, authtoken) => async (
   dispatch

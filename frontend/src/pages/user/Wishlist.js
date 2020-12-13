@@ -112,14 +112,6 @@ const Wishlist = () => {
                     <div className='cart__shiping-update'>
                       <Link to='/shop'>Continue Shopping</Link>
                     </div>
-                    {/* <div className='cart__clear'>
-                      <Link
-                        to='#'
-                        onClick={() => deleteAllFromWishlist(addToast)}
-                      >
-                        Clear Wishist
-                      </Link>
-                    </div> */}
                   </div>
                 </div>
               </div>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 import { showAverage } from "../../../helpers/averageRating";
 
-const ProductInfo = ({ product }) => {
+const ProductInfo = ({ user, product, addToWishlist, wishlistItem }) => {
   const { title, price, quantity, category, subs, reviews } = product;
+  const { addToast } = useToasts();
 
   return (
     <div className='col-lg-6 col-md-6'>
@@ -27,7 +29,18 @@ const ProductInfo = ({ product }) => {
             <button title='Add To Compare'>Compare</button>
           </div>
           <div className='pro__details-wishlist'>
-            <button title='Add To Wishlist'>Add To Wishlist</button>
+            <button
+              className={wishlistItem !== undefined ? "active" : ""}
+              disabled={wishlistItem !== undefined}
+              title={
+                wishlistItem !== undefined
+                  ? "Added to wishlist"
+                  : "Add to wishlist"
+              }
+              onClick={() => addToWishlist(product._id, addToast, user.token)}
+            >
+              <i className='fa fa-heart-o'></i>
+            </button>
           </div>
         </div>
         <div className='pro__details-buy-now btn-hover'>
