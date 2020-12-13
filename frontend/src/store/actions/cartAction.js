@@ -1,38 +1,9 @@
-import axios from "axios";
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
   DELETE_FROM_CART,
   DELETE_ALL_FROM_CART,
 } from "../constants/index";
-
-// export const addUserCart = async (cart, authtoken) => {
-//   return axios.post(
-//     `${process.env_REACT_APP_API}/user/cart`,
-//     { cart },
-//     {
-//       headers: {
-//         authtoken,
-//       },
-//     }
-//   );
-// };
-
-// export const getUserCart = async (authtoken) => {
-//   return axios.get(`${process.env_REACT_APP_API}/user/cart`, {
-//     headers: {
-//       authtoken,
-//     },
-//   });
-// };
-
-// export const removeUserCart = async (authtoken) => {
-//   return axios.delete(`${process.env_REACT_APP_API}/user/cart`, {
-//     headers: {
-//       authtoken,
-//     },
-//   });
-// };
 
 //add to cart
 export const addToCart = (item, addToast, quantityCount) => {
@@ -50,14 +21,46 @@ export const addToCart = (item, addToast, quantityCount) => {
   };
 };
 
-// export const addToCart = async (cart, authtoken) => {
-//   return axios.post(
-//     `${process.env_REACT_APP_API}/user/cart`,
-//     { cart },
-//     {
-//       headers: {
-//         authtoken,
-//       },
-//     }
-//   );
-// };
+//decrease from cart
+export const decreaseQuantity = (item, addToast) => {
+  return (dispatch) => {
+    if (addToast) {
+      addToast("Item decremented from cart", {
+        appearance: "warning",
+        autoDismiss: true,
+      });
+    }
+    dispatch({ type: DECREASE_QUANTITY, payload: item });
+  };
+};
+
+//delete from cart by id
+export const deleteFromCart = (item, addToast) => {
+  return (dispatch) => {
+    if (addToast) {
+      addToast("Removed from cart", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+    dispatch({ type: DELETE_FROM_CART, payload: item });
+  };
+};
+
+//delete all from cart
+export const deleteAllFromCart = (addToast) => {
+  return (dispatch) => {
+    if (addToast) {
+      addToast("Removed all from cart", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+    dispatch({ type: DELETE_ALL_FROM_CART });
+  };
+};
+
+// get stock of cart item
+export const productInStock = (item) => {
+  return item.sold;
+};

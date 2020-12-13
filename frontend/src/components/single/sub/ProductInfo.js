@@ -15,10 +15,6 @@ const ProductInfo = ({
   const { title, price, quantity, category, subs, reviews } = product;
   const { addToast } = useToasts();
 
-  const [productStock, setProductStock] = useState(
-    product.variation ? product.variation[0].size[0].stock : product.stock
-  );
-
   const [quantityCount, setQuantityCount] = useState(1);
 
   // console.log(cartItems);
@@ -39,26 +35,6 @@ const ProductInfo = ({
         <div className='pro__details-price-wrap mt-40'>
           <div className='product__price'>
             <span>Price: ${price}</span>
-          </div>
-        </div>
-
-        <div className='pro__details-compare-wishlist'>
-          <div className='pro__details-compare'>
-            <button title='Add To Compare'>Compare</button>
-          </div>
-          <div className='pro__details-wishlist'>
-            <button
-              className={wishlistItem !== undefined ? "active" : ""}
-              disabled={wishlistItem !== undefined}
-              title={
-                wishlistItem !== undefined
-                  ? "Added to wishlist"
-                  : "Add to wishlist"
-              }
-              onClick={() => addToWishlist(product._id, addToast, user.token)}
-            >
-              <i className='fa fa-heart-o'></i>
-            </button>
           </div>
         </div>
 
@@ -89,6 +65,26 @@ const ProductInfo = ({
               className='inc qtybutton'
             >
               +
+            </button>
+          </div>
+        </div>
+
+        <div className='pro__details-compare-wishlist'>
+          <div className='pro__details-compare'>
+            <button title='Add To Compare'>Compare</button>
+          </div>
+          <div className='pro__details-wishlist'>
+            <button
+              className={wishlistItem !== undefined ? "active" : ""}
+              disabled={wishlistItem !== undefined}
+              title={
+                wishlistItem !== undefined
+                  ? "Added to wishlist"
+                  : "Add to wishlist"
+              }
+              onClick={() => addToWishlist(product._id, addToast, user.token)}
+            >
+              <i className='fa fa-heart-o'></i>
             </button>
           </div>
         </div>
