@@ -37,6 +37,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import AdminProfile from "./pages/admin/AdminDashboard";
 import Wishlist from "./pages/user/Wishlist";
 import Cart from "./pages/Cart";
+import Compare from "./pages/Compare";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ const App = () => {
           <Route exact path='/about-us' component={About} />
           <Route exact path='/contact-us' component={Contact} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/compare' component={Compare} />
           <PrivateRoute
             exact
             path='/user/dashboard'

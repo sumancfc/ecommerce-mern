@@ -3666,8 +3666,8 @@ textarea {
   padding-left: 10px;
 }
 
-.cart__tax .discount__code form button.cart__btn,
-.discount__code-wrapper .discount__code form button.cart__btn {
+button.cart__btn,
+button.cart__btn {
   background-color: #333;
   border: medium none;
   color: #fff;
@@ -3680,8 +3680,8 @@ textarea {
   transition: all 0.3s ease 0s;
 }
 
-.cart__tax .discount__code form button.cart__btn:hover,
-.discount__code-wrapper .discount__code form button.cart__btn:hover {
+button.cart__btn:hover,
+button.cart__btn:hover {
   background-color: #ff5151;
 }
 
@@ -3790,22 +3790,6 @@ textarea {
   float: right;
 }
 
-.grand__totall a {
-  background-color: #333;
-  color: #fff;
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1;
-  padding: 18px 10px 17px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.grand__totall a:hover {
-  background-color: #ff5151;
-}
-
 .empty__area-icon i {
   font-size: 100px;
 }
@@ -3816,6 +3800,102 @@ textarea {
 
 .cart__item-variation span {
   display: block;
+}
+
+/* compare Page */
+.compare__table .table tbody tr td {
+  text-align: center;
+  padding: 20px 20px;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+.compare__table .table tbody tr td.first__col {
+  min-width: 175px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.compare__table .table tbody tr td.product__img-title {
+  min-width: 310px;
+  vertical-align: bottom;
+  text-align: left;
+}
+
+.compare__table .table tbody tr td.product__img-title .image {
+  clear: both;
+  width: 100%;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.compare__table .table tbody tr td.product__img-title .image img {
+  width: 100%;
+}
+
+.compare__table .table tbody tr td.product__img-title .category {
+  float: left;
+  clear: both;
+  color: #ff5151;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.compare__table .table tbody tr td.product__img-title .title {
+  float: left;
+  clear: both;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-top: 5px;
+}
+
+.compare__table .table tbody tr td.product__img-title .title:hover {
+  color: #ff5151;
+}
+
+.compare__table .table tbody tr td.product__description p {
+  text-align: left;
+  margin: 0;
+}
+
+.compare__table .table tbody tr td.compare__price,
+.compare__table .table tbody tr td.compare__color,
+.compare__table .table tbody tr td.product__instock {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.compare__table .table tbody > tr td.compare__price span.amount {
+  color: #333;
+  font-weight: 500;
+}
+
+.compare__table .table tbody > tr td.compare__price span.old {
+  margin-right: 10px;
+  text-decoration: line-through;
+  color: #8e8e8e;
+}
+
+.compare__table .table tbody tr td.product__remove button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.compare__table .table tbody tr td.product__remove button:hover {
+  color: #ff5151;
+}
+
+.compare__table .table tbody tr td.product__remove button i {
+  font-size: 20px;
+}
+
+.compare__table .table tbody tr td.product__rating i {
+  color: #e7a415;
 }
 
 /* Media Query */

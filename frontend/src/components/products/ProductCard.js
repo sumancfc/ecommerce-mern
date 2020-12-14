@@ -9,14 +9,14 @@ const ProductCard = ({
   product,
   addToCart,
   addToWishlist,
+  addToCompare,
   cartItem,
   wishlistItem,
+  compareItem,
 }) => {
   const { title, slug, images, price, category, quantity } = product;
 
   const { addToast } = useToasts();
-
-  // console.log(product);
 
   return (
     <Fragment>
@@ -47,7 +47,16 @@ const ProductCard = ({
               >
                 <i className='fa fa-heart-o'></i>
               </button>
-              <button title='Add To Compare'>
+              <button
+                className={compareItem !== undefined ? "active" : ""}
+                disabled={compareItem !== undefined}
+                title={
+                  compareItem !== undefined
+                    ? "Added to compare"
+                    : "Add to compare"
+                }
+                onClick={() => addToCompare(product._id, addToast)}
+              >
                 <i className='fa fa-retweet'></i>
               </button>
             </div>

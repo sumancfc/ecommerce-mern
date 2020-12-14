@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -8,11 +9,6 @@ import {
 //add to cart
 export const addToCart = (item, addToast, quantityCount) => {
   return (dispatch) => {
-    // const { cartData } = store.getState();
-
-    // console.log(cartData);
-
-    // const {data} =
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
@@ -70,4 +66,19 @@ export const deleteAllFromCart = (addToast) => {
 // get stock of cart item
 export const productAvailable = (item) => {
   return item.quantity;
+};
+
+//save cart items to database
+export const userCart = async (cartItems, authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/user/cart`,
+    {
+      cartItems,
+    },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
 };

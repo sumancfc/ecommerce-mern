@@ -10,19 +10,33 @@ import {
   deleteAllFromCart,
   deleteFromCart,
   productAvailable,
+  userCart,
 } from "../store/actions/cartAction";
 
 const Cart = ({
+  user,
   cartItems,
   decreaseQuantity,
   addToCart,
   deleteFromCart,
   deleteAllFromCart,
+  history,
 }) => {
   const [quantityCount] = useState(1);
 
   const { addToast } = useToasts();
   let cartTotalPrice = 0;
+
+  const proccedTochekcout = () => {
+    userCart(cartItems, user.token)
+      .then((res) => {
+        console.log(res);
+        if (res.data.ok) {
+          history.push("/checkout");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Layout>
@@ -221,24 +235,13 @@ const Cart = ({
                         Cart Total
                       </h4>
                     </div>
-                    <h5>
-                      Total products <span> ${cartTotalPrice.toFixed(2)}</span>
-                    </h5>
-                    <div className='total__shipping'>
-                      <h5>Total shipping</h5>
-                      <ul>
-                        <li>
-                          <input type='checkbox' /> Standard <span>$20.00</span>
-                        </li>
-                        <li>
-                          <input type='checkbox' /> Express <span>$30.00</span>
-                        </li>
-                      </ul>
-                    </div>
+
                     <h4 className='grand__totall-title'>
                       Grand Total <span> ${cartTotalPrice.toFixed(2)}</span>
                     </h4>
-                    <Link to='/checkout'>Proceed to Checkout</Link>
+                    <button className='cart__btn' onClick={proccedTochekcout}>
+                      Proceed to Checkout
+                    </button>
                   </div>
                 </div>
               </div>
@@ -273,6 +276,7 @@ const Cart = ({
 
 const mapStateToProps = (state) => {
   return {
+    user: state.userList,
     cartItems: state.cartData,
   };
 };

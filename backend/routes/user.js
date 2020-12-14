@@ -1,12 +1,18 @@
 const express = require("express");
+
 const {
+  addUserCart,
   addToWishlist,
   getWishlist,
   removeFromWishlist,
 } = require("../controllers/user");
+
 const { authCheck } = require("../middlewares/auth");
 
 const router = express.Router();
+
+//cart
+router.post("/user/cart", authCheck, addUserCart);
 
 //wishlist
 router.post("/user/wishlist", authCheck, addToWishlist);
