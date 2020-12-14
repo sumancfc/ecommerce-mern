@@ -13,6 +13,7 @@ const ProductInfo = ({
   wishlistItem,
 }) => {
   const { title, price, quantity, category, subs, reviews } = product;
+  console.log(quantity);
   const { addToast } = useToasts();
 
   const [quantityCount, setQuantityCount] = useState(1);

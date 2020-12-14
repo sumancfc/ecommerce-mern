@@ -137,7 +137,7 @@ export const getProductCartQuantity = (cartItems, product) => {
     (single) => single._id === product._id
   )[0];
   if (cartItems.length >= 1 && productInCart) {
-    return cartItems.filter((single) => product._id === single._id)[0].quantity;
+    return cartItems.filter((single) => product._id === single._id)[0].qty;
   } else {
     return 0;
   }

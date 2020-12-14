@@ -66,10 +66,16 @@ export const userRegister = (email, setEmail, addToast) => async () => {
 //redirect user per role
 const userRoleRedirect = (res, history) => {
   // console.log(res);
-  if (res.data.role === "admin") {
-    history.push("/admin/dashboard");
+  let int = history.location.state;
+
+  if (int) {
+    history.push(int.from);
   } else {
-    history.push("/user/dashboard");
+    if (res.data.role === "admin") {
+      history.push("/admin/dashboard");
+    } else {
+      history.push("/user/dashboard");
+    }
   }
 };
 

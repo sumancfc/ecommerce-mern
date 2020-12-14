@@ -15,12 +15,15 @@ const cartReducer = (state = initialState, action) => {
     // for non variant products
 
     const cartItem = cartItems.filter((item) => item._id === product._id)[0];
+    console.log(cartItem);
+
     if (cartItem === undefined) {
       return [
         ...cartItems,
         {
           ...product,
-          quantity: product.quantity ? product.quantity : 1,
+
+          qty: product.qty ? product.qty : 1,
           cartItemId: product._id,
         },
       ];
@@ -29,9 +32,7 @@ const cartReducer = (state = initialState, action) => {
         item.cartItemId === cartItem.cartItemId
           ? {
               ...item,
-              quantity: product.quantity
-                ? item.quantity + product.quantity
-                : item.quantity + 1,
+              qty: product.qty ? item.qty + product.qty : item.qty + 1,
             }
           : item
       );
@@ -39,7 +40,7 @@ const cartReducer = (state = initialState, action) => {
   }
 
   if (action.type === DECREASE_QUANTITY) {
-    if (product.quantity === 1) {
+    if (product.qty === 1) {
       const remainingItems = (cartItems, product) =>
         cartItems.filter(
           (cartItem) => cartItem.cartItemId !== product.cartItemId
@@ -48,7 +49,7 @@ const cartReducer = (state = initialState, action) => {
     } else {
       return cartItems.map((item) =>
         item.cartItemId === product.cartItemId
-          ? { ...item, quantity: item.quantity - 1 }
+          ? { ...item, qty: item.qty - 1 }
           : item
       );
     }

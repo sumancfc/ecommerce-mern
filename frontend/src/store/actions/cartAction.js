@@ -8,14 +8,21 @@ import {
 //add to cart
 export const addToCart = (item, addToast, quantityCount) => {
   return (dispatch) => {
+    // const { cartData } = store.getState();
+
+    // console.log(cartData);
+
+    // const {data} =
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
+
+    // console.log(item);
     dispatch({
       type: ADD_TO_CART,
       payload: {
         ...item,
-        quantity: quantityCount,
+        qty: quantityCount,
       },
     });
   };
@@ -61,6 +68,6 @@ export const deleteAllFromCart = (addToast) => {
 };
 
 // get stock of cart item
-export const productInStock = (item) => {
-  return item.sold;
+export const productAvailable = (item) => {
+  return item.quantity;
 };

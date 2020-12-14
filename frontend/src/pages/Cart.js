@@ -9,7 +9,7 @@ import {
   decreaseQuantity,
   deleteAllFromCart,
   deleteFromCart,
-  productInStock,
+  productAvailable,
 } from "../store/actions/cartAction";
 
 const Cart = ({
@@ -54,10 +54,14 @@ const Cart = ({
                             slug,
                             title,
                             price,
-                            quantity,
+                            qty,
+                            _id,
                           } = cartItem;
 
-                          cartTotalPrice += price * quantity;
+                          console.log(_id);
+
+                          cartTotalPrice += price * qty;
+
                           return (
                             <tr key={i}>
                               <td className='product__thumbnail'>
@@ -93,7 +97,7 @@ const Cart = ({
                                   <input
                                     className='cart__plus-minus-box'
                                     type='text'
-                                    value={cartItem.quantity}
+                                    value={cartItem.qty}
                                     readOnly
                                   />
                                   <button
@@ -107,9 +111,8 @@ const Cart = ({
                                     }
                                     disabled={
                                       cartItem !== undefined &&
-                                      cartItem.quantity &&
-                                      cartItem.quantity >=
-                                        productInStock(cartItem)
+                                      qty &&
+                                      qty >= productAvailable(cartItem)
                                     }
                                   >
                                     +
@@ -117,7 +120,7 @@ const Cart = ({
                                 </div>
                               </td>
                               <td className='product__subtotal'>
-                                $ {Number(price * cartItem.quantity).toFixed(2)}
+                                $ {Number(price * qty).toFixed(2)}
                               </td>
 
                               <td className='product__remove'>
@@ -219,7 +222,7 @@ const Cart = ({
                       </h4>
                     </div>
                     <h5>
-                      Total products <span> ${cartTotalPrice}</span>
+                      Total products <span> ${cartTotalPrice.toFixed(2)}</span>
                     </h5>
                     <div className='total__shipping'>
                       <h5>Total shipping</h5>
@@ -233,7 +236,7 @@ const Cart = ({
                       </ul>
                     </div>
                     <h4 className='grand__totall-title'>
-                      Grand Total <span> ${cartTotalPrice}</span>
+                      Grand Total <span> ${cartTotalPrice.toFixed(2)}</span>
                     </h4>
                     <Link to='/checkout'>Proceed to Checkout</Link>
                   </div>

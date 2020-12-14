@@ -13,11 +13,16 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.userList);
-  // console.log(user);
 
   useEffect(() => {
-    if (user && user.token) {
-      history.push("/admin/dashboard");
+    let int = history.location.state;
+
+    if (int) {
+      return;
+    } else {
+      if (user && user.token) {
+        history.push("/");
+      }
     }
   }, [user, history]);
 
