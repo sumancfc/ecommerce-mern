@@ -3582,11 +3582,6 @@ textarea {
   margin: 0;
 }
 
-.cart__tax .tax__wrapper .tax__select-wrapper,
-.discount__code-wrapper .tax__wrapper .tax__select-wrapper {
-  margin: 5px 0 0;
-}
-
 .cart__tax .tax__wrapper .tax__select-wrapper .tax__select,
 .discount__code-wrapper .tax__wrapper .tax__select-wrapper .tax__select {
   margin: 0 0 26px;

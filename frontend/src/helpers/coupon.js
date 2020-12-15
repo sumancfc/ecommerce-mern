@@ -24,3 +24,16 @@ export const deleteCoupon = async (couponId, authtoken) => {
     headers: { authtoken },
   });
 };
+
+//discount coupon applied
+export const applyDiscountCoupon = async (couponName, authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/user/cart/coupon`,
+    {
+      couponName,
+    },
+    {
+      headers: { authtoken },
+    }
+  );
+};

@@ -4,6 +4,8 @@ const {
   addUserCart,
   getUserCart,
   deleteUserCart,
+  saveShippingAddress,
+  applyCoupon,
   addToWishlist,
   getWishlist,
   removeFromWishlist,
@@ -17,6 +19,12 @@ const router = express.Router();
 router.post("/user/cart", authCheck, addUserCart);
 router.get("/user/cart", authCheck, getUserCart);
 router.delete("/user/cart", authCheck, deleteUserCart);
+
+//shipping address
+router.post("/user/address", authCheck, saveShippingAddress);
+
+//coupon
+router.post("/user/cart/coupon", authCheck, applyCoupon);
 
 //wishlist
 router.post("/user/wishlist", authCheck, addToWishlist);

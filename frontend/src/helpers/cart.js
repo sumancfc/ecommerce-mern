@@ -28,3 +28,16 @@ export const deleteUserCart = async (authtoken) => {
     headers: { authtoken },
   });
 };
+
+//save shipping address
+export const saveShippingAddress = async (shippingAddress, authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/user/address`,
+    { shippingAddress },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};

@@ -3,13 +3,17 @@ import { useSelector } from "react-redux";
 import Layout from "../Layout";
 import Breadcrumb from "../components/breadcrumb";
 import { getUserCarts } from "../helpers/cart";
+import ShippingAddress from "../components/shippingAddress";
+import DiscountCoupon from "../components/discount";
+import { applyDiscountCoupon } from "../helpers/coupon";
 
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  console.log(products);
-  console.log(totalPrice);
+  const [couponName, setCouponName] = useState("");
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const [priceAfterDiscount, setPriceAfterDiscount] = useState(0);
+  const [error, setError] = useState("");
 
   const user = useSelector((state) => state.userList);
 
@@ -20,6 +24,24 @@ const Checkout = () => {
     });
   }, [user]);
 
+  const applyCoupon = (e) => {
+    e.preventDefault();
+    // console.log("Coupon applied");
+    applyDiscountCoupon(couponName, user.token)
+      .then((res) => {
+        if (res.data) {
+          setPriceAfterDiscount(res.data.priceAfterDiscount);
+          setDiscountPrice(res.data.discountPrice);
+        }
+
+        if (res.data.err) {
+          setError(res.data.err);
+        }
+        setCouponName("");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Layout>
       <Breadcrumb pageTitle='Checkout' />
@@ -28,60 +50,14 @@ const Checkout = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 col-md-6'>
-              <div className='cart__tax'>
-                <div className='title__wrap'>
-                  <h4 className='cart__bottom-title section__bg-gray'>
-                    Estimate Shipping And Tax
-                  </h4>
-                </div>
-                <div className='tax__wrapper'>
-                  <p>Enter your destination to get a shipping estimate.</p>
-                  <div className='tax__select-wrapper'>
-                    <div className='tax__select'>
-                      <label>* Country</label>
-                      <select className='email s-email s-wid'>
-                        <option>Nepal</option>
-                        <option>India</option>
-                        <option>Australia</option>
-                        <option>UK</option>
-                      </select>
-                    </div>
-                    <div className='tax__select'>
-                      <label>* Region / State</label>
-                      <select className='email s-email s-wid'>
-                        <option>Nepal</option>
-                        <option>India</option>
-                        <option>Australia</option>
-                        <option>UK</option>
-                      </select>
-                    </div>
-                    <div className='tax__select'>
-                      <label>* Zip/Postal Code</label>
-                      <input type='text' />
-                    </div>
-                    <button className='cart__btn' type='submit'>
-                      Get A Quote
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className='discount__code-wrapper mt-40'>
-                <div className='title__wrap'>
-                  <h4 className='cart__bottom-title section__bg-gray'>
-                    Use Coupon Code
-                  </h4>
-                </div>
-                <div className='discount__code'>
-                  <p>Enter your coupon code if you have one.</p>
-                  <form>
-                    <input type='text' required='' name='name' />
-                    <button className='cart__btn' type='submit'>
-                      Apply Coupon
-                    </button>
-                  </form>
-                </div>
-              </div>
+              <ShippingAddress user={user} />
+              <DiscountCoupon
+                couponName={couponName}
+                setCouponName={setCouponName}
+                applyCoupon={applyCoupon}
+                error={error}
+                setError={setError}
+              />
             </div>
 
             <div className='col-lg-6 col-md-12'>
@@ -109,23 +85,29 @@ const Checkout = () => {
                     <div className='order__info order__subtotal'>
                       <ul>
                         <li>
-                          Subtotal <span>${totalPrice} </span>
+                          Cart Total <span>${totalPrice} </span>
                         </li>
                       </ul>
                     </div>
-                    <div className='order__info order__shipping'>
-                      <ul>
-                        <li>
-                          Shipping <p>Enter your full address </p>
-                        </li>
-                      </ul>
-                    </div>
+
                     <div className='order__info order__total'>
-                      <ul>
-                        <li>
-                          Total <span>$273.00 </span>
-                        </li>
-                      </ul>
+                      {discountPrice > 0 && (
+                        <ul>
+                          <li>
+                            Discount Price <span> - ${discountPrice} </span>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+
+                    <div className='order__info order__total'>
+                      {priceAfterDiscount > 0 && (
+                        <ul>
+                          <li>
+                            Total Payable <span>${priceAfterDiscount}</span>
+                          </li>
+                        </ul>
+                      )}
                     </div>
                   </div>
                   <div className='payment__method'>

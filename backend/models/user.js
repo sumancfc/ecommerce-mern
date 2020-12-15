@@ -17,7 +17,12 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    address: String,
+    shippingAddress: {
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
+    },
     wishlist: [
       {
         type: ObjectId,
