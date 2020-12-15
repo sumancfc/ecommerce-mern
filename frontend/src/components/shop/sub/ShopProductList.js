@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { addToCart } from "../../../store/actions/cartAction";
-import {
-  addToWishlist,
-  getAllWishlist,
-} from "../../../store/actions/wishlistAction";
+import { addToWishlist, getAllWishlist } from "../../../helpers/wishlist";
 import ShopProductItem from "./ShopProductItem";
 
-const ShopProductList = ({ products, addToCart, addToWishlist }) => {
+const ShopProductList = ({ products, addToCart }) => {
   const [wishlistItems, setWishlistItems] = useState([]);
 
   const user = useSelector((state) => state.userList);
   const cartItems = useSelector((state) => state.cartData);
 
   useEffect(() => {
+    loadWishlist();
+    // eslint-disable-next-line
+  }, []);
+
+  const loadWishlist = () => {
     getAllWishlist(user.token).then((res) => {
       setWishlistItems(res.data.wishlist);
     });
-  }, [user]);
+  };
+
+  const handleWishlist = (productId, addToast, authtoken) => {
+    addToWishlist(productId, authtoken)
+      .then((res) => {
+        loadWishlist();
+        addToast("Added To Wishlist", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       {products.map((product) => {
@@ -27,7 +44,7 @@ const ShopProductList = ({ products, addToCart, addToWishlist }) => {
             product={product}
             user={user}
             addToCart={addToCart}
-            addToWishlist={addToWishlist}
+            handleWishlist={handleWishlist}
             cartItem={
               cartItems.filter((cartItem) => cartItem._id === product._id)[0]
             }
@@ -59,9 +76,6 @@ const mapDispatchToProps = (dispatch) => {
           selectedProductSize
         )
       );
-    },
-    addToWishlist: (item, addToast, authtoken) => {
-      dispatch(addToWishlist(item, addToast, authtoken));
     },
   };
 };

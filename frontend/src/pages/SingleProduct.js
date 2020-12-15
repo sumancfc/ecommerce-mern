@@ -6,10 +6,10 @@ import Breadcrumb from "../components/breadcrumb";
 import Layout from "../Layout";
 import RelatedProduct from "../components/products/RelatedProduct";
 import { connect, useSelector } from "react-redux";
-import { addToWishlist, getAllWishlist } from "../store/actions/wishlistAction";
+import { addToWishlist, getAllWishlist } from "../helpers/wishlist";
 import { addToCart } from "../store/actions/cartAction";
 
-const SingleProduct = ({ match, addToCart, addToWishlist }) => {
+const SingleProduct = ({ match, addToCart }) => {
   const [product, setProduct] = useState({});
   const [related, setRelated] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -23,6 +23,7 @@ const SingleProduct = ({ match, addToCart, addToWishlist }) => {
 
   useEffect(() => {
     loadProduct();
+    loadWishlist();
     //eslint-disable-next-line
   }, [slug]);
 
@@ -37,13 +38,25 @@ const SingleProduct = ({ match, addToCart, addToWishlist }) => {
       });
   };
 
-  useEffect(() => {
+  const loadWishlist = () => {
     getAllWishlist(user.token).then((res) => {
       setWishlistItems(res.data.wishlist);
-      loadProduct();
     });
-    //eslint-disable-next-line
-  }, [user]);
+  };
+
+  const handleWishlist = (productId, addToast, authtoken) => {
+    addToWishlist(productId, authtoken)
+      .then((res) => {
+        loadWishlist();
+        addToast("Added To Wishlist", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Layout>
@@ -53,7 +66,7 @@ const SingleProduct = ({ match, addToCart, addToWishlist }) => {
         product={product}
         user={user}
         addToCart={addToCart}
-        addToWishlist={addToWishlist}
+        handleWishlist={handleWishlist}
         cartItems={cartItems}
         wishlistItem={
           wishlistItems.filter((item) => item._id === product._id)[0]
@@ -66,7 +79,7 @@ const SingleProduct = ({ match, addToCart, addToWishlist }) => {
         related={related}
         user={user}
         addToCart={addToCart}
-        addToWishlist={addToWishlist}
+        handleWishlist={handleWishlist}
         cartItem={
           cartItems.filter((cartItem) => cartItem._id === product._id)[0]
         }
@@ -82,9 +95,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
-    },
-    addToWishlist: (item, addToast, authtoken) => {
-      dispatch(addToWishlist(item, addToast, authtoken));
     },
   };
 };

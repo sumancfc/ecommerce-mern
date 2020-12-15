@@ -8,13 +8,13 @@ const ProductCard = ({
   user,
   product,
   addToCart,
-  addToWishlist,
   addToCompare,
   cartItem,
   wishlistItem,
   compareItem,
+  handleWishlist,
 }) => {
-  const { title, slug, images, price, category, quantity } = product;
+  const { _id, title, slug, images, price, category, quantity } = product;
 
   const { addToast } = useToasts();
 
@@ -43,7 +43,7 @@ const ProductCard = ({
                     ? "Added to wishlist"
                     : "Add to wishlist"
                 }
-                onClick={() => addToWishlist(product._id, addToast, user.token)}
+                onClick={() => handleWishlist(_id, addToast, user.token)}
               >
                 <i className='fa fa-heart-o'></i>
               </button>

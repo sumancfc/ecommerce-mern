@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, connect } from "react-redux";
 import { getProductAB } from "../../helpers/product";
 import { addToCart } from "../../store/actions/cartAction";
-import {
-  addToWishlist,
-  getAllWishlist,
-} from "../../store/actions/wishlistAction";
-import { addToCompare } from "../../store/actions/compareAction";
+import { addToWishlist, getAllWishlist } from "../../helpers/wishlist";
 import ProductCard from "../products/ProductCard";
 import Title from "../Title";
 
@@ -14,7 +10,7 @@ const BestProducts = ({
   title,
   desc,
   addToCart,
-  addToWishlist,
+
   addToCompare,
 }) => {
   const [products, setProducts] = useState([]);
@@ -22,14 +18,32 @@ const BestProducts = ({
 
   const user = useSelector((state) => state.userList);
   const cartItems = useSelector((state) => state.cartData);
-  const compareItems = useSelector((state) => state.compareData);
 
   useEffect(() => {
     getProductAB("sold", "desc", 8).then((res) => setProducts(res.data));
+    loadWishlist();
+    // eslint-disable-next-line
+  }, []);
+
+  const loadWishlist = () => {
     getAllWishlist(user.token).then((res) => {
       setWishlistItems(res.data.wishlist);
     });
-  }, [user]);
+  };
+
+  const handleWishlist = (productId, addToast, authtoken) => {
+    addToWishlist(productId, authtoken)
+      .then((res) => {
+        loadWishlist();
+        addToast("Added To Wishlist", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -44,7 +58,7 @@ const BestProducts = ({
                   product={product}
                   user={user}
                   addToCart={addToCart}
-                  addToWishlist={addToWishlist}
+                  handleWishlist={handleWishlist}
                   addToCompare={addToCompare}
                   cartItem={
                     cartItems.filter(
@@ -53,11 +67,6 @@ const BestProducts = ({
                   }
                   wishlistItem={
                     wishlistItems.filter((item) => item._id === product._id)[0]
-                  }
-                  compareItem={
-                    compareItems.filter(
-                      (compareItem) => compareItem._id === product._id
-                    )[0]
                   }
                 />
               );
@@ -73,12 +82,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
-    },
-    addToWishlist: (item, addToast, authtoken) => {
-      dispatch(addToWishlist(item, addToast, authtoken));
-    },
-    addToCompare: (item, addToast) => {
-      dispatch(addToCompare(item, addToast));
     },
   };
 };

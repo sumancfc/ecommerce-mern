@@ -8,7 +8,6 @@ import {
   categoryUpdateReducer,
   categorySingleReducer,
 } from "./categoryReducer";
-
 import {
   productDetailReducer,
   productReducer,
@@ -16,7 +15,6 @@ import {
 } from "./productReducer";
 import { searchReducer } from "./searchReducer";
 import { userReducer } from "./userReducer";
-import { addWishlistReducer } from "./wishlistReducer";
 
 const rootReducer = combineReducers({
   userList: userReducer,
@@ -30,7 +28,6 @@ const rootReducer = combineReducers({
   productReview: productReviewReducer,
   search: searchReducer,
   cartData: cartReducer,
-  addWishlist: addWishlistReducer,
   compareData: compareReducer,
 });
 

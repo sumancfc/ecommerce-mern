@@ -1,33 +1,49 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import Breadcrumb from "../../components/breadcrumb";
 import {
   deleteFromWishlist,
   getAllWishlist,
 } from "../../store/actions/wishlistAction";
 import Layout from "../../Layout";
+import { addToCart } from "../../store/actions/cartAction";
 
 const Wishlist = () => {
   const { addToast } = useToasts();
 
   const [wishlistItems, setWishlistItems] = useState([]);
 
-  //   console.log(wishlistItems);
-
   const user = useSelector((state) => state.userList);
+  const cartItems = useSelector((state) => state.cartData);
+  console.log(cartItems);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadWishlist();
+
+    // eslint-disable-next-line
   }, []);
 
   const loadWishlist = () => {
     getAllWishlist(user.token).then((res) => {
       setWishlistItems(res.data.wishlist);
     });
+  };
+
+  const handleAddToCart = (item, addToast) => {
+    dispatch(addToCart(item, addToast));
+    setTimeout(() => {
+      deleteFromWishlist(item._id, user.token).then((res) => {
+        loadWishlist();
+        addToast("Product deleted from wishlist", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      });
+    }, 500);
   };
 
   const handleRemove = (productId) => {
@@ -87,7 +103,21 @@ const Wishlist = () => {
                                 <span className='amount'>${price}</span>
                               </td>
                               <td className='product__wishlist-cart'>
-                                <Link to='#'>Add To Cart</Link>
+                                {cartItems &&
+                                cartItems.filter(
+                                  (item) => item._id === wishlistItem._id
+                                )[0] ? (
+                                  <Link to='#'>Added To Cart</Link>
+                                ) : (
+                                  <Link
+                                    to='#'
+                                    onClick={() =>
+                                      handleAddToCart(wishlistItem, addToast)
+                                    }
+                                  >
+                                    Add To Cart
+                                  </Link>
+                                )}
                               </td>
                               <td className='product__remove'>
                                 <Link

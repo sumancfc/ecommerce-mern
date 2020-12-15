@@ -6,7 +6,7 @@ const RelatedProduct = ({
   related,
   user,
   addToCart,
-  addToWishlist,
+  handleWishlist,
   cartItem,
   wishlistItem,
 }) => {
@@ -28,7 +28,7 @@ const RelatedProduct = ({
                   product={product}
                   user={user}
                   addToCart={addToCart}
-                  addToWishlist={addToWishlist}
+                  handleWishlist={handleWishlist}
                   cartItem={cartItem}
                   wishlistItem={wishlistItem}
                 />

@@ -8,17 +8,15 @@ const ProductInfo = ({
   user,
   product,
   addToCart,
-  addToWishlist,
+  handleWishlist,
   cartItems,
   wishlistItem,
 }) => {
-  const { title, price, quantity, category, subs, reviews } = product;
-  console.log(quantity);
+  const { _id, title, price, quantity, category, subs, reviews } = product;
+
   const { addToast } = useToasts();
 
   const [quantityCount, setQuantityCount] = useState(1);
-
-  // console.log(cartItems);
 
   const productCartQuantity = getProductCartQuantity(cartItems, product);
 
@@ -83,7 +81,7 @@ const ProductInfo = ({
                   ? "Added to wishlist"
                   : "Add to wishlist"
               }
-              onClick={() => addToWishlist(product._id, addToast, user.token)}
+              onClick={() => handleWishlist(_id, addToast, user.token)}
             >
               <i className='fa fa-heart-o'></i>
             </button>

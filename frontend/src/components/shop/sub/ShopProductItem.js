@@ -8,11 +8,11 @@ const ShopProductItem = ({
   product,
   user,
   addToCart,
-  addToWishlist,
+  handleWishlist,
   cartItem,
   wishlistItem,
 }) => {
-  const { title, slug, images, price, category, description } = product;
+  const { _id, title, slug, images, price, category, description } = product;
   const { addToast } = useToasts();
 
   return (
@@ -40,7 +40,7 @@ const ShopProductItem = ({
                     ? "Added to wishlist"
                     : "Add to wishlist"
                 }
-                onClick={() => addToWishlist(product._id, addToast, user.token)}
+                onClick={() => handleWishlist(_id, addToast, user.token)}
               >
                 <i className='fa fa-heart-o'></i>
               </button>
@@ -116,9 +116,7 @@ const ShopProductItem = ({
                         ? "Added to wishlist"
                         : "Add to wishlist"
                     }
-                    onClick={() =>
-                      addToWishlist(product._id, addToast, user.token)
-                    }
+                    onClick={() => handleWishlist(_id, addToast, user.token)}
                   >
                     <i className='fa fa-heart-o'></i>
                   </button>

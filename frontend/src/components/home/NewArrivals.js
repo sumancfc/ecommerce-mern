@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { getProductAB } from "../../helpers/product";
 import { addToCart } from "../../store/actions/cartAction";
-
-import {
-  addToWishlist,
-  getAllWishlist,
-} from "../../store/actions/wishlistAction";
+import { addToWishlist, getAllWishlist } from "../../helpers/wishlist";
 import ProductCard from "../products/ProductCard";
 import Title from "../Title";
 
-const NewArrivals = ({ title, desc, addToCart, addToWishlist }) => {
+const NewArrivals = ({ title, desc, addToCart }) => {
   const [products, setProducts] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
 
@@ -19,10 +15,29 @@ const NewArrivals = ({ title, desc, addToCart, addToWishlist }) => {
 
   useEffect(() => {
     getProductAB("createdAt", "desc", 8).then((res) => setProducts(res.data));
+    loadWishlist();
+    // eslint-disable-next-line
+  }, []);
+
+  const loadWishlist = () => {
     getAllWishlist(user.token).then((res) => {
       setWishlistItems(res.data.wishlist);
     });
-  }, [user]);
+  };
+
+  const handleWishlist = (productId, addToast, authtoken) => {
+    addToWishlist(productId, authtoken)
+      .then((res) => {
+        loadWishlist();
+        addToast("Added To Wishlist", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -37,7 +52,7 @@ const NewArrivals = ({ title, desc, addToCart, addToWishlist }) => {
                   product={product}
                   user={user}
                   addToCart={addToCart}
-                  addToWishlist={addToWishlist}
+                  handleWishlist={handleWishlist}
                   cartItem={
                     cartItems.filter(
                       (cartItem) => cartItem._id === product._id
@@ -60,9 +75,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
       dispatch(addToCart(item, addToast, quantityCount));
-    },
-    addToWishlist: (item, addToast, authtoken) => {
-      dispatch(addToWishlist(item, addToast, authtoken));
     },
   };
 };

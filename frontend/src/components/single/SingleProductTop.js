@@ -6,7 +6,7 @@ const SingleProductTop = ({
   product,
   user,
   addToCart,
-  addToWishlist,
+  handleWishlist,
   cartItems,
   wishlistItem,
 }) => {
@@ -20,7 +20,7 @@ const SingleProductTop = ({
             product={product}
             user={user}
             addToCart={addToCart}
-            addToWishlist={addToWishlist}
+            handleWishlist={handleWishlist}
             cartItems={cartItems}
             wishlistItem={wishlistItem}
           />
