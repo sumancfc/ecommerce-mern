@@ -10,8 +10,8 @@ import {
   deleteAllFromCart,
   deleteFromCart,
   productAvailable,
-  userCart,
 } from "../store/actions/cartAction";
+import { addUserCart } from "../helpers/cart";
 
 const Cart = ({
   user,
@@ -28,7 +28,7 @@ const Cart = ({
   let cartTotalPrice = 0;
 
   const proccedTochekcout = () => {
-    userCart(cartItems, user.token)
+    addUserCart(cartItems, user.token)
       .then((res) => {
         console.log(res);
         if (res.data.ok) {
@@ -171,64 +171,9 @@ const Cart = ({
               </div>
 
               <div className='row'>
-                <div className='col-lg-4 col-md-6'>
-                  <div className='cart__tax'>
-                    <div className='title__wrap'>
-                      <h4 className='cart__bottom-title section__bg-gray'>
-                        Estimate Shipping And Tax
-                      </h4>
-                    </div>
-                    <div className='tax__wrapper'>
-                      <p>Enter your destination to get a shipping estimate.</p>
-                      <div className='tax__select-wrapper'>
-                        <div className='tax__select'>
-                          <label>* Country</label>
-                          <select className='email s-email s-wid'>
-                            <option>Nepal</option>
-                            <option>India</option>
-                            <option>Australia</option>
-                            <option>UK</option>
-                          </select>
-                        </div>
-                        <div className='tax__select'>
-                          <label>* Region / State</label>
-                          <select className='email s-email s-wid'>
-                            <option>Nepal</option>
-                            <option>India</option>
-                            <option>Australia</option>
-                            <option>UK</option>
-                          </select>
-                        </div>
-                        <div className='tax__select'>
-                          <label>* Zip/Postal Code</label>
-                          <input type='text' />
-                        </div>
-                        <button className='cart__btn' type='submit'>
-                          Get A Quote
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-lg-4 col-md-6'>
-                  <div className='discount__code-wrapper'>
-                    <div className='title__wrap'>
-                      <h4 className='cart__bottom-title section__bg-gray'>
-                        Use Coupon Code
-                      </h4>
-                    </div>
-                    <div className='discount__code'>
-                      <p>Enter your coupon code if you have one.</p>
-                      <form>
-                        <input type='text' required='' name='name' />
-                        <button className='cart__btn' type='submit'>
-                          Apply Coupon
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-lg-4 col-md-12'>
+                <div className='col-lg-4 col-md-12 '></div>
+                <div className='col-lg-4 col-md-12 '></div>
+                <div className='col-lg-4 col-md-12 '>
                   <div className='grand__totall'>
                     <div className='title__wrap'>
                       <h4 className='cart__bottom-title section__bg-gary-cart'>

@@ -35,9 +35,7 @@ const AdminProfile = ({ children, title }) => {
                       </li>
 
                       <li>
-                        <Link to='/admin/payment'>
-                          <i className='fa fa-credit-card'></i> Payment Method
-                        </Link>
+                        <Link to='/admin/coupon'>Coupon</Link>
                       </li>
 
                       <li>

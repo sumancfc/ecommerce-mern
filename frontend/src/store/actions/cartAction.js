@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -24,7 +23,7 @@ export const addToCart = (item, addToast, quantityCount) => {
   };
 };
 
-//decrease from cart
+//decrease from cart in redux state
 export const decreaseQuantity = (item, addToast) => {
   return (dispatch) => {
     if (addToast) {
@@ -37,7 +36,7 @@ export const decreaseQuantity = (item, addToast) => {
   };
 };
 
-//delete from cart by id
+//delete from cart by id in redux state
 export const deleteFromCart = (item, addToast) => {
   return (dispatch) => {
     if (addToast) {
@@ -50,7 +49,7 @@ export const deleteFromCart = (item, addToast) => {
   };
 };
 
-//delete all from cart
+//delete all from cart in redux state
 export const deleteAllFromCart = (addToast) => {
   return (dispatch) => {
     if (addToast) {
@@ -66,19 +65,4 @@ export const deleteAllFromCart = (addToast) => {
 // get stock of cart item
 export const productAvailable = (item) => {
   return item.quantity;
-};
-
-//save cart items to database
-export const userCart = async (cartItems, authtoken) => {
-  return await axios.post(
-    `${process.env.REACT_APP_API}/user/cart`,
-    {
-      cartItems,
-    },
-    {
-      headers: {
-        authtoken,
-      },
-    }
-  );
 };

@@ -12,6 +12,7 @@ const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const subCategoryRoutes = require("./routes/subcategory");
 const productRoutes = require("./routes/product");
+const couponRoutes = require("./routes/coupon");
 const cloudinaryRoutes = require("./routes/cloudinary");
 
 const { errorNotFound, errorHandler } = require("./middlewares/errorHandler");
@@ -42,6 +43,7 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", subCategoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", couponRoutes);
 app.use("/api", cloudinaryRoutes);
 
 //error middleware

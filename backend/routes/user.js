@@ -2,6 +2,8 @@ const express = require("express");
 
 const {
   addUserCart,
+  getUserCart,
+  deleteUserCart,
   addToWishlist,
   getWishlist,
   removeFromWishlist,
@@ -13,6 +15,8 @@ const router = express.Router();
 
 //cart
 router.post("/user/cart", authCheck, addUserCart);
+router.get("/user/cart", authCheck, getUserCart);
+router.delete("/user/cart", authCheck, deleteUserCart);
 
 //wishlist
 router.post("/user/wishlist", authCheck, addToWishlist);

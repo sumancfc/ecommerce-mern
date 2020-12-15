@@ -32,12 +32,14 @@ import CreateProduct from "./pages/admin/products/CreateProduct";
 import AllProducts from "./pages/admin/products/AllProducts";
 import UpdateProduct from "./pages/admin/products/UpdateProduct";
 import CategoryGrid from "./pages/CategoryGrid";
+import CreateCoupon from "./pages/admin/coupon/CreateCoupon";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminProfile from "./pages/admin/AdminDashboard";
 import Wishlist from "./pages/user/Wishlist";
 import Cart from "./pages/Cart";
 import Compare from "./pages/Compare";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -89,6 +91,7 @@ const App = () => {
           />
           <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
           <PrivateRoute exact path='/cart' component={Cart} />
+          <PrivateRoute exact path='/checkout' component={Checkout} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />
           <AdminRoute
@@ -113,6 +116,7 @@ const App = () => {
             component={UpdateProduct}
           />
           <AdminRoute exact path='/admin/products' component={AllProducts} />
+          <AdminRoute exact path='/admin/coupon' component={CreateCoupon} />
 
           <Route exact path='/product/:slug' component={SingleProduct} />
           <Route exact path='/category/:slug' component={CategoryGrid} />

@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 
+//add to cart
 exports.addUserCart = async (req, res) => {
   const { cartItems } = req.body;
 
@@ -44,6 +45,28 @@ exports.addUserCart = async (req, res) => {
   }).save();
 
   res.json({ ok: true });
+};
+
+//get cart
+exports.getUserCart = async (req, res) => {
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  let cartItems = await Cart.findOne({ orderdBy: user._id })
+    .populate("products.product", "_id title price totalAfterDiscount")
+    .exec();
+
+  const { products, cartTotal, totalAfterDiscount } = cartItems;
+
+  res.json({ products, cartTotal, totalAfterDiscount });
+};
+
+//delete from cart
+exports.deleteUserCart = async (req, res) => {
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  let cartItems = await Cart.findOneAndRemove({ orderdBy: user._id }).exec();
+
+  res.json(cartItems);
 };
 
 //add to wishlist

@@ -21,7 +21,7 @@ const Login = ({ history }) => {
       return;
     } else {
       if (user && user.token) {
-        history.push("/");
+        history.push("/admin/dashboard");
       }
     }
   }, [user, history]);

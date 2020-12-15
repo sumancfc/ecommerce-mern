@@ -3604,8 +3604,6 @@ textarea {
 .discount__code-wrapper .tax__wrapper .tax__select-wrapper .tax__select select {
   -moz-appearance: none;
   -webkit-appearance: none;
-  /* background: #fff url("/assets/images/icon-img/cart.png") no-repeat scroll
-    right 18px center; */
   background: #fff no-repeat scroll right 18px center;
   border: 1px solid #ebebeb;
   -webkit-box-shadow: none;
@@ -3623,28 +3621,6 @@ textarea {
   background: #fff none repeat scroll 0 0;
   border: 1px solid #ebebeb;
   height: 40px;
-}
-
-.cart__tax .tax__wrapper .tax__select-wrapper button.cart__btn,
-.discount__code-wrapper .tax__wrapper .tax__select-wrapper button.cart__btn {
-  background-color: #333;
-  border: medium none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 12px 40px 13px;
-  text-transform: uppercase;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-.cart__tax .tax__wrapper .tax__select-wrapper button.cart__btn:hover,
-.discount__code-wrapper
-  .tax__wrapper
-  .tax__select-wrapper
-  button.cart__btn:hover {
-  background-color: #ff5151;
 }
 
 .cart__tax .discount__code,
@@ -3674,7 +3650,7 @@ button.cart__btn {
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  padding: 12px 40px 13px;
+  padding: 12px 30px 13px;
   text-transform: uppercase;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
@@ -3896,6 +3872,148 @@ button.cart__btn:hover {
 
 .compare__table .table tbody tr td.product__rating i {
   color: #e7a415;
+}
+
+/* Checkout Starts */
+
+.order__area {
+  padding: 40px 50px 50px;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+  border-color: rgba(52, 53, 56, 0.1);
+}
+
+.order__area h3 {
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  margin: 0 0 45px;
+  text-transform: uppercase;
+}
+
+.order__area h3:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -12px;
+  background-color: #ff5151;
+  width: 50px;
+  height: 2px;
+}
+
+.order__area .order__wrap .order__info {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.order__area .order__wrap .order__info ul li {
+  font-size: 14px;
+  padding: 0 0 7px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.order__area .order__wrap .order__info ul li span {
+  float: right;
+  color: #ff5151;
+}
+
+.order__area .order__wrap .order__info.order__subtotal {
+  padding: 15px 0 10px;
+}
+
+.order__area .order__wrap .order__info.order__subtotal ul li span {
+  font-size: 16px;
+}
+
+.order__area .order__wrap .order__info.order__shipping {
+  padding: 15px 0 13px;
+  display: block;
+  overflow: hidden;
+}
+
+.order__area .order__wrap .order__info.order__shipping ul li > p {
+  float: right;
+  font-size: 14px;
+  text-align: right;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.order__area .order__wrap .order__info.order__total {
+  padding: 15px 0 10px;
+}
+
+.order__area .order__wrap .order__info.order__total ul li span {
+  font-size: 16px;
+}
+
+.order__area .order__wrap .order__info-center {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 24px 0 23px;
+}
+
+.order__area .order__wrap .order__info-center ul li {
+  font-size: 14px;
+  margin: 0 0 11px;
+}
+
+.order__area .order__wrap .order__info-center ul li:last-child {
+  margin-bottom: 0;
+}
+
+.order__area .order__wrap .order__info-center ul li span {
+  float: right;
+  font-size: 16px;
+}
+
+.order__area .order__wrap .payment__method {
+  margin: 17px 0 0;
+}
+
+.order__area .order__wrap .payment__method .payment__single {
+  margin-bottom: 20px;
+}
+
+.order__area .order__wrap .payment__method .payment__single input {
+  width: auto;
+  display: inline-block;
+  float: left;
+  height: auto;
+  margin-top: 5px;
+}
+
+.order__area .order__wrap .payment__method .payment__single label {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0px 0 0 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.order__area .order__wrap .payment__method .payment__single label img {
+  max-width: 140px;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.order__area .order__wrap .payment__method .payment__single label a {
+  text-decoration: underline;
+}
+
+.order__area .order__wrap .payment__method .payment__single .payment__box {
+  margin: 6px 0 0;
+  display: none;
+}
+
+.order__area .order__wrap .payment__method .payment__single .payment__box p {
+  font-size: 14px;
+  margin: 0;
 }
 
 /* Media Query */
@@ -4622,4 +4740,13 @@ button.cart__btn:hover {
   .hero__slider .slider__container h4 {
     font-size: 20px;
   }
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.delete__btn {
+  background: none;
+  border: none;
 }
