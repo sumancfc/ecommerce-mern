@@ -39,7 +39,7 @@ const Checkout = ({ history }) => {
     getAddress(user.token)
       .then((res) => {
         console.log(res.data);
-        setShippingAddress(res.data.shippingAddress);
+        // setShippingAddress(res.data.shippingAddress);
       })
       .catch((err) => console.log(err));
   }, [user]);

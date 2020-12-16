@@ -17,13 +17,12 @@ const Wishlist = () => {
 
   const user = useSelector((state) => state.userList);
   const cartItems = useSelector((state) => state.cartData);
-  console.log(cartItems);
 
   const dispatch = useDispatch();
 
+  console.log(wishlistItems);
   useEffect(() => {
     loadWishlist();
-
     // eslint-disable-next-line
   }, []);
 
@@ -35,6 +34,7 @@ const Wishlist = () => {
 
   const handleAddToCart = (item, addToast) => {
     dispatch(addToCart(item, addToast));
+    console.log("item added", item.title);
     setTimeout(() => {
       deleteFromWishlist(item._id, user.token).then((res) => {
         loadWishlist();
@@ -80,7 +80,14 @@ const Wishlist = () => {
                       </thead>
                       <tbody>
                         {wishlistItems.map((wishlistItem, i) => {
-                          const { images, slug, title, price } = wishlistItem;
+                          const {
+                            images,
+                            slug,
+                            title,
+                            price,
+                            quantity,
+                          } = wishlistItem;
+
                           return (
                             <tr key={i}>
                               <td className='product__thumbnail'>
@@ -103,20 +110,24 @@ const Wishlist = () => {
                                 <span className='amount'>${price}</span>
                               </td>
                               <td className='product__wishlist-cart'>
-                                {cartItems &&
-                                cartItems.filter(
-                                  (item) => item._id === wishlistItem._id
-                                )[0] ? (
-                                  <Link to='#'>Added To Cart</Link>
+                                {quantity && quantity > 0 ? (
+                                  cartItems.filter(
+                                    (item) => item._id === wishlistItem._id
+                                  )[0] ? (
+                                    <button>Added To Cart</button>
+                                  ) : (
+                                    <button
+                                      onClick={() =>
+                                        handleAddToCart(wishlistItem, addToast)
+                                      }
+                                    >
+                                      Add To Cart
+                                    </button>
+                                  )
                                 ) : (
-                                  <Link
-                                    to='#'
-                                    onClick={() =>
-                                      handleAddToCart(wishlistItem, addToast)
-                                    }
-                                  >
-                                    Add To Cart
-                                  </Link>
+                                  <button disabled className='active'>
+                                    Out of stock
+                                  </button>
                                 )}
                               </td>
                               <td className='product__remove'>

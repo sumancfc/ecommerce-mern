@@ -12,7 +12,16 @@ const ShopProductItem = ({
   cartItem,
   wishlistItem,
 }) => {
-  const { _id, title, slug, images, price, category, description } = product;
+  const {
+    _id,
+    title,
+    slug,
+    images,
+    price,
+    category,
+    description,
+    quantity,
+  } = product;
   const { addToast } = useToasts();
 
   return (
@@ -59,20 +68,24 @@ const ShopProductItem = ({
                 <span>${price} </span>
               </div>
               <div className='product-add-to-cart'>
-                <button
-                  onClick={() => addToCart(product, addToast)}
-                  className={
-                    cartItem !== undefined && cartItem.quantity > 0
-                      ? "active"
-                      : ""
-                  }
-                  disabled={cartItem !== undefined && cartItem.quantity > 0}
-                  title={
-                    cartItem !== undefined ? "Added to cart" : "Add to cart"
-                  }
-                >
-                  <i className='fa fa-shopping-cart'></i>
-                </button>
+                {quantity && quantity > 0 ? (
+                  <button
+                    onClick={() => addToCart(product, addToast)}
+                    className={
+                      cartItem !== undefined && quantity > 0 ? "active" : ""
+                    }
+                    disabled={cartItem !== undefined && quantity > 0}
+                    title={
+                      cartItem !== undefined ? "Added to cart" : "Add to cart"
+                    }
+                  >
+                    <i className='fa fa-shopping-cart'></i>
+                  </button>
+                ) : (
+                  <button disabled className='active' title='Out of stock'>
+                    <i className='fa fa-shopping-cart'></i>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -123,20 +136,26 @@ const ShopProductItem = ({
                   <button title='Add To Compare'>
                     <i className='fa fa-retweet'></i>
                   </button>
-                  <button
-                    onClick={() => addToCart(product, addToast)}
-                    className={
-                      cartItem !== undefined && cartItem.quantity > 0
-                        ? "active"
-                        : ""
-                    }
-                    disabled={cartItem !== undefined && cartItem.quantity > 0}
-                    title={
-                      cartItem !== undefined ? "Added to cart" : "Add to cart"
-                    }
-                  >
-                    <i className='fa fa-shopping-cart'></i>
-                  </button>
+                  {quantity && quantity > 0 ? (
+                    <button
+                      onClick={() => addToCart(product, addToast)}
+                      className={
+                        cartItem !== undefined && cartItem.quantity > 0
+                          ? "active"
+                          : ""
+                      }
+                      disabled={cartItem !== undefined && cartItem.quantity > 0}
+                      title={
+                        cartItem !== undefined ? "Added to cart" : "Add to cart"
+                      }
+                    >
+                      <i className='fa fa-shopping-cart'></i>
+                    </button>
+                  ) : (
+                    <button disabled className='active' title='Out of stock'>
+                      <i className='fa fa-shopping-cart'></i>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
