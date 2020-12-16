@@ -1,5 +1,5 @@
 import React from "react";
-import MenuCart from "../../cart";
+import MenuCart from "../../menucart";
 import Logo from "../../logo";
 import Search from "../../search/Search";
 

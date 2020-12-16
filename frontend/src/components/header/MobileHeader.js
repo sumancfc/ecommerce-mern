@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../logo";
 import Search from "../search/Search";
-import MenuCart from "../cart";
+import MenuCart from "../menucart";
 
 const MobileHeader = () => {
   const openMobileMenu = () => {

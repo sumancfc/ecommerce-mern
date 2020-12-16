@@ -699,7 +699,7 @@ textarea {
 
 .shopping__cart-content {
   background: #fff none repeat scroll 0 0;
-  padding: 28px 20px 20px;
+  padding: 20px;
   position: absolute;
   right: 15px;
   top: 100%;
@@ -795,8 +795,8 @@ textarea {
 }
 
 .shopping__cart-content ul li .shopping__cart-s-title span {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   color: #373737;
 }
 
@@ -831,22 +831,8 @@ textarea {
   margin-right: 0;
 }
 
-.shopping__cart-content .shopping__cart-total {
-  margin: 50px 0 20px;
-  border-bottom: 1px solid #cccccc;
-  padding: 0px 0px 17px;
-}
-
-.shopping__cart-content .shopping__cart-total h4 {
-  font-size: 20px;
-  margin: 0;
-}
-
-.shopping__cart-content .shopping__cart-total h4 span {
-  float: right;
-}
-
 .shopping__cart-content .shopping__cart-btn a {
+  margin-top: 25px;
   margin-bottom: 10px;
   padding: 16px 40px 17px;
   font-size: 16px;
@@ -4373,9 +4359,7 @@ button.cart__btn:hover {
   .shopping__cart-content {
     width: 295px;
     right: 15px;
-    padding: 31px 15px 10px;
     overflow-y: auto;
-    height: 350px;
     top: 100%;
     margin-top: 14px;
   }
