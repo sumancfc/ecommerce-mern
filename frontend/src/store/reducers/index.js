@@ -15,6 +15,7 @@ import {
 } from "./productReducer";
 import { searchReducer } from "./searchReducer";
 import { userReducer } from "./userReducer";
+import { couponReducer } from "./couponReducer";
 
 const rootReducer = combineReducers({
   userList: userReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   cartData: cartReducer,
   compareData: compareReducer,
+  coupon: couponReducer,
 });
 
 export default rootReducer;

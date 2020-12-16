@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import Layout from "../Layout";
 import Breadcrumb from "../components/breadcrumb";
@@ -9,7 +9,7 @@ import DiscountCoupon from "../components/discount";
 import { applyDiscountCoupon } from "../helpers/coupon";
 import OrderPlace from "../components/order";
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponName, setCouponName] = useState("");
@@ -28,6 +28,7 @@ const Checkout = () => {
 
   const user = useSelector((state) => state.userList);
 
+  const dispatch = useDispatch();
   const { addToast } = useToasts();
 
   useEffect(() => {
@@ -71,14 +72,27 @@ const Checkout = () => {
         if (res.data) {
           setPriceAfterDiscount(res.data.priceAfterDiscount);
           setDiscountPrice(res.data.discountPrice);
+
+          dispatch({
+            type: "COUPON_APPLIED",
+            payload: true,
+          });
         }
 
         if (res.data.err) {
           setError(res.data.err);
+          dispatch({
+            type: "COUPON_APPLIED",
+            payload: false,
+          });
         }
         setCouponName("");
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleOrder = () => {
+    history.push("/payment");
   };
 
   return (
@@ -113,6 +127,7 @@ const Checkout = () => {
                 discountPrice={discountPrice}
                 priceAfterDiscount={priceAfterDiscount}
                 addressSaved={addressSaved}
+                handleOrder={handleOrder}
               />
             </div>
           </div>

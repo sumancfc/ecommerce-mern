@@ -40,6 +40,7 @@ import Wishlist from "./pages/user/Wishlist";
 import Cart from "./pages/Cart";
 import Compare from "./pages/Compare";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ const App = () => {
           <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
           <PrivateRoute exact path='/cart' component={Cart} />
           <PrivateRoute exact path='/checkout' component={Checkout} />
+          <PrivateRoute exact path='/payment' component={Payment} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />
           <AdminRoute

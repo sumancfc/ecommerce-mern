@@ -6,6 +6,7 @@ const OrderPlace = ({
   discountPrice,
   priceAfterDiscount,
   addressSaved,
+  handleOrder,
 }) => {
   return (
     <div className='order__area bg-gray'>
@@ -129,6 +130,7 @@ const OrderPlace = ({
         <button
           className='cart__btn'
           disabled={!addressSaved || !products.length}
+          onClick={handleOrder}
         >
           Place Order
         </button>
