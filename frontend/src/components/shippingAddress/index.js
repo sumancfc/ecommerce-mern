@@ -1,29 +1,13 @@
-import React, { useState } from "react";
-import { useToasts } from "react-toast-notifications";
-import { saveShippingAddress } from "../../helpers/cart";
+import React from "react";
 
-const ShippingAddress = ({ user }) => {
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
-
-  const { addToast } = useToasts();
-
-  const handleShippingAddress = (e) => {
-    e.preventDefault();
-
-    saveShippingAddress({ address, city, postalCode, country }, user.token)
-      .then((res) => {
-        addToast("Address added", { appearance: "success", autoDismiss: true });
-        setAddress("");
-        setCountry("");
-        setPostalCode("");
-        setCity("");
-      })
-      .catch((err) => console.log(err));
-  };
-
+const ShippingAddress = ({
+  address,
+  city,
+  postalCode,
+  country,
+  handleShippingAddressChange,
+  handleShippingAddress,
+}) => {
   return (
     <div className='cart__tax'>
       <div className='title__wrap'>
@@ -41,8 +25,9 @@ const ShippingAddress = ({ user }) => {
             <input
               type='text'
               placeholder='Enter Address'
+              name='address'
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={handleShippingAddressChange}
               required
             />
           </div>
@@ -50,8 +35,9 @@ const ShippingAddress = ({ user }) => {
             <input
               type='text'
               placeholder='Enter City'
+              name='city'
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={handleShippingAddressChange}
               required
             />
           </div>
@@ -59,8 +45,9 @@ const ShippingAddress = ({ user }) => {
             <input
               type='text'
               placeholder='Enter Postal Code'
+              name='postalCode'
               value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
+              onChange={handleShippingAddressChange}
               required
             />
           </div>
@@ -68,8 +55,9 @@ const ShippingAddress = ({ user }) => {
             <input
               type='text'
               placeholder='Enter Country'
+              name='country'
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={handleShippingAddressChange}
               required
             />
           </div>

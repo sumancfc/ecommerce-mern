@@ -153,5 +153,14 @@ exports.saveShippingAddress = async (req, res) => {
     { shippingAddress }
   ).exec();
 
+  res.json({ ok: true });
+};
+
+//get address
+exports.getShippingAddress = async (req, res) => {
+  const userAddress = await User.findOne({ email: req.user.email })
+    .select("shippingAddress")
+    .exec();
+
   res.json(userAddress);
 };

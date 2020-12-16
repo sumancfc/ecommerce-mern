@@ -4745,3 +4745,7 @@ button.cart__btn:hover {
   background: none;
   border: none;
 }
+
+button:disabled {
+  background: rgb(208, 203, 203) !important;
+}

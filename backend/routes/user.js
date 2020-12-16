@@ -5,6 +5,7 @@ const {
   getUserCart,
   deleteUserCart,
   saveShippingAddress,
+  getShippingAddress,
   applyCoupon,
   addToWishlist,
   getWishlist,
@@ -22,6 +23,7 @@ router.delete("/user/cart", authCheck, deleteUserCart);
 
 //shipping address
 router.post("/user/address", authCheck, saveShippingAddress);
+router.get("/user/address", authCheck, getShippingAddress);
 
 //coupon
 router.post("/user/cart/coupon", authCheck, applyCoupon);

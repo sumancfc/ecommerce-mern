@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useToasts } from "react-toast-notifications";
 import Layout from "../Layout";
 import Breadcrumb from "../components/breadcrumb";
-import { getUserCarts } from "../helpers/cart";
+import { getAddress, getUserCarts, saveShippingAddress } from "../helpers/cart";
 import ShippingAddress from "../components/shippingAddress";
 import DiscountCoupon from "../components/discount";
 import { applyDiscountCoupon } from "../helpers/coupon";
+import OrderPlace from "../components/order";
 
 const Checkout = () => {
   const [products, setProducts] = useState([]);
@@ -14,16 +16,53 @@ const Checkout = () => {
   const [discountPrice, setDiscountPrice] = useState(0);
   const [priceAfterDiscount, setPriceAfterDiscount] = useState(0);
   const [error, setError] = useState("");
+  const [addressSaved, setAddressSaved] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
+
+  const { address, city, postalCode, country } = shippingAddress;
 
   const user = useSelector((state) => state.userList);
+
+  const { addToast } = useToasts();
 
   useEffect(() => {
     getUserCarts(user.token).then((res) => {
       setProducts(res.data.products);
       setTotalPrice(res.data.cartTotal);
     });
+    getAddress(user.token)
+      .then((res) => {
+        console.log(res.data);
+        setShippingAddress(res.data.shippingAddress);
+      })
+      .catch((err) => console.log(err));
   }, [user]);
 
+  //handle address change
+  const handleShippingAddressChange = (e) => {
+    const { name, value } = e.target;
+
+    setShippingAddress({ ...shippingAddress, [name]: value });
+  };
+
+  //handle address submit
+  const handleShippingAddress = (e) => {
+    e.preventDefault();
+
+    saveShippingAddress(shippingAddress, user.token)
+      .then((res) => {
+        setAddressSaved(res.data.ok);
+        addToast("Address added", { appearance: "success", autoDismiss: true });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //apply discount coupon
   const applyCoupon = (e) => {
     e.preventDefault();
     // console.log("Coupon applied");
@@ -50,7 +89,14 @@ const Checkout = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-lg-6 col-md-6'>
-              <ShippingAddress user={user} />
+              <ShippingAddress
+                address={address}
+                city={city}
+                postalCode={postalCode}
+                country={country}
+                handleShippingAddressChange={handleShippingAddressChange}
+                handleShippingAddress={handleShippingAddress}
+              />
               <DiscountCoupon
                 couponName={couponName}
                 setCouponName={setCouponName}
@@ -61,131 +107,13 @@ const Checkout = () => {
             </div>
 
             <div className='col-lg-6 col-md-12'>
-              <div className='order__area bg-gray'>
-                <h3>Your order</h3>
-                <div className='order__wrap'>
-                  <div className='order__info-wrap'>
-                    <div className='order__info'>
-                      <ul>
-                        <li>
-                          Product <span>Total</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className='order__info-center'>
-                      <ul>
-                        {products.map((prod, i) => (
-                          <li key={i}>
-                            {prod.product.title} X {prod.count}{" "}
-                            <span>${prod.product.price * prod.count} </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className='order__info order__subtotal'>
-                      <ul>
-                        <li>
-                          Cart Total <span>${totalPrice} </span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div className='order__info order__total'>
-                      {discountPrice > 0 && (
-                        <ul>
-                          <li>
-                            Discount Price <span> - ${discountPrice} </span>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-
-                    <div className='order__info order__total'>
-                      {priceAfterDiscount > 0 && (
-                        <ul>
-                          <li>
-                            Total Payable <span>${priceAfterDiscount}</span>
-                          </li>
-                        </ul>
-                      )}
-                    </div>
-                  </div>
-                  <div className='payment__method'>
-                    <div className='payment__top payment__single'>
-                      <input
-                        id='payment_method'
-                        className='input-radio'
-                        type='radio'
-                        value='cheque'
-                        checked='checked'
-                        name='payment method'
-                      />
-                      <label htmlFor='payment_method'>
-                        Direct Bank Transfer
-                      </label>
-                      <div className='payment__box payment_method_bacs'>
-                        <p>
-                          Make your payment directly into our bank account.
-                          Please use your Order ID as the payment reference.
-                        </p>
-                      </div>
-                    </div>
-                    <div className='payment__top payment__single'>
-                      <input
-                        id='payment__method'
-                        className='input-radio'
-                        type='radio'
-                        value='cheque'
-                        name='payment method'
-                      />
-                      <label htmlFor='payment__method'>Check payments</label>
-                      <div className='payment__box payment_method_bacs'>
-                        <p>
-                          Make your payment directly into our bank account.
-                          Please use your Order ID as the payment reference.
-                        </p>
-                      </div>
-                    </div>
-                    <div className='payment__top payment__single'>
-                      <input
-                        id='payment__method-3'
-                        className='input-radio'
-                        type='radio'
-                        value='cheque'
-                        name='payment method'
-                      />
-                      <label htmlFor='payment__method-3'>
-                        Cash on delivery
-                      </label>
-                      <div className='payment__box payment_method_bacs'>
-                        <p>
-                          Make your payment directly into our bank account.
-                          Please use your Order ID as the payment reference.
-                        </p>
-                      </div>
-                    </div>
-                    <div className='payment__top payment__single payment__single-3'>
-                      <input
-                        id='payment__method-4'
-                        className='input-radio'
-                        type='radio'
-                        value='cheque'
-                        name='payment method'
-                      />
-                      <label htmlFor='payment__method-4'>PayPal</label>
-                      <div className='payment__box payment_method_bacs'>
-                        <p>
-                          Make your payment directly into our bank account.
-                          Please use your Order ID as the payment reference.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Place__order mt-40'>
-                  <button className='cart__btn'>Place Order</button>
-                </div>
-              </div>
+              <OrderPlace
+                products={products}
+                totalPrice={totalPrice}
+                discountPrice={discountPrice}
+                priceAfterDiscount={priceAfterDiscount}
+                addressSaved={addressSaved}
+              />
             </div>
           </div>
         </div>
