@@ -6,7 +6,7 @@ import {
   updateCategory,
 } from "../../../store/actions/categoryAction";
 import { CATEGORY_UPDATE_RESET } from "../../../store/constants/category";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import CategoryForm from "../common/CategoryForm";
 
 const UpdateCategory = ({

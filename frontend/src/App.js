@@ -35,7 +35,7 @@ import CategoryGrid from "./pages/CategoryGrid";
 import CreateCoupon from "./pages/admin/coupon/CreateCoupon";
 
 import AdminRoute from "./components/routes/AdminRoute";
-import AdminProfile from "./pages/admin/AdminDashboard";
+import AdminProfile from "./pages/admin/AdminProfile";
 import Wishlist from "./pages/user/Wishlist";
 import Cart from "./pages/Cart";
 import Compare from "./pages/Compare";
@@ -43,6 +43,8 @@ import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
 import PaymentHistory from "./pages/user/PaymentHistory";
 import OrderDetails from "./pages/user/OrderDetails";
+import OrderList from "./pages/admin/order/OrderList";
+import AdminOrderDetails from "./pages/admin/order/AdminOrderDetails";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -103,6 +105,12 @@ const App = () => {
           <PrivateRoute exact path='/checkout' component={Checkout} />
           <PrivateRoute exact path='/payment' component={Payment} />
           <AdminRoute exact path='/admin/dashboard' component={AdminProfile} />
+          <AdminRoute exact path='/admin/orders' component={OrderList} />
+          <AdminRoute
+            exact
+            path='/admin/order/:orderId'
+            component={AdminOrderDetails}
+          />
           <AdminRoute exact path='/admin/category' component={CreateCategory} />
           <AdminRoute
             exact

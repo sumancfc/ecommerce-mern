@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import { getAllCategories } from "../../../store/actions/categoryAction";
 import { getSub, updateSub } from "../../../store/actions/subAction";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import CategoryForm from "../common/CategoryForm";
 
 const UpdateSubCategory = ({

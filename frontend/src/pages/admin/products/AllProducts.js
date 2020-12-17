@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LinkButton from "../../../components/button/LinkButton";
 import { deleteProduct, getProducts } from "../../../helpers/product";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import { useToasts } from "react-toast-notifications";
 import ProductList from "../common/ProductList";
 

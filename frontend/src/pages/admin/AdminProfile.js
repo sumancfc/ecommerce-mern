@@ -39,9 +39,7 @@ const AdminProfile = ({ children, title }) => {
                       </li>
 
                       <li>
-                        <Link to='/admin/address'>
-                          <i className='fa fa-map-marker'></i> address
-                        </Link>
+                        <Link to='/admin/orders'>All Orders</Link>
                       </li>
 
                       <li>

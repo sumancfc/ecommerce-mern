@@ -8,7 +8,7 @@ import {
   getSubs,
   removeSub,
 } from "../../../store/actions/subAction";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import CategoryForm from "../common/CategoryForm";
 import ListTable from "../common/ListTable";
 

@@ -6,7 +6,7 @@ import {
   getAllCategories,
   gCategorySubs,
 } from "../../../store/actions/categoryAction";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import ImageUpload from "../common/ImageUpload";
 import ProductForm from "../common/ProductForm";
 

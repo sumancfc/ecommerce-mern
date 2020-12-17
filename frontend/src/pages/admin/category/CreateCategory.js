@@ -12,7 +12,7 @@ import {
   CATEGORY_DELETE_RESET,
   CATEGORY_UPDATE_RESET,
 } from "../../../store/constants/category";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 import CategoryForm from "../common/CategoryForm";
 import ListTable from "../common/ListTable";
 

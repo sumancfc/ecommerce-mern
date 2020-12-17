@@ -27,3 +27,31 @@ export const getOrderDetails = async (orderId, authtoken) =>
       authtoken,
     },
   });
+
+//get all orders by admin
+export const getAllOrders = async (authtoken) =>
+  await axios.get(`${process.env.REACT_APP_API}/admin/orders`, {
+    headers: {
+      authtoken,
+    },
+  });
+
+//get user's order details by admin
+export const getOrderDetailsByAdmin = async (orderId, authtoken) =>
+  await axios.get(`${process.env.REACT_APP_API}/admin/order/${orderId}`, {
+    headers: {
+      authtoken,
+    },
+  });
+
+//update order status
+export const updateOrderStatus = async (orderId, orderStatus, authtoken) =>
+  await axios.put(
+    `${process.env.REACT_APP_API}/admin/order-status`,
+    { orderId, orderStatus },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );

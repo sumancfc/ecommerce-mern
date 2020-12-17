@@ -9,6 +9,7 @@ const app = express();
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
+const adminRoutes = require("./routes/admin");
 const categoryRoutes = require("./routes/category");
 const subCategoryRoutes = require("./routes/subcategory");
 const productRoutes = require("./routes/product");
@@ -41,6 +42,7 @@ app.use(cors());
 //routes middleware
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", subCategoryRoutes);
 app.use("/api", productRoutes);

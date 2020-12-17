@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import UserDashboard from "./UserDashboard";
 import { getUserOrders } from "../../helpers/order";
-import { Link } from "react-router-dom";
+import OrdersTable from "../../components/order/OrdersTable";
 
 const PaymentHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -24,34 +24,7 @@ const PaymentHistory = () => {
     <UserDashboard
       title={orders.length > 0 ? "User purchase orders" : "No purchase orders"}
     >
-      <div className='row'>
-        <div className='col-md-12'>
-          <table className='table'>
-            <thead className='thead-dark'>
-              <tr>
-                <th scope='col'>S.N</th>
-                <th scope='col'>Order ID</th>
-                <th scope='col'>Data</th>
-                <th scope='col'>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.reverse().map((order, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>
-                    <b>{order._id}</b>
-                  </td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>
-                    <Link to={`/user/order/${order._id}`}>View Details</Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <OrdersTable orders={orders} path='user' />
     </UserDashboard>
   );
 };

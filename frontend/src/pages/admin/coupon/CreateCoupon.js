@@ -9,7 +9,7 @@ import {
   deleteCoupon,
   getCoupons,
 } from "../../../helpers/coupon";
-import AdminProfile from "../AdminDashboard";
+import AdminProfile from "../AdminProfile";
 
 const CreateCoupon = () => {
   const [name, setName] = useState("");
