@@ -3997,6 +3997,27 @@ button.cart__btn:hover {
   margin: 0;
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.delete__btn {
+  background: none;
+  border: none;
+}
+
+.Place__order button:disabled {
+  background: rgb(208, 203, 203) !important;
+}
+
+.order__details p {
+  margin-bottom: 5px;
+}
+
+.order__details p strong {
+  margin-right: 15px;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {
@@ -4719,17 +4740,4 @@ button.cart__btn:hover {
   .hero__slider .slider__container h4 {
     font-size: 20px;
   }
-}
-
-.react-datepicker-wrapper {
-  width: 100%;
-}
-
-.delete__btn {
-  background: none;
-  border: none;
-}
-
-button:disabled {
-  background: rgb(208, 203, 203) !important;
 }

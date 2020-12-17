@@ -7,8 +7,6 @@ import HeaderMenuCart from "./HeaderMenuCart";
 const MenuCart = () => {
   const cartItems = useSelector((state) => state.cartData);
 
-  console.log(cartItems);
-
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("show");
   };

@@ -41,6 +41,8 @@ import Cart from "./pages/Cart";
 import Compare from "./pages/Compare";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
+import PaymentHistory from "./pages/user/PaymentHistory";
+import OrderDetails from "./pages/user/OrderDetails";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -89,6 +91,12 @@ const App = () => {
             exact
             path='/user/dashboard'
             component={UserDashboard}
+          />
+          <PrivateRoute exact path='/user/history' component={PaymentHistory} />
+          <PrivateRoute
+            exact
+            path='/user/order/:orderId'
+            component={OrderDetails}
           />
           <PrivateRoute exact path='/user/wishlist' component={Wishlist} />
           <PrivateRoute exact path='/cart' component={Cart} />

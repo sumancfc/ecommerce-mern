@@ -199,3 +199,32 @@ exports.createUserOrder = async (req, res) => {
 
   res.json({ ok: true });
 };
+
+//get all user orders
+exports.getUserOrder = async (req, res) => {
+  const { email } = req.user;
+
+  const user = await User.findOne({ email }).exec();
+
+  const orders = await Order.find({ orderdBy: user._id })
+    .populate("products.product")
+    .exec();
+
+  res.json(orders);
+};
+
+exports.getOrderDetails = async (req, res) => {
+  const orderId = req.params.orderId;
+
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  const order = await Order.findOne({
+    _id: orderId,
+    orderdBy: user._id,
+  })
+    .populate("products.product")
+    .populate("orderdBy")
+    .exec();
+
+  res.json(order);
+};

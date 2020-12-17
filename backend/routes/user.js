@@ -11,6 +11,8 @@ const {
   getWishlist,
   removeFromWishlist,
   createUserOrder,
+  getUserOrder,
+  getOrderDetails,
 } = require("../controllers/user");
 
 const { authCheck } = require("../middlewares/auth");
@@ -36,5 +38,7 @@ router.put("/user/wishlist/:id", authCheck, removeFromWishlist);
 
 //orders
 router.post("/user/order", authCheck, createUserOrder);
+router.get("/user/orders", authCheck, getUserOrder);
+router.get("/user/order/:orderId", authCheck, getOrderDetails);
 
 module.exports = router;
