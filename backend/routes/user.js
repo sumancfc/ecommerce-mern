@@ -11,6 +11,7 @@ const {
   getWishlist,
   removeFromWishlist,
   createUserOrder,
+  createCashOnDelivery,
   getUserOrder,
   getOrderDetails,
 } = require("../controllers/user");
@@ -38,6 +39,7 @@ router.put("/user/wishlist/:id", authCheck, removeFromWishlist);
 
 //orders
 router.post("/user/order", authCheck, createUserOrder);
+router.post("/user/cash-on-delivery", authCheck, createCashOnDelivery);
 router.get("/user/orders", authCheck, getUserOrder);
 router.get("/user/order/:orderId", authCheck, getOrderDetails);
 

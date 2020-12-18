@@ -4018,6 +4018,30 @@ button.cart__btn:hover {
   margin-right: 15px;
 }
 
+.Cash {
+  background: yellowgreen;
+}
+
+.Not {
+  background: turquoise;
+}
+
+.Processing {
+  background: rgb(121, 121, 3);
+}
+
+.Dispatched {
+  background: tomato;
+}
+
+.Cancelled {
+  background: violet;
+}
+
+.Completed {
+  background: green;
+}
+
 /* Media Query */
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
   .section-padding .container-fluid {

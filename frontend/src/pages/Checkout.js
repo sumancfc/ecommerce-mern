@@ -3,11 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import Layout from "../Layout";
 import Breadcrumb from "../components/breadcrumb";
-import { getAddress, getUserCarts, saveShippingAddress } from "../helpers/cart";
+import {
+  deleteUserCart,
+  getAddress,
+  getUserCarts,
+  saveShippingAddress,
+} from "../helpers/cart";
 import ShippingAddress from "../components/shippingAddress";
 import DiscountCoupon from "../components/discount";
 import { applyDiscountCoupon } from "../helpers/coupon";
-import OrderPlace from "../components/order";
+import OrderPlace from "../components/order/OrderPlace";
+import { createOrderByCashOnDelivery } from "../helpers/order";
+import { deleteAllFromCart } from "../store/actions/cartAction";
 
 const Checkout = ({ history }) => {
   const [products, setProducts] = useState([]);
@@ -23,10 +30,13 @@ const Checkout = ({ history }) => {
     postalCode: "",
     country: "",
   });
+  const [COD, setCOD] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("Stripe");
 
   const { address, city, postalCode, country } = shippingAddress;
 
   const user = useSelector((state) => state.userList);
+  const coupon = useSelector((state) => state.coupon);
 
   const dispatch = useDispatch();
   const { addToast } = useToasts();
@@ -38,7 +48,7 @@ const Checkout = ({ history }) => {
     });
     getAddress(user.token)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // setShippingAddress(res.data.shippingAddress);
       })
       .catch((err) => console.log(err));
@@ -95,6 +105,41 @@ const Checkout = ({ history }) => {
     history.push("/payment");
   };
 
+  const handleCashOnDelivery = (e) => {
+    setCOD(true);
+    setPaymentMethod(e.target.value);
+  };
+
+  const handleStripe = (e) => {
+    setCOD(false);
+    setPaymentMethod(e.target.value);
+  };
+
+  //create cash on delivery
+  const createCashOnDelivery = () => {
+    createOrderByCashOnDelivery(COD, coupon, user.token)
+      .then((res) => {
+        if (res.data.ok) {
+          // empty cart from local storage
+          if (typeof window !== "undefined") localStorage.removeItem("cart");
+          // empty cart from redux
+          dispatch(deleteAllFromCart(addToast));
+          // reset coupon to false
+          dispatch({
+            type: "COUPON_APPLIED",
+            payload: false,
+          });
+          // empty cart from database
+          deleteUserCart(user.token);
+
+          setTimeout(() => {
+            history.push("/user/history");
+          }, 1000);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Layout>
       <Breadcrumb pageTitle='Checkout' />
@@ -128,6 +173,12 @@ const Checkout = ({ history }) => {
                 priceAfterDiscount={priceAfterDiscount}
                 addressSaved={addressSaved}
                 handleOrder={handleOrder}
+                COD={COD}
+                handleCashOnDelivery={handleCashOnDelivery}
+                handleStripe={handleStripe}
+                setPaymentMethod={setPaymentMethod}
+                paymentMethod={paymentMethod}
+                createCashOnDelivery={createCashOnDelivery}
               />
             </div>
           </div>

@@ -55,3 +55,15 @@ export const updateOrderStatus = async (orderId, orderStatus, authtoken) =>
       },
     }
   );
+
+//create order by cash on delivery
+export const createOrderByCashOnDelivery = async (COD, coupon, authtoken) =>
+  await axios.post(
+    `${process.env.REACT_APP_API}/user/cash-on-delivery`,
+    { COD, couponApplied: coupon },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );

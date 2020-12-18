@@ -26,7 +26,9 @@ const PaymentMethod = ({ paymentIntent, orderStatus, status = true }) => {
         {new Date(paymentIntent.created * 1000).toLocaleString()}
       </p>
       {status && orderStatus && (
-        <p className='badge bg-primary text-white p-2'>STATUS: {orderStatus}</p>
+        <p className={`badge text-white p-3 ${orderStatus}`}>
+          STATUS: {orderStatus}
+        </p>
       )}
     </div>
   );

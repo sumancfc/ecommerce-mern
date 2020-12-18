@@ -2,10 +2,7 @@ const Order = require("../models/order");
 
 //get all orders ---> admin
 exports.getOrders = async (req, res) => {
-  const orders = await Order.find({})
-    .sort("-createdAt")
-    .populate("products.product")
-    .exec();
+  const orders = await Order.find({}).populate("products.product").exec();
 
   res.json(orders);
 };
