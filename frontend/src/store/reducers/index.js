@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
-import compareReducer from "./compareReducer";
 import {
   categoryCreateReducer,
   categoryListReducer,
@@ -29,7 +28,6 @@ const rootReducer = combineReducers({
   productReview: productReviewReducer,
   search: searchReducer,
   cartData: cartReducer,
-  compareData: compareReducer,
   coupon: couponReducer,
 });
 

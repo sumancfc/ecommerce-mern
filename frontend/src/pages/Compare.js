@@ -1,17 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout";
 import Breadcrumb from "../components/breadcrumb";
-import Ratings from "../components/rating";
-import { deleteFromCompare } from "../store/actions/compareAction";
 import { addToCart } from "../store/actions/cartAction";
+import { showAverage } from "../helpers/averageRating";
+import { deleteFromCompare, getAllCompare } from "../helpers/compare";
 
-const Compare = ({ cartItems, compareItems, addToCart, deleteFromCompare }) => {
+const Compare = () => {
   const { addToast } = useToasts();
+  const dispatch = useDispatch();
 
-  console.log(compareItems);
+  const [compareItems, setCompareItems] = useState([]);
+
+  const user = useSelector((state) => state.userList);
+  const cartItems = useSelector((state) => state.cartData);
+
+  useEffect(() => {
+    loadCompare();
+    // eslint-disable-next-line
+  }, []);
+
+  const loadCompare = () => {
+    getAllCompare(user.token).then((res) => setCompareItems(res.data.compare));
+  };
+
+  const handleAddToCart = (item, addToast) => {
+    dispatch(addToCart(item, addToast));
+  };
+
+  const handleRemove = (productId) => {
+    deleteFromCompare(productId, user.token).then((res) => {
+      loadCompare();
+      addToast("Product deleted from compare", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    });
+  };
 
   return (
     <Layout>
@@ -27,7 +54,7 @@ const Compare = ({ cartItems, compareItems, addToCart, deleteFromCompare }) => {
                     <table className='table table-bordered mb-0'>
                       <tbody>
                         <tr>
-                          <td className='first__col'>Product Name</td>
+                          <td className='first__col'>Product Image</td>
 
                           {compareItems.map((compareItem, i) => (
                             <td className='product__img-title' key={i}>
@@ -39,118 +66,93 @@ const Compare = ({ cartItems, compareItems, addToCart, deleteFromCompare }) => {
                                       ? compareItem.images[0].url
                                       : ""
                                   }
-                                  alt={compareItem.title}
+                                  alt={compareItem.slug}
                                   className='img-fluid'
                                 />
                               </Link>
-                              <Link to='#' className='category'>
-                                {compareItem.category}
-                              </Link>
-                              <Link
-                                to={
-                                  process.env.PUBLIC_URL +
-                                  "/product/" +
-                                  compareItem.slug
-                                }
-                                className='title'
-                              >
+                            </td>
+                          ))}
+                        </tr>
+                        <tr>
+                          <td className='first__col'>Product Name</td>
+                          {compareItems.map((compareItem, i) => (
+                            <td className='product__description' key={i}>
+                              <Link to={`/product/${compareItem.slug}`}>
                                 {compareItem.title}
                               </Link>
                             </td>
                           ))}
                         </tr>
-
                         <tr>
                           <td className='first__col'>Description</td>
                           {compareItems.map((compareItem, i) => (
                             <td className='product__description' key={i}>
-                              <p>{compareItem.shortDetails}</p>
+                              <p>{compareItem.description}</p>
+                            </td>
+                          ))}
+                        </tr>
+
+                        <tr>
+                          <td className='first__col'>Price</td>
+                          {compareItems.map((compareItem, i) => (
+                            <td className='compare__price' key={i}>
+                              <span className='amount'>
+                                ${compareItem.price}
+                              </span>
                             </td>
                           ))}
                         </tr>
                         <tr>
-                          <td className='first__col'>Price</td>
-                          {compareItems.map((compareItem, i) => {
-                            return (
-                              <td className='compare__price' key={i}>
-                                <span className='amount'>
-                                  ${compareItem.price}
-                                </span>
-                              </td>
-                            );
-                          })}
-                        </tr>
-
-                        <tr>
                           <td className='first__col'>Stock</td>
                           {compareItems.map((compareItem, i) => (
                             <td className='product__instock' key={i}>
-                              <p>{compareItem.stock}</p>
+                              {compareItem.quantity > 0 ? (
+                                <h5 className='text-success'>In Stock</h5>
+                              ) : (
+                                <h5 className='text-danger'>Out Of Stock</h5>
+                              )}
                             </td>
                           ))}
                         </tr>
                         <tr>
                           <td className='first__col'>Add to cart</td>
                           {compareItems.map((compareItem, i) => {
-                            const cartItem = cartItems.filter(
-                              (item) => item.id === compareItem.id
-                            )[0];
-
-                            return compareItem.stock &&
-                              compareItem.stock > 0 ? (
+                            const { quantity, _id } = compareItem;
+                            return (
                               <td key={i}>
-                                <button
-                                  className={
-                                    cartItem !== undefined &&
-                                    cartItem.quantity > 0
-                                      ? "active"
-                                      : ""
-                                  }
-                                  onClick={() =>
-                                    addToCart(compareItem, addToast)
-                                  }
-                                  disabled={
-                                    cartItem !== undefined &&
-                                    cartItem.quantity > 0
-                                  }
-                                  title={
-                                    cartItem !== undefined
-                                      ? "Added to cart"
-                                      : "Add to cart"
-                                  }
-                                >
-                                  {cartItem !== undefined &&
-                                  cartItem.quantity > 0
-                                    ? "Added to cart"
-                                    : "Add to cart"}
-                                </button>
+                                {quantity && quantity > 0 ? (
+                                  cartItems.filter(
+                                    (item) => item._id === _id
+                                  )[0] ? (
+                                    <button>Added To Cart</button>
+                                  ) : (
+                                    <button
+                                      onClick={() =>
+                                        handleAddToCart(compareItem, addToast)
+                                      }
+                                    >
+                                      Add To Cart
+                                    </button>
+                                  )
+                                ) : (
+                                  <button disabled className='active'>
+                                    Out of stock
+                                  </button>
+                                )}
                               </td>
-                            ) : (
-                              <button disabled className='compare__cart'>
-                                out od Stock
-                              </button>
                             );
                           })}
                         </tr>
                         <tr>
                           <td className='first__col'>Rating</td>
                           {compareItems.map((compareItem, i) => (
-                            <td>
-                              ratings
-                              {/* {compareItem.rating && compareItem.rating > 0 ? (
-                                <div>
-                                  <div className='product__rating'>
-                                    <Ratings value={compareItem.rating} />
-                                  </div>
-                                  <div className='product__rating'>
-                                    <span>(40+)</span>
-                                  </div>
-                                </div>
+                            <td key={i}>
+                              {compareItem.reviews &&
+                              compareItem.reviews.length > 0 ? (
+                                showAverage(compareItem)
                               ) : (
-                                <div className='product__rating'>
-                                  <span>No Reviews</span>
-                                </div>
-                              )} */}
+                                <span>No review Yet</span>
+                              )}
                             </td>
                           ))}
                         </tr>
@@ -160,7 +162,7 @@ const Compare = ({ cartItems, compareItems, addToCart, deleteFromCompare }) => {
                             <td className='product__remove' key={i}>
                               <button
                                 onClick={() =>
-                                  deleteFromCompare(compareItem, addToast)
+                                  handleRemove(compareItem._id, addToast)
                                 }
                               >
                                 <i className='fa fa-trash'></i>
@@ -202,23 +204,4 @@ const Compare = ({ cartItems, compareItems, addToCart, deleteFromCompare }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cartItems: state.cartData,
-    compareItems: state.compareData,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (item, addToast, quantityCount) => {
-      dispatch(addToCart(item, addToast, quantityCount));
-    },
-
-    deleteFromCompare: (item, addToast) => {
-      dispatch(deleteFromCompare(item, addToast));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Compare);
+export default Compare;

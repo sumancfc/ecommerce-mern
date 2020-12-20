@@ -282,3 +282,43 @@ exports.createCashOnDelivery = async (req, res) => {
 
   res.json({ ok: true });
 };
+
+//addTocompare
+exports.addToCompare = async (req, res) => {
+  const { productId } = req.body;
+  const { email } = req.user;
+
+  const compare = await User.findOneAndUpdate(
+    { email },
+    { $addToSet: { compare: productId } }
+  ).exec();
+
+  res.json(compare);
+};
+
+//get compare products
+exports.getCompareItems = async (req, res) => {
+  const email = req.user.email;
+
+  const compareItems = await User.findOne({ email })
+    .select("compare")
+    .populate("compare")
+    .populate("product")
+    .exec();
+
+  // console.log(compareItems);
+
+  res.json(compareItems);
+};
+
+//remove compare
+exports.removeFromCompare = async (req, res) => {
+  const { id } = req.params;
+  const email = req.user.email;
+
+  await User.findOneAndUpdate({ email }, { $pull: { compare: id } }).exec();
+
+  res.json({
+    message: "Product removed from compare",
+  });
+};

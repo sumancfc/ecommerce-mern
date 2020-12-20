@@ -14,6 +14,9 @@ const {
   createCashOnDelivery,
   getUserOrder,
   getOrderDetails,
+  addToCompare,
+  getCompareItems,
+  removeFromCompare,
 } = require("../controllers/user");
 
 const { authCheck } = require("../middlewares/auth");
@@ -42,5 +45,10 @@ router.post("/user/order", authCheck, createUserOrder);
 router.post("/user/cash-on-delivery", authCheck, createCashOnDelivery);
 router.get("/user/orders", authCheck, getUserOrder);
 router.get("/user/order/:orderId", authCheck, getOrderDetails);
+
+//compare
+router.post("/user/compare", authCheck, addToCompare);
+router.get("/user/compare", authCheck, getCompareItems);
+router.put("/user/compare/:id", authCheck, removeFromCompare);
 
 module.exports = router;

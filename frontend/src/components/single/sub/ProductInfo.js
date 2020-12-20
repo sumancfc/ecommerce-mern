@@ -9,8 +9,10 @@ const ProductInfo = ({
   product,
   addToCart,
   handleWishlist,
+  handleCompare,
   cartItems,
   wishlistItem,
+  compareItem,
 }) => {
   const { _id, title, price, quantity, category, subs, reviews } = product;
 
@@ -70,7 +72,18 @@ const ProductInfo = ({
 
         <div className='pro__details-compare-wishlist'>
           <div className='pro__details-compare'>
-            <button title='Add To Compare'>Compare</button>
+            <button
+              className={compareItem !== undefined ? "active" : ""}
+              disabled={compareItem !== undefined}
+              title={
+                compareItem !== undefined
+                  ? "Added to compare"
+                  : "Add to compare"
+              }
+              onClick={() => handleCompare(_id, addToast, user.token)}
+            >
+              <i className='fa fa-retweet'></i>
+            </button>
           </div>
           <div className='pro__details-wishlist'>
             <button
@@ -89,12 +102,21 @@ const ProductInfo = ({
         </div>
 
         <div className='pro__details-buy-now btn-hover'>
-          <button
+          {quantity && quantity > 0 ? (
+            <button onClick={() => addToCart(product, addToast, quantityCount)}>
+              Add To Cart
+            </button>
+          ) : (
+            <button disabled className='active'>
+              Out of stock
+            </button>
+          )}
+          {/* <button
             onClick={() => addToCart(product, addToast, quantityCount)}
             disabled={productCartQuantity >= quantity}
           >
             Add To Cart
-          </button>
+          </button> */}
         </div>
 
         {category && (

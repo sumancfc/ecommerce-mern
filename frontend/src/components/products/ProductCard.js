@@ -1,18 +1,17 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
-
 import laptop from "../../assets/images/product-8.jpg";
 
 const ProductCard = ({
   user,
   product,
   addToCart,
-  addToCompare,
   cartItem,
   wishlistItem,
   compareItem,
   handleWishlist,
+  handleCompare,
 }) => {
   const { _id, title, slug, images, price, category, quantity } = product;
 
@@ -55,7 +54,7 @@ const ProductCard = ({
                     ? "Added to compare"
                     : "Add to compare"
                 }
-                onClick={() => addToCompare(product._id, addToast)}
+                onClick={() => handleCompare(_id, addToast, user.token)}
               >
                 <i className='fa fa-retweet'></i>
               </button>

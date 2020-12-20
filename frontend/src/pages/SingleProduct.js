@@ -4,15 +4,17 @@ import SingleProductTop from "../components/single/SingleProductTop";
 import { getProduct, getRelatedProduct } from "../helpers/product";
 import Breadcrumb from "../components/breadcrumb";
 import Layout from "../Layout";
-import RelatedProduct from "../components/products/RelatedProduct";
+// import RelatedProduct from "../components/products/RelatedProduct";
 import { connect, useSelector } from "react-redux";
 import { addToWishlist, getAllWishlist } from "../helpers/wishlist";
+import { addToCompare, getAllCompare } from "../helpers/compare";
 import { addToCart } from "../store/actions/cartAction";
 
 const SingleProduct = ({ match, addToCart }) => {
   const [product, setProduct] = useState({});
-  const [related, setRelated] = useState([]);
+  // const [related, setRelated] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [compareItems, setCompareItems] = useState([]);
 
   const slug = match.params.slug;
 
@@ -24,6 +26,7 @@ const SingleProduct = ({ match, addToCart }) => {
   useEffect(() => {
     loadProduct();
     loadWishlist();
+    loadCompare();
     //eslint-disable-next-line
   }, [slug]);
 
@@ -31,7 +34,7 @@ const SingleProduct = ({ match, addToCart }) => {
     getProduct(slug)
       .then((res) => {
         setProduct(res.data);
-        getRelatedProduct(res.data._id).then((res) => setRelated(res.data));
+        // getRelatedProduct(res.data._id).then((res) => setRelated(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -44,11 +47,29 @@ const SingleProduct = ({ match, addToCart }) => {
     });
   };
 
+  const loadCompare = () => {
+    getAllCompare(user.token).then((res) => setCompareItems(res.data.compare));
+  };
+
   const handleWishlist = (productId, addToast, authtoken) => {
     addToWishlist(productId, authtoken)
       .then((res) => {
         loadWishlist();
         addToast("Added To Wishlist", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleCompare = (productId, addToast, authtoken) => {
+    addToCompare(productId, authtoken)
+      .then((res) => {
+        loadCompare();
+        addToast("Added To Compare", {
           appearance: "success",
           autoDismiss: true,
         });
@@ -67,15 +88,17 @@ const SingleProduct = ({ match, addToCart }) => {
         user={user}
         addToCart={addToCart}
         handleWishlist={handleWishlist}
+        handleCompare={handleCompare}
         cartItems={cartItems}
         wishlistItem={
           wishlistItems.filter((item) => item._id === product._id)[0]
         }
+        compareItem={compareItems.filter((item) => item._id === product._id)[0]}
       />
 
       <SingleProductDesc slug={slug} />
 
-      <RelatedProduct
+      {/* <RelatedProduct
         related={related}
         user={user}
         addToCart={addToCart}
@@ -86,7 +109,7 @@ const SingleProduct = ({ match, addToCart }) => {
         wishlistItem={
           wishlistItems.filter((item) => item._id === product._id)[0]
         }
-      />
+      /> */}
     </Layout>
   );
 };

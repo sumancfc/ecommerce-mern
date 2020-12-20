@@ -9,8 +9,10 @@ const ShopProductItem = ({
   user,
   addToCart,
   handleWishlist,
+  handleCompare,
   cartItem,
   wishlistItem,
+  compareItem,
 }) => {
   const {
     _id,
@@ -53,7 +55,16 @@ const ShopProductItem = ({
               >
                 <i className='fa fa-heart-o'></i>
               </button>
-              <button title='Add To Compare'>
+              <button
+                className={compareItem !== undefined ? "active" : ""}
+                disabled={compareItem !== undefined}
+                title={
+                  compareItem !== undefined
+                    ? "Added to compare"
+                    : "Add to compare"
+                }
+                onClick={() => handleCompare(_id, addToast, user.token)}
+              >
                 <i className='fa fa-retweet'></i>
               </button>
             </div>
@@ -133,7 +144,16 @@ const ShopProductItem = ({
                   >
                     <i className='fa fa-heart-o'></i>
                   </button>
-                  <button title='Add To Compare'>
+                  <button
+                    className={compareItem !== undefined ? "active" : ""}
+                    disabled={compareItem !== undefined}
+                    title={
+                      compareItem !== undefined
+                        ? "Added to compare"
+                        : "Add to compare"
+                    }
+                    onClick={() => handleCompare(_id, addToast, user.token)}
+                  >
                     <i className='fa fa-retweet'></i>
                   </button>
                   {quantity && quantity > 0 ? (

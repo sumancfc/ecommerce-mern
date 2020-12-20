@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema(
         ref: "Product",
       },
     ],
+    compare: [
+      {
+        type: ObjectId,
+        ref: "Product",
+      },
+    ],
   },
   { timestamps: true }
 );
